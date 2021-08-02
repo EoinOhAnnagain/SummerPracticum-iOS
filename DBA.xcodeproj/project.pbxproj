@@ -39,7 +39,6 @@
 		6ACC952226AE117E00CDEA95 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC952126AE117E00CDEA95 /* MapViewController.swift */; };
 		6ACC952426AE441900CDEA95 /* CodeBreakerRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC952326AE441900CDEA95 /* CodeBreakerRulesViewController.swift */; };
 		6AEF380726B842A8001A8A31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AEF380626B842A8001A8A31 /* GoogleService-Info.plist */; };
-		6AEF380926B84404001A8A31 /* Sensitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEF380826B84404001A8A31 /* Sensitive.swift */; };
 		F59B1AE1D215686AF8CB9E3F /* Pods_DBA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AFBC5AC62CFA2512042B848 /* Pods_DBA.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,7 +79,6 @@
 		6ACC952126AE117E00CDEA95 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		6ACC952326AE441900CDEA95 /* CodeBreakerRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBreakerRulesViewController.swift; sourceTree = "<group>"; };
 		6AEF380626B842A8001A8A31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6AEF380826B84404001A8A31 /* Sensitive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensitive.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +143,6 @@
 				6AEF380626B842A8001A8A31 /* GoogleService-Info.plist */,
 				6A1E1BDE2686765C00A51DF1 /* Info.plist */,
 				6A9455752693D88200EA47B9 /* Constants.swift */,
-				6AEF380826B84404001A8A31 /* Sensitive.swift */,
 			);
 			path = DBA;
 			sourceTree = "<group>";
@@ -340,7 +337,6 @@
 				6A9455762693D88200EA47B9 /* Constants.swift in Sources */,
 				6A1E1BD12686765600A51DF1 /* AppDelegate.swift in Sources */,
 				6AAC5F21268C9CAB00451DD2 /* WeatherData.swift in Sources */,
-				6AEF380926B84404001A8A31 /* Sensitive.swift in Sources */,
 				6AC219F026987D100064B6AC /* ChatViewController.swift in Sources */,
 				6A1E1BD32686765600A51DF1 /* SceneDelegate.swift in Sources */,
 				6AC1A8DF26B241EF00A08AF9 /* ContactUsViewController.swift in Sources */,
