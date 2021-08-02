@@ -8,6 +8,5 @@
 struct S {
     
     //Store sensitive data such as API keys etc. here
-    //Re-test
     
 }
