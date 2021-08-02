@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="chatCell" rowHeight="69" id="KGk-i7-Jjw" customClass="ChatCell" customModule="DBA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="319" height="69"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="319" height="69"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3qC-5T-zmT">
+                        <rect key="frame" x="10" y="10" width="299" height="49"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubble.left.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZBd-PD-Sof">
+                                <rect key="frame" x="0.0" y="0.5" width="40" height="39.5"/>
+                                <color key="tintColor" name="Interface"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="7mI-yH-uVf"/>
+                                    <constraint firstAttribute="height" constant="40" id="xJz-Jx-Ib2"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAY-Ly-d9E">
+                                <rect key="frame" x="48" y="0.0" width="203" height="49"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRa-G2-BAn">
+                                        <rect key="frame" x="10" y="10" width="183" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="Interface"/>
+                                <constraints>
+                                    <constraint firstItem="LRa-G2-BAn" firstAttribute="top" secondItem="wAY-Ly-d9E" secondAttribute="top" constant="10" id="8w5-fE-xjF"/>
+                                    <constraint firstItem="LRa-G2-BAn" firstAttribute="leading" secondItem="wAY-Ly-d9E" secondAttribute="leading" constant="10" id="NYO-6N-ufS"/>
+                                    <constraint firstAttribute="bottom" secondItem="LRa-G2-BAn" secondAttribute="bottom" constant="10" id="P6d-GB-l1R"/>
+                                    <constraint firstAttribute="trailing" secondItem="LRa-G2-BAn" secondAttribute="trailing" constant="10" id="iV0-m3-Ggr"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubble.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zAm-vC-b7M">
+                                <rect key="frame" x="259" y="0.5" width="40" height="39.5"/>
+                                <color key="tintColor" name="Interface"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="C2c-Px-HUm"/>
+                                    <constraint firstAttribute="width" constant="40" id="SwV-bF-fqa"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="3qC-5T-zmT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="SEW-Fs-f2n"/>
+                    <constraint firstAttribute="trailing" secondItem="3qC-5T-zmT" secondAttribute="trailing" constant="10" id="gnw-Wd-4Fy"/>
+                    <constraint firstItem="3qC-5T-zmT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="knC-6z-g3C"/>
+                    <constraint firstAttribute="bottom" secondItem="3qC-5T-zmT" secondAttribute="bottom" constant="10" id="pNM-Dd-I4T"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="chatBubble" destination="wAY-Ly-d9E" id="xbP-Qn-tyq"/>
+                <outlet property="label" destination="LRa-G2-BAn" id="97z-uw-RNj"/>
+                <outlet property="leftSpeechBubble" destination="ZBd-PD-Sof" id="qgA-9H-oI5"/>
+                <outlet property="rightSpeechBubble" destination="zAm-vC-b7M" id="9kx-Jl-YZ2"/>
+            </connections>
+            <point key="canvasLocation" x="132.60869565217394" y="148.99553571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bubble.left.fill" catalog="system" width="128" height="110"/>
+        <image name="bubble.right" catalog="system" width="128" height="110"/>
+        <namedColor name="Interface">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
