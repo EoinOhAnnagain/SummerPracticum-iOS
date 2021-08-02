@@ -1,6 +1,6 @@
 # General
 .DS_Store
-/DBA/Sensitive.swift
+Sensitive.swift
 
 ## User settings
 xcuserdata/
