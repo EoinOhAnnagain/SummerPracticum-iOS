@@ -8,6 +8,5 @@
 struct S {
     
     //Store sensitive data such as API keys etc. here
-    //test on git ignore
     
 }
