@@ -27,8 +27,8 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     @IBOutlet weak var titleLabel2: UILabel!
     
     
-    @IBOutlet var buttonsToRound: [UIButton]!
-    @IBOutlet var labelsToRound: [UILabel]!
+    @IBOutlet var buttons: [UIButton]!
+    @IBOutlet var labels: [UILabel]!
     
     
     
@@ -47,7 +47,8 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         super.viewDidLoad()
         
         logOut()
-        round()
+        roundCorners(buttons)
+        roundCorners(labels)
         title()
         
         loginEmailTextField.delegate = self
@@ -196,28 +197,6 @@ extension LoginViewController {
         
     }
     
-}
-
-//MARK: - Button Rounding
-
-extension LoginViewController {
-    
-    func round() {
-        for b in buttonsToRound {
-            roundButtons(b)
-        }
-        for l in labelsToRound {
-            roundLabels(l)
-        }
-    }
-    
-    func roundButtons(_ name: UIButton) {
-        name.layer.cornerRadius = 0.4 * name.bounds.size.height
-    }
-    
-    func roundLabels(_ name: UILabel) {
-        name.layer.cornerRadius = 0.3 * name.bounds.size.height
-    }
 }
 
 

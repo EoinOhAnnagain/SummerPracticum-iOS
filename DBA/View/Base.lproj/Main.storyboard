@@ -1778,9 +1778,6 @@
                                 <color key="textColor" name="Interface"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -1794,9 +1791,6 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -1810,11 +1804,6 @@
                                         <state key="normal" title="Sign Up">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="signUpPressed:" destination="QJF-4w-IrE" eventType="touchUpInside" id="and-Oz-f48"/>
                                         </connections>
@@ -1840,11 +1829,6 @@
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="loginPressed:" destination="QJF-4w-IrE" eventType="touchUpInside" id="VR3-0L-tYF"/>
                                         </connections>
@@ -1892,11 +1876,11 @@
                         <outlet property="signUpSecondPasswordTextField" destination="SIs-ZY-sCd" id="odp-Uq-9fM"/>
                         <outlet property="titleLabel" destination="gWw-ny-lz4" id="Uns-dG-UK8"/>
                         <outlet property="titleLabel2" destination="WVW-BP-DPH" id="i4I-An-C9d"/>
-                        <outletCollection property="labelsToRound" destination="WVW-BP-DPH" collectionClass="NSMutableArray" id="wOr-j6-efF"/>
-                        <outletCollection property="labelsToRound" destination="gWw-ny-lz4" collectionClass="NSMutableArray" id="0xZ-QK-5ia"/>
-                        <outletCollection property="buttonsToRound" destination="Jg1-r2-KnS" collectionClass="NSMutableArray" id="oFz-Ju-3SG"/>
-                        <outletCollection property="buttonsToRound" destination="KFk-h0-cnG" collectionClass="NSMutableArray" id="jsO-r1-9sx"/>
-                        <outletCollection property="buttonsToRound" destination="eyx-nz-tql" collectionClass="NSMutableArray" id="TIV-qp-l0w"/>
+                        <outletCollection property="labels" destination="WVW-BP-DPH" collectionClass="NSMutableArray" id="wOr-j6-efF"/>
+                        <outletCollection property="labels" destination="gWw-ny-lz4" collectionClass="NSMutableArray" id="0xZ-QK-5ia"/>
+                        <outletCollection property="buttons" destination="Jg1-r2-KnS" collectionClass="NSMutableArray" id="oFz-Ju-3SG"/>
+                        <outletCollection property="buttons" destination="KFk-h0-cnG" collectionClass="NSMutableArray" id="jsO-r1-9sx"/>
+                        <outletCollection property="buttons" destination="eyx-nz-tql" collectionClass="NSMutableArray" id="TIV-qp-l0w"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="LoginToMain" id="OFs-Hh-Nq1"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="GuestToMain" id="DOJ-S0-buZ"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="SignToMain" id="Cmc-VE-ar6"/>
