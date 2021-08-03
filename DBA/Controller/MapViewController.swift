@@ -14,7 +14,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
-    @IBOutlet var buttonsToRound: [UIButton]!
+    @IBOutlet var buttons: [UIButton]!
     let manager = CLLocationManager()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +30,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        round()
+        roundCorners(buttons)
+        
         mapView.layer.cornerRadius = 25
         // Do any additional setup after loading the view.
     }
@@ -89,26 +90,3 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 }
 
 
-
-
-//MARK: - Button Rounding
-
-extension MapViewController {
-
-    func round() {
-        for b in buttonsToRound {
-            roundButtons(b)
-        }
-//        for l in labelsToRound {
-//            roundLabels(l)
-//        }
-    }
-
-    func roundButtons(_ name: UIButton) {
-        name.layer.cornerRadius = 0.4 * name.bounds.size.height
-    }
-
-    func roundLabels(_ name: UILabel) {
-        name.layer.cornerRadius = 0.3 * name.bounds.size.height
-    }
-}

@@ -40,8 +40,14 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
         super.viewDidLoad()
 
         setUp()
-        roundButton(sendButton)
-        roundButton(emailTextField)
+        
+        roundCorners(sendButton)
+        roundCorners(issueTextView)
+        
+        roundCorners(sendButton)
+        roundCorners(issueTextView)
+        roundCorners(emailTextField)
+        
         resultLabel.alpha = 0
         
         firstPicker.dataSource = self
@@ -159,19 +165,6 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
     }
     */
 
-}
-
-//MARK: - Rounding
-
-extension ContactUsViewController {
-    
-    func roundButton(_ name: UIButton) {
-        name.layer.cornerRadius = 0.4 * name.bounds.size.height
-    }
-    
-    func roundButton(_ name: UITextField) {
-        name.layer.cornerRadius = 0.4 * name.bounds.size.height
-    }
 }
 
 

@@ -27,7 +27,7 @@ class ChosenBookViewController: UIViewController {
         chaptersPicker.delegate = self
         chaptersPicker.dataSource = self
         
-        bookSelect.layer.cornerRadius = 0.5 * bookSelect.bounds.size.width
+        roundCorners(bookSelect)
         
         
         bookCover.image = UIImage(named: bookTitle!)

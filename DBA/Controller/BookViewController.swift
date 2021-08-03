@@ -19,6 +19,8 @@ class BookViewController: UIViewController {
     
     var playing = false
     
+    @IBOutlet var buttons: [UIButton]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,8 +28,7 @@ class BookViewController: UIViewController {
         readChapter()
         SpeechService.shared.changedChapter(bookText.text)
         
-        
-        
+        roundCorners(buttons)
         
         //bookPicker.dataSource = self
         //bookPicker.delegate = self
