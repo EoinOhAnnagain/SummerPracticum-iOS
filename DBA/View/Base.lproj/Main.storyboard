@@ -1650,12 +1650,29 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xj0-Cw-71q">
                                 <rect key="frame" x="0.0" y="140" width="414" height="756"/>
                             </mapView>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmH-S2-1BV">
+                                <rect key="frame" x="20" y="160" width="40" height="40"/>
+                                <color key="backgroundColor" name="Interface"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HJm-49-1tx"/>
+                                    <constraint firstAttribute="width" constant="40" id="l1t-Oz-jXW"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="location.fill" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="locationButtonPressed:" destination="Lcm-pK-ovO" eventType="touchUpInside" id="SVX-dQ-K5o"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="a7c-mN-1n8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Xj0-Cw-71q" firstAttribute="leading" secondItem="a7c-mN-1n8" secondAttribute="leading" id="16v-Yl-VnS"/>
                             <constraint firstAttribute="bottom" secondItem="Xj0-Cw-71q" secondAttribute="bottom" id="7kN-DB-oSp"/>
+                            <constraint firstItem="tmH-S2-1BV" firstAttribute="leading" secondItem="a7c-mN-1n8" secondAttribute="leading" constant="20" id="Vu1-vz-bir"/>
+                            <constraint firstItem="tmH-S2-1BV" firstAttribute="top" secondItem="a7c-mN-1n8" secondAttribute="top" constant="20" id="gYy-1d-QeW"/>
                             <constraint firstItem="Xj0-Cw-71q" firstAttribute="trailing" secondItem="a7c-mN-1n8" secondAttribute="trailing" id="rQe-dz-iNg"/>
                             <constraint firstItem="Xj0-Cw-71q" firstAttribute="top" secondItem="a7c-mN-1n8" secondAttribute="top" id="yJn-RQ-Fma"/>
                         </constraints>
@@ -1670,6 +1687,7 @@
                     <connections>
                         <outlet property="bookStopButton" destination="VZr-9Y-rPW" id="mAp-im-kLn"/>
                         <outlet property="mapView" destination="Xj0-Cw-71q" id="RuM-EK-7E8"/>
+                        <outletCollection property="buttonsToRound" destination="tmH-S2-1BV" collectionClass="NSMutableArray" id="qFB-3w-40K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xLZ-WC-nA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2524,6 +2542,7 @@
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>
         <image name="gamecontroller.fill" catalog="system" width="128" height="80"/>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="message.circle" catalog="system" width="128" height="121"/>
         <image name="paperplane.circle" catalog="system" width="128" height="121"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
