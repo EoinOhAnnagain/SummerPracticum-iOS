@@ -61,16 +61,14 @@ class ChatViewController: UIViewController {
     
     
     func loadMessages() {
-        db.collection(chosenChat)
-            .order(by: K.chat.FStore.dateField)
-            .addSnapshotListener { (querySnapshot, error) in
+        db.collection(chosenChat).order(by: K.chat.FStore.dateField).addSnapshotListener { (querySnapshot, error) in
                 self.messages = []
                 if let e = error {
                     print(e.localizedDescription)
                 } else {
                     
                     if let snapshotDocuments = querySnapshot?.documents {
-                        
+            
                         if snapshotDocuments.count == 0 {
                             let newMessage =  Message(sender: "Debug", body: "This chat is currently empty...\nWhy not be the first to post", date: 0)
                             self.messages.append(newMessage)
@@ -169,7 +167,7 @@ extension ChatViewController: UITableViewDelegate {
         
         let formattedDate = dateFormatter(messageDate)
         let formattedTime = timeFormatter(messageDate)
-        infoLabel.text = "Message \(indexPath.row) sent at \(formattedTime) on \(formattedDate)"
+        infoLabel.text = "Message sent at \(formattedTime) on \(formattedDate)"
     }
     
     func dateFormatter(_ unformatted: NSNumber) -> String {
@@ -266,7 +264,7 @@ extension ChatViewController: UIPickerViewDelegate {
     }
 }
 
-// MARK: - Manage Return Key
+// MARK: - Manage Return Key and Send Messages
 
 extension ChatViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -275,12 +273,13 @@ extension ChatViewController: UITextFieldDelegate {
     }
     
     func send() {
+        
         if let messageText = messageTextField.text, let messageSender = Auth.auth().currentUser?.email {
             if messageText != "" {
                 db.collection(chosenChat).addDocument(data: [
                     K.chat.FStore.senderField: messageSender,
                     K.chat.FStore.textField: messageText,
-                    K.chat.FStore.dateField: Date().timeIntervalSince1970
+                    K.chat.FStore.dateField: Int(Date().timeIntervalSince1970)
                 ]) { (error) in
                     if let e = error {
                         print(e.localizedDescription)
@@ -301,5 +300,6 @@ extension ChatViewController: UITextFieldDelegate {
     
     @IBAction func sendPressed(_ sender: UIButton) {
         send()
+        view.endEditing(true)
     }
 }
