@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var startingPicker: UIPickerView!
     @IBOutlet weak var endingPicker: UIPickerView!
     
+    @IBOutlet var buttons: [UIButton]!
     
     var stops = ["81813, National Museum, Wolfe Tone Quay", "81911, Law Society, Blackhall Place", "80195, Ophaly Court, Dundrum Road", "80297 Hospital, Dundrum Road", "82502, Columbanus Road junction, Dundrum Road", "82503, Annaville Close, Dundrum Road", "82504, Taney Road, Rundrum Road", "82538, Drankfort, Dundrum Road"]
     
@@ -65,7 +66,7 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
         navigationItem.title = "D B A"
         
-        
+        roundCorners(buttons)
         
         startingPicker.dataSource = self
         endingPicker.dataSource = self

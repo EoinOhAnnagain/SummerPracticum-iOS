@@ -52,6 +52,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var sunsetLabel: UILabel!
     @IBOutlet weak var sunLoader: UIActivityIndicatorView!
     
+    @IBOutlet var views: [UIView]!
     
     
     
@@ -63,6 +64,8 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        roundCorners(views)
+        
         // Do any additional setup after loading the view.
         
         // Arrow direction to update (360)
