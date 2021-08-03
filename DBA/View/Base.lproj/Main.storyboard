@@ -1669,6 +1669,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bookStopButton" destination="VZr-9Y-rPW" id="mAp-im-kLn"/>
+                        <outlet property="mapView" destination="Xj0-Cw-71q" id="RuM-EK-7E8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xLZ-WC-nA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
