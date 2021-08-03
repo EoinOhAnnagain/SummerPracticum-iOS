@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate {
 
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
+    
+    @IBOutlet var buttonsToRound: [UIButton]!
+    let manager = CLLocationManager()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -24,7 +30,45 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        round()
+        mapView.layer.cornerRadius = 25
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.delegate = self
+        manager.startUpdatingLocation()
+    }
+    
+    @IBAction func locationButtonPressed(_ sender: UIButton) {
+        manager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            manager.stopUpdatingLocation()
+            
+            render(location)
+        }
+    }
+    
+    func render(_ location: CLLocation) {
+        
+        let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        
+        let region = MKCoordinateRegion(center: coordinate, span: span)
+        
+        
+        mapView.setRegion(region, animated: true)
+        
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        mapView.addAnnotation(pin)
+        
     }
     
     @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
@@ -42,4 +86,29 @@ class MapViewController: UIViewController {
     }
     */
 
+}
+
+
+
+
+//MARK: - Button Rounding
+
+extension MapViewController {
+
+    func round() {
+        for b in buttonsToRound {
+            roundButtons(b)
+        }
+//        for l in labelsToRound {
+//            roundLabels(l)
+//        }
+    }
+
+    func roundButtons(_ name: UIButton) {
+        name.layer.cornerRadius = 0.4 * name.bounds.size.height
+    }
+
+    func roundLabels(_ name: UILabel) {
+        name.layer.cornerRadius = 0.3 * name.bounds.size.height
+    }
 }
