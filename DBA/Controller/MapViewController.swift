@@ -51,13 +51,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if let location = locations.first {
             manager.stopUpdatingLocation()
             
-            render(location)
+            let user = Pin(lat: location.coordinate.latitude, long: location.coordinate.longitude, isStop: false, isUser: true)
+            
+            render(user)
         }
     }
     
-    func render(_ location: CLLocation) {
+    func render(_ location: Pin) {
         
-        let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let coordinate = CLLocationCoordinate2D(latitude: location.lat, longitude: location.long)
         
         let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         
