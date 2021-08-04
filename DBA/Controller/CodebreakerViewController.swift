@@ -347,6 +347,6 @@ extension CodebreakerViewController {
 
     @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
         SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
+        bookStopButton.image = nil
     }
 }

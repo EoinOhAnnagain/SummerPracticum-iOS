@@ -274,7 +274,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 extension ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewDidAppear(animated)
         
         if SpeechService.shared.renderStopButton() {
             bookStopButton.image = UIImage(systemName: "play.slash")
@@ -285,6 +285,6 @@ extension ViewController {
 
     @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
         SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
+        bookStopButton.image = nil
     }
 }
