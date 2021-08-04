@@ -17,3 +17,13 @@ struct Pin {
     let subtitle: String
     
 }
+
+struct Result: Codable {
+    let data: [Routes]
+}
+
+struct Routes: Codable {
+    
+    let route_name: String
+    
+}

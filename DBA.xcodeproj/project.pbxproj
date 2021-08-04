@@ -18,6 +18,7 @@
 		6A1E1BDA2686765C00A51DF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A1E1BD92686765C00A51DF1 /* Assets.xcassets */; };
 		6A1E1BDD2686765C00A51DF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A1E1BDB2686765C00A51DF1 /* LaunchScreen.storyboard */; };
 		6A22299426BA1F67003F4EB3 /* StopsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A22299326BA1F67003F4EB3 /* StopsManager.swift */; };
+		6A2E78DC26BAF78B001BD7A0 /* routes.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A2E78DB26BAF78A001BD7A0 /* routes.json */; };
 		6A37B3B326B9F953004800A7 /* GeneralFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A37B3B226B9F953004800A7 /* GeneralFunctions.swift */; };
 		6A63D9C926B1DE950073A657 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63D9C826B1DE950073A657 /* SpeechService.swift */; };
 		6A76038E26A269A700DE482C /* BookCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A76038D26A269A700DE482C /* BookCollectionViewController.swift */; };
@@ -63,6 +64,7 @@
 		6A1E1BDC2686765C00A51DF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A1E1BDE2686765C00A51DF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A22299326BA1F67003F4EB3 /* StopsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsManager.swift; sourceTree = "<group>"; };
+		6A2E78DB26BAF78A001BD7A0 /* routes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = routes.json; sourceTree = "<group>"; };
 		6A37B3B226B9F953004800A7 /* GeneralFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralFunctions.swift; sourceTree = "<group>"; };
 		6A63D9C826B1DE950073A657 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
 		6A76038D26A269A700DE482C /* BookCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				6A1E1BDB2686765C00A51DF1 /* LaunchScreen.storyboard */,
 				6AEF380626B842A8001A8A31 /* GoogleService-Info.plist */,
 				6A1E1BDE2686765C00A51DF1 /* Info.plist */,
+				6A2E78DB26BAF78A001BD7A0 /* routes.json */,
 				6A9455752693D88200EA47B9 /* Constants.swift */,
 				6AEF380A26B84DD6001A8A31 /* Sensitive.swift */,
 				6A37B3B226B9F953004800A7 /* GeneralFunctions.swift */,
@@ -272,6 +275,7 @@
 				6A1E1BDD2686765C00A51DF1 /* LaunchScreen.storyboard in Resources */,
 				6AEF380726B842A8001A8A31 /* GoogleService-Info.plist in Resources */,
 				6ABDDF9B269C98890058A93D /* ChatCell.xib in Resources */,
+				6A2E78DC26BAF78B001BD7A0 /* routes.json in Resources */,
 				6A04DD0526B6EED0003031EC /* AboutUsCellTableViewCell.xib in Resources */,
 				6A1E1BDA2686765C00A51DF1 /* Assets.xcassets in Resources */,
 				6A1E1BD82686765600A51DF1 /* Main.storyboard in Resources */,

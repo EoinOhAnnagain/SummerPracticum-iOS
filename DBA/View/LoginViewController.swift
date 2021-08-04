@@ -30,6 +30,8 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet var labels: [UILabel]!
     
+    var routeNames: [String] = []
+    
     
   
     
@@ -40,6 +42,8 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         roundCorners(buttons)
         roundCorners(labels)
         title()
+        
+        parseJSON()
         
         loginEmailTextField.delegate = self
         loginPasswordTextField.delegate = self
@@ -226,6 +230,61 @@ extension LoginViewController {
 
 extension LoginViewController {
     
+    func parseJSON() {
+        print("Started parsing")
+        guard let jsonURL = Bundle.main.path(forResource: "routes", ofType: "json") else {
+            print("There was an issue")
+            return
+        }
+        guard let jsonString = try? String(contentsOf: URL(fileURLWithPath: jsonURL), encoding: String.Encoding.utf8) else {
+            return
+        }
+        
+        //jsonString
+        
+        
+        
+        do {
+            
+            let decodedData = try JSONDecoder().decode(Person.self, from: Data(jsonString.utf8))
+            
+            
+            for data in decodedData.test {
+                K.routeNames.append(data.route_short_name)
+            }
+            
+            K.routeNames.sort()
+            
+            print("Parsing Complete")
+            
+            
+//            let route_short_name = decodedData.test[0].route_short_name
+//
+//
+//            let person = test(route_short_name: route_short_name)
+//
+//
+//            print(person.route_short_name)
+            
+            
+            
+        } catch {
+            print("Error occured when decoding: \(error.localizedDescription)\n\(error)")
+        }
+        
+        
+        
+    }
+}
+
+struct Person: Codable {
     
+    let test: [test]
+    
+}
+
+struct test: Codable {
+    
+    let route_short_name: String
     
 }
