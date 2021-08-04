@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A00FAF026BB4AAF0088A491 /* stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A00FAEF26BB4AAF0088A491 /* stops.json */; };
 		6A04DD0426B6EED0003031EC /* AboutUsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A04DD0226B6EED0003031EC /* AboutUsCellTableViewCell.swift */; };
 		6A04DD0526B6EED0003031EC /* AboutUsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A04DD0326B6EED0003031EC /* AboutUsCellTableViewCell.xib */; };
 		6A09552E26A39642004FA1FD /* ChosenBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A09552D26A39642004FA1FD /* ChosenBookViewController.swift */; };
@@ -17,11 +18,15 @@
 		6A1E1BD82686765600A51DF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A1E1BD62686765600A51DF1 /* Main.storyboard */; };
 		6A1E1BDA2686765C00A51DF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A1E1BD92686765C00A51DF1 /* Assets.xcassets */; };
 		6A1E1BDD2686765C00A51DF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A1E1BDB2686765C00A51DF1 /* LaunchScreen.storyboard */; };
+		6A22299426BA1F67003F4EB3 /* StopsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A22299326BA1F67003F4EB3 /* StopsManager.swift */; };
+		6A2E78DC26BAF78B001BD7A0 /* routes.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A2E78DB26BAF78A001BD7A0 /* routes.json */; };
+		6A37B3B326B9F953004800A7 /* GeneralFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A37B3B226B9F953004800A7 /* GeneralFunctions.swift */; };
 		6A63D9C926B1DE950073A657 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63D9C826B1DE950073A657 /* SpeechService.swift */; };
 		6A76038E26A269A700DE482C /* BookCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A76038D26A269A700DE482C /* BookCollectionViewController.swift */; };
 		6A76039126A26DFF00DE482C /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A76038F26A26DFF00DE482C /* BookCollectionViewCell.swift */; };
 		6A76039226A26DFF00DE482C /* BookCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A76039026A26DFF00DE482C /* BookCollectionViewCell.xib */; };
 		6A78A642268A0819003BA1ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A78A641268A0819003BA1ED /* LoginViewController.swift */; };
+		6A868B0E26BA051F00983067 /* MapPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A868B0D26BA051F00983067 /* MapPins.swift */; };
 		6A9455762693D88200EA47B9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9455752693D88200EA47B9 /* Constants.swift */; };
 		6AAC5F1D268C8FCB00451DD2 /* weatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC5F1C268C8FCB00451DD2 /* weatherManager.swift */; };
 		6AAC5F1F268C97A900451DD2 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC5F1E268C97A900451DD2 /* WeatherModel.swift */; };
@@ -47,6 +52,7 @@
 		18943BC021D0F47085E646B2 /* Pods-DBA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBA.release.xcconfig"; path = "Target Support Files/Pods-DBA/Pods-DBA.release.xcconfig"; sourceTree = "<group>"; };
 		2F7DF73008B5561DDFADA62C /* Pods-DBA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBA.debug.xcconfig"; path = "Target Support Files/Pods-DBA/Pods-DBA.debug.xcconfig"; sourceTree = "<group>"; };
 		5AFBC5AC62CFA2512042B848 /* Pods_DBA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DBA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A00FAEF26BB4AAF0088A491 /* stops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stops.json; sourceTree = "<group>"; };
 		6A04DD0226B6EED0003031EC /* AboutUsCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsCellTableViewCell.swift; sourceTree = "<group>"; };
 		6A04DD0326B6EED0003031EC /* AboutUsCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutUsCellTableViewCell.xib; sourceTree = "<group>"; };
 		6A09552D26A39642004FA1FD /* ChosenBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenBookViewController.swift; sourceTree = "<group>"; };
@@ -59,11 +65,15 @@
 		6A1E1BD92686765C00A51DF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A1E1BDC2686765C00A51DF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A1E1BDE2686765C00A51DF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A22299326BA1F67003F4EB3 /* StopsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsManager.swift; sourceTree = "<group>"; };
+		6A2E78DB26BAF78A001BD7A0 /* routes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = routes.json; sourceTree = "<group>"; };
+		6A37B3B226B9F953004800A7 /* GeneralFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralFunctions.swift; sourceTree = "<group>"; };
 		6A63D9C826B1DE950073A657 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
 		6A76038D26A269A700DE482C /* BookCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewController.swift; sourceTree = "<group>"; };
 		6A76038F26A26DFF00DE482C /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A76039026A26DFF00DE482C /* BookCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookCollectionViewCell.xib; sourceTree = "<group>"; };
 		6A78A641268A0819003BA1ED /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = DBA/View/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
+		6A868B0D26BA051F00983067 /* MapPins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPins.swift; sourceTree = "<group>"; };
 		6A9455752693D88200EA47B9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6AAC5F1C268C8FCB00451DD2 /* weatherManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weatherManager.swift; sourceTree = "<group>"; };
 		6AAC5F1E268C97A900451DD2 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
@@ -144,8 +154,11 @@
 				6A1E1BDB2686765C00A51DF1 /* LaunchScreen.storyboard */,
 				6AEF380626B842A8001A8A31 /* GoogleService-Info.plist */,
 				6A1E1BDE2686765C00A51DF1 /* Info.plist */,
+				6A2E78DB26BAF78A001BD7A0 /* routes.json */,
 				6A9455752693D88200EA47B9 /* Constants.swift */,
 				6AEF380A26B84DD6001A8A31 /* Sensitive.swift */,
+				6A00FAEF26BB4AAF0088A491 /* stops.json */,
+				6A37B3B226B9F953004800A7 /* GeneralFunctions.swift */,
 			);
 			path = DBA;
 			sourceTree = "<group>";
@@ -191,6 +204,8 @@
 				6AAC5F20268C9CAB00451DD2 /* WeatherData.swift */,
 				6ABDDF92269C94380058A93D /* Messages.swift */,
 				6A63D9C826B1DE950073A657 /* SpeechService.swift */,
+				6A868B0D26BA051F00983067 /* MapPins.swift */,
+				6A22299326BA1F67003F4EB3 /* StopsManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,6 +278,8 @@
 				6A1E1BDD2686765C00A51DF1 /* LaunchScreen.storyboard in Resources */,
 				6AEF380726B842A8001A8A31 /* GoogleService-Info.plist in Resources */,
 				6ABDDF9B269C98890058A93D /* ChatCell.xib in Resources */,
+				6A00FAF026BB4AAF0088A491 /* stops.json in Resources */,
+				6A2E78DC26BAF78B001BD7A0 /* routes.json in Resources */,
 				6A04DD0526B6EED0003031EC /* AboutUsCellTableViewCell.xib in Resources */,
 				6A1E1BDA2686765C00A51DF1 /* Assets.xcassets in Resources */,
 				6A1E1BD82686765600A51DF1 /* Main.storyboard in Resources */,
@@ -331,10 +348,13 @@
 				6A76038E26A269A700DE482C /* BookCollectionViewController.swift in Sources */,
 				6A04DD0426B6EED0003031EC /* AboutUsCellTableViewCell.swift in Sources */,
 				6ABDDF8F269BB9580058A93D /* BookViewController.swift in Sources */,
+				6A22299426BA1F67003F4EB3 /* StopsManager.swift in Sources */,
+				6A37B3B326B9F953004800A7 /* GeneralFunctions.swift in Sources */,
 				6ABDDF91269BB9840058A93D /* AboutUsViewController.swift in Sources */,
 				6A63D9C926B1DE950073A657 /* SpeechService.swift in Sources */,
 				6A0CC06D269F377E00BB0A93 /* CodebreakerViewController.swift in Sources */,
 				6A1E1BD52686765600A51DF1 /* ViewController.swift in Sources */,
+				6A868B0E26BA051F00983067 /* MapPins.swift in Sources */,
 				6AAC5F1D268C8FCB00451DD2 /* weatherManager.swift in Sources */,
 				6AAC5F1F268C97A900451DD2 /* WeatherModel.swift in Sources */,
 				6A9455762693D88200EA47B9 /* Constants.swift in Sources */,

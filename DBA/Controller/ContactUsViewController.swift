@@ -26,22 +26,20 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
     
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if SpeechService.shared.renderStopButton() {
-            bookStopButton.image = UIImage(systemName: "play.slash")
-        } else {
-            bookStopButton.image = nil
-        }
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUp()
-        roundButton(sendButton)
-        roundButton(emailTextField)
+        
+        roundCorners(sendButton)
+        roundCorners(issueTextView)
+        
+        roundCorners(sendButton)
+        roundCorners(issueTextView)
+        roundCorners(emailTextField)
+        
         resultLabel.alpha = 0
         
         firstPicker.dataSource = self
@@ -53,10 +51,6 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
-        SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
-    }
 
     func setUp() {
         if userEmail != nil {
@@ -161,19 +155,6 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
 
 }
 
-//MARK: - Rounding
-
-extension ContactUsViewController {
-    
-    func roundButton(_ name: UIButton) {
-        name.layer.cornerRadius = 0.4 * name.bounds.size.height
-    }
-    
-    func roundButton(_ name: UITextField) {
-        name.layer.cornerRadius = 0.4 * name.bounds.size.height
-    }
-}
-
 
 // MARK: - Manage Return Key
 
@@ -209,6 +190,29 @@ extension ContactUsViewController: UIPickerViewDelegate {
         } else {
             return K.contact.pickerOptions[row - 1]
         }
+    }
+    
+}
+
+
+//MARK: - Audio Book Control
+
+extension ContactUsViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if SpeechService.shared.renderStopButton() {
+            bookStopButton.image = UIImage(systemName: "play.slash")
+        } else {
+            bookStopButton.image = nil
+        }
+    }
+    
+    
+    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
+        SpeechService.shared.stopSpeeching()
+        bookStopButton.image = nil
     }
     
 }
