@@ -11,11 +11,10 @@ import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
-    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
     @IBOutlet var buttons: [UIButton]!
-    let manager = CLLocationManager()
+    let locationManager = CLLocationManager()
     
 
     
@@ -24,59 +23,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
         roundCorners(buttons)
         
-        mapView.layer.cornerRadius = 25
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.delegate = self
-        manager.startUpdatingLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
-        manager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            manager.stopUpdatingLocation()
-            
-            let user = Pin(lat: location.coordinate.latitude, long: location.coordinate.longitude, isStop: false, isUser: true)
-            
-            render(user)
-        }
-    }
-    
-    func render(_ location: Pin) {
-        
-        let coordinate = CLLocationCoordinate2D(latitude: location.lat, longitude: location.long)
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-        
-        let region = MKCoordinateRegion(center: coordinate, span: span)
-        
-        
-        mapView.setRegion(region, animated: true)
-        
-        let pin = MKPointAnnotation()
-        pin.coordinate = coordinate
-        mapView.addAnnotation(pin)
-        
-    }
-    
+   
 
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

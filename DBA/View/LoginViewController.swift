@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
+import CoreLocation
 
 class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     
@@ -30,6 +31,8 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet var labels: [UILabel]!
     
+    var routeNames: [String] = []
+    
     
   
     
@@ -40,6 +43,9 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         roundCorners(buttons)
         roundCorners(labels)
         title()
+        
+        parseRoutesJSON()
+        parseStopsJSON()
         
         loginEmailTextField.delegate = self
         loginPasswordTextField.delegate = self
@@ -207,6 +213,8 @@ extension LoginViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        infoLabel.text = ""
+        
         if SpeechService.shared.renderStopButton() {
             bookStopButton.image = UIImage(systemName: "play.slash")
         } else {
@@ -220,10 +228,138 @@ extension LoginViewController {
     }
 }
 
+//MARK: - Get Routes
+
+extension LoginViewController {
+    
+    func parseStopsJSON() {
+        print("Started stops parsing")
+        guard let jsonURL = Bundle.main.path(forResource: "routes", ofType: "json") else {
+            print("There was an issue")
+            return
+        }
+        guard let jsonString = try? String(contentsOf: URL(fileURLWithPath: jsonURL), encoding: String.Encoding.utf8) else {
+            return
+        }
+        
+        //jsonString
+        
+        
+        
+        do {
+            
+            let decodedData = try JSONDecoder().decode(routesJSONArray.self, from: Data(jsonString.utf8))
+            
+            
+            for data in decodedData.routes {
+                K.routeNames.append(data.route_short_name)
+            }
+            
+            K.routeNames.sort()
+            
+            print("Parsing Complete")
+            
+            
+//            let route_short_name = decodedData.test[0].route_short_name
+//
+//
+//            let person = test(route_short_name: route_short_name)
+//
+//
+//            print(person.route_short_name)
+            
+            
+            
+        } catch {
+            print("Error occured when decoding: \(error.localizedDescription)\n\(error)")
+        }
+        
+        
+        
+    }
+}
+
+
+
+
+
 //MARK: - Get Stops
 
 extension LoginViewController {
     
-    
-    
+    func parseRoutesJSON() {
+        print("Started routes parsing")
+        guard let jsonRoutesURL = Bundle.main.path(forResource: "stops", ofType: "json") else {
+            print("There was an issue")
+            return
+        }
+        guard let jsonRoutesString = try? String(contentsOf: URL(fileURLWithPath: jsonRoutesURL), encoding: String.Encoding.utf8) else {
+            print("Uh oh")
+            return
+        }
+        
+        //jsonString
+        
+        
+        
+        do {
+            
+            let decodedRoutesData = try JSONDecoder().decode(stopsJSONArray.self, from: Data(jsonRoutesString.utf8))
+            
+            
+            for data in decodedRoutesData.Stops {
+                
+                let lat = data.Latitude
+                let long = data.Longitude
+                let routeData = data.RouteData
+                
+                
+                var nameEnglish: String?
+                if data.ShortCommonName_en != nil {
+                    nameEnglish = data.ShortCommonName_en
+                } else {
+                    nameEnglish = "UNKNOWN"
+                }
+                
+                //let nameEnglish = data.ShortCommonName_en
+                
+                var nameIrish: String?
+                if data.ShortCommonName_en != nil {
+                    nameIrish = data.ShortCommonName_en
+                } else {
+                    nameIrish = "UNKNOWN"
+                }
+                //let nameIrish = data.ShortCommonName_ga
+                
+                let stopNumber = data.PlateCode
+                
+                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, titleGa: nameIrish!, routes: routeData, stopNumber: stopNumber))
+                
+            }
+            
+            //K.routeNames.sort()
+            
+            
+            print("Routes Parsing Complete")
+            
+            
+//            let route_short_name = decodedData.test[0].route_short_name
+//
+//
+//            let person = test(route_short_name: route_short_name)
+//
+//
+//            print(person.route_short_name)
+            
+            
+            
+        } catch {
+            print("Error occured when decoding: \(error.localizedDescription)\n\(error)")
+        }
+        
+        
+        
+    }
 }
+
+

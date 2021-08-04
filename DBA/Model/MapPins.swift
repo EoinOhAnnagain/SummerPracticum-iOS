@@ -13,6 +13,38 @@ struct Pin {
     let lat: CLLocationDegrees
     let long: CLLocationDegrees
     let isStop: Bool
-    let isUser: Bool
+    let titleEn: String
+    let titleGa: String
+    let routes: String
+    let stopNumber: Int
+    
+}
+
+struct stopsJSONArray: Codable {
+    
+    let Stops: [Stops]
+    
+}
+
+struct Stops: Codable {
+    
+    let Latitude: Float
+    let Longitude: Float
+    let RouteData: String
+    let ShortCommonName_en: String?
+    let ShortCommonName_ga: String?
+    let PlateCode: Int
+    
+}
+
+struct routesJSONArray: Codable {
+    
+    let routes: [routes]
+    
+}
+
+struct routes: Codable {
+    
+    let route_short_name: String
     
 }

@@ -9,9 +9,9 @@ import Foundation
 
 struct StopsManager {
     
-    var delegate: StopsManagerDelegate?
+    //var delegate: StopsManagerDelegate?
     
-    let incompleteURL = 
+    //let incompleteURL = ""
     
     
 }
