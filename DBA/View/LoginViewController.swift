@@ -248,7 +248,7 @@ extension LoginViewController {
         
         do {
             
-            let decodedData = try JSONDecoder().decode(Person.self, from: Data(jsonString.utf8))
+            let decodedData = try JSONDecoder().decode(routesJSONArray.self, from: Data(jsonString.utf8))
             
             
             for data in decodedData.routes {
@@ -279,17 +279,7 @@ extension LoginViewController {
     }
 }
 
-struct Person: Codable {
-    
-    let routes: [routes]
-    
-}
 
-struct routes: Codable {
-    
-    let route_short_name: String
-    
-}
 
 
 
@@ -314,7 +304,7 @@ extension LoginViewController {
         
         do {
             
-            let decodedRoutesData = try JSONDecoder().decode(People.self, from: Data(jsonRoutesString.utf8))
+            let decodedRoutesData = try JSONDecoder().decode(stopsJSONArray.self, from: Data(jsonRoutesString.utf8))
             
             
             for data in decodedRoutesData.Stops {
@@ -372,19 +362,4 @@ extension LoginViewController {
     }
 }
 
-struct People: Codable {
-    
-    let Stops: [Stops]
-    
-}
 
-struct Stops: Codable {
-    
-    let Latitude: Float
-    let Longitude: Float
-    let RouteData: String
-    let ShortCommonName_en: String?
-    let ShortCommonName_ga: String?
-    let PlateCode: Int
-    
-}
