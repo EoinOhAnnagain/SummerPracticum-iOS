@@ -11,7 +11,7 @@ struct StopsManager {
     
     var delegate: StopsManagerDelegate?
     
-    let incompleteURL = 
+    let incompleteURL = ""
     
     
 }

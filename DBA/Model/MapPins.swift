@@ -14,5 +14,7 @@ struct Pin {
     let long: CLLocationDegrees
     let isStop: Bool
     let isUser: Bool
+    let title: String
+    let subtitle: String
     
 }

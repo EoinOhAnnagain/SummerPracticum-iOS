@@ -43,7 +43,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if let location = locations.first {
             manager.stopUpdatingLocation()
             
-            let user = Pin(lat: location.coordinate.latitude, long: location.coordinate.longitude, isStop: false, isUser: true)
+            let user = Pin(lat: location.coordinate.latitude, long: location.coordinate.longitude, isStop: false, isUser: true, title: "You are here!", subtitle: "Aren't you amanzing :)")
             
             render(user)
         }
@@ -62,6 +62,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         let pin = MKPointAnnotation()
         pin.coordinate = coordinate
+        pin.title = location.title
+        pin.subtitle = location.subtitle
         mapView.addAnnotation(pin)
         
     }
