@@ -17,15 +17,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var buttons: [UIButton]!
     let manager = CLLocationManager()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if SpeechService.shared.renderStopButton() {
-            bookStopButton.image = UIImage(systemName: "play.slash")
-        } else {
-            bookStopButton.image = nil
-        }
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,10 +66,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
-        SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
-    }
+
 
     /*
     // MARK: - Navigation
@@ -91,4 +80,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
 }
 
+//MARK: - Audio Book Control
 
+extension MapViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if SpeechService.shared.renderStopButton() {
+            bookStopButton.image = UIImage(systemName: "play.slash")
+        } else {
+            bookStopButton.image = nil
+        }
+    }
+    
+    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
+        SpeechService.shared.stopSpeeching()
+        navigationItem.setRightBarButton(nil, animated: true)
+    }
+}
