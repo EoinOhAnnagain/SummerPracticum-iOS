@@ -207,6 +207,8 @@ extension LoginViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        infoLabel.text = ""
+        
         if SpeechService.shared.renderStopButton() {
             bookStopButton.image = UIImage(systemName: "play.slash")
         } else {
