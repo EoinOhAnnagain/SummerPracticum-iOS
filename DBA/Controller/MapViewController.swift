@@ -6,31 +6,67 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate {
 
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if SpeechService.shared.renderStopButton() {
-            bookStopButton.image = UIImage(systemName: "play.slash")
-        } else {
-            bookStopButton.image = nil
-        }
-    }
+    @IBOutlet var buttons: [UIButton]!
+    let manager = CLLocationManager()
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        roundCorners(buttons)
+        
+        mapView.layer.cornerRadius = 25
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
-        SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.delegate = self
+        manager.startUpdatingLocation()
     }
+    
+    @IBAction func locationButtonPressed(_ sender: UIButton) {
+        manager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            manager.stopUpdatingLocation()
+            
+            let user = Pin(lat: location.coordinate.latitude, long: location.coordinate.longitude, isStop: false, isUser: true)
+            
+            render(user)
+        }
+    }
+    
+    func render(_ location: Pin) {
+        
+        let coordinate = CLLocationCoordinate2D(latitude: location.lat, longitude: location.long)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        
+        let region = MKCoordinateRegion(center: coordinate, span: span)
+        
+        
+        mapView.setRegion(region, animated: true)
+        
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        mapView.addAnnotation(pin)
+        
+    }
+    
+
 
     /*
     // MARK: - Navigation
@@ -42,4 +78,24 @@ class MapViewController: UIViewController {
     }
     */
 
+}
+
+//MARK: - Audio Book Control
+
+extension MapViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if SpeechService.shared.renderStopButton() {
+            bookStopButton.image = UIImage(systemName: "play.slash")
+        } else {
+            bookStopButton.image = nil
+        }
+    }
+    
+    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
+        SpeechService.shared.stopSpeeching()
+        bookStopButton.image = nil
+    }
 }

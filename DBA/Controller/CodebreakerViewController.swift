@@ -45,15 +45,7 @@ class CodebreakerViewController: UIViewController {
     @IBOutlet weak var gameOverImage: UIImageView!
     @IBOutlet var victoryImages: [UIImageView]!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if SpeechService.shared.renderStopButton() {
-            bookStopButton.image = UIImage(systemName: "play.slash")
-        } else {
-            bookStopButton.image = nil
-        }
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,10 +96,7 @@ class CodebreakerViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
-        SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
-    }
+    
     
     func prepRoundCircles(_ circles: [UIButton]) {
         for circle in circles {
@@ -340,4 +329,24 @@ class CodebreakerViewController: UIViewController {
      }
      */
     
+}
+
+//MARK: - Audio Book Control
+
+extension CodebreakerViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if SpeechService.shared.renderStopButton() {
+            bookStopButton.image = UIImage(systemName: "play.slash")
+        } else {
+            bookStopButton.image = nil
+        }
+    }
+
+    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
+        SpeechService.shared.stopSpeeching()
+        bookStopButton.image = nil
+    }
 }

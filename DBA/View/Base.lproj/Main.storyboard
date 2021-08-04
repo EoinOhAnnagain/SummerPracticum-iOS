@@ -98,8 +98,8 @@
                             <constraint firstItem="QxZ-rB-9AH" firstAttribute="leading" secondItem="tVg-Md-VWX" secondAttribute="leading" id="2gI-VY-zzx"/>
                             <constraint firstAttribute="trailing" secondItem="QxZ-rB-9AH" secondAttribute="trailing" id="8Ou-Wh-Swj"/>
                             <constraint firstItem="O49-ej-mgq" firstAttribute="top" secondItem="PcN-na-rMH" secondAttribute="bottom" constant="8" id="NND-g8-GUJ"/>
-                            <constraint firstItem="PcN-na-rMH" firstAttribute="top" secondItem="AvG-Qj-Mkz" secondAttribute="top" constant="140" id="Xme-rf-FCc"/>
                             <constraint firstItem="QxZ-rB-9AH" firstAttribute="top" secondItem="I9v-5S-ZQm" secondAttribute="bottom" constant="8" id="XwS-20-4Yh"/>
+                            <constraint firstItem="PcN-na-rMH" firstAttribute="top" secondItem="tVg-Md-VWX" secondAttribute="top" id="dJW-yN-Ung"/>
                             <constraint firstItem="I9v-5S-ZQm" firstAttribute="trailing" secondItem="tVg-Md-VWX" secondAttribute="trailing" id="eCI-aB-qOm"/>
                             <constraint firstItem="PcN-na-rMH" firstAttribute="trailing" secondItem="tVg-Md-VWX" secondAttribute="trailing" id="fw8-rw-WwC"/>
                             <constraint firstItem="I9v-5S-ZQm" firstAttribute="leading" secondItem="tVg-Md-VWX" secondAttribute="leading" id="gzu-uN-lrD"/>
@@ -288,11 +288,6 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="arrowshape.turn.up.backward" catalog="system" symbolScale="large"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="dismissPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="YVD-9a-a7d"/>
                                         </connections>
@@ -305,11 +300,6 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="arrow.left" catalog="system" symbolScale="large"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="previousPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="M6V-fY-ciP"/>
                                         </connections>
@@ -322,11 +312,6 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="arrow.up" catalog="system" symbolScale="large"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="toTopPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="f7k-am-Gx0"/>
                                         </connections>
@@ -339,11 +324,6 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="arrow.right" catalog="system" symbolScale="large"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="forwardPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="1uL-fc-qQa"/>
                                         </connections>
@@ -356,11 +336,6 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="playpause" catalog="system" symbolScale="large"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="mediaButtonPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="4S3-aR-QfH"/>
                                         </connections>
@@ -388,6 +363,11 @@
                     <connections>
                         <outlet property="bookText" destination="OrJ-2g-e8G" id="U8b-TT-BeC"/>
                         <outlet property="mediaButton" destination="dpu-nC-9fe" id="UXd-B2-jSD"/>
+                        <outletCollection property="buttons" destination="8GN-JB-mpq" collectionClass="NSMutableArray" id="QBE-DH-mlJ"/>
+                        <outletCollection property="buttons" destination="TAZ-D3-oOZ" collectionClass="NSMutableArray" id="tCn-cg-jV8"/>
+                        <outletCollection property="buttons" destination="WDq-4h-Fgn" collectionClass="NSMutableArray" id="szP-e4-X5u"/>
+                        <outletCollection property="buttons" destination="2ac-VP-FbF" collectionClass="NSMutableArray" id="CKN-cS-Pjx"/>
+                        <outletCollection property="buttons" destination="dpu-nC-9fe" collectionClass="NSMutableArray" id="Qxo-fm-D26"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvU-Yt-Sh9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1361,11 +1341,6 @@
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="25"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </textView>
                                         </subviews>
                                         <constraints>
@@ -1515,11 +1490,6 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="person.3.fill" catalog="system" symbolScale="large"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="aboutUsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jFh-Lv-K41"/>
                                         </connections>
@@ -1532,11 +1502,6 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="message.circle" catalog="system" symbolScale="large"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="chatButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QSi-Em-zSr"/>
                                         </connections>
@@ -1566,11 +1531,6 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="gamecontroller.fill" catalog="system" symbolScale="large"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="toGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="daf-FT-cmL"/>
                                         </connections>
@@ -1583,11 +1543,6 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="arrow.up.and.person.rectangle.portrait" catalog="system" symbolScale="large"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="contactUsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BvH-Zh-pqy"/>
                                         </connections>
@@ -1626,6 +1581,11 @@
                         <outlet property="weatherIcon" destination="SVy-Nw-irR" id="4jV-Yk-wx3"/>
                         <outlet property="weatherLoader" destination="Jhy-lA-Vkw" id="fwl-Ml-0R0"/>
                         <outlet property="weatherWidgetButton" destination="dwc-bj-jxG" id="HIx-0P-y7f"/>
+                        <outletCollection property="buttons" destination="oor-0d-eLn" collectionClass="NSMutableArray" id="yiH-Il-nEN"/>
+                        <outletCollection property="buttons" destination="y6N-f9-I6B" collectionClass="NSMutableArray" id="xbQ-r5-OJh"/>
+                        <outletCollection property="buttons" destination="nyT-GP-VFh" collectionClass="NSMutableArray" id="2G9-V7-ub4"/>
+                        <outletCollection property="buttons" destination="ul6-Qu-zkH" collectionClass="NSMutableArray" id="TCf-gd-zaf"/>
+                        <outletCollection property="buttons" destination="2lV-Xi-tka" collectionClass="NSMutableArray" id="tEm-e2-zSm"/>
                         <segue destination="Dv3-3x-ApG" kind="presentation" identifier="toWeather" id="rWG-q9-Iep"/>
                         <segue destination="76j-rU-nC6" kind="show" identifier="MainToChat" id="nlx-U9-drR"/>
                         <segue destination="t2D-eN-zyk" kind="show" identifier="MainToUs" id="Ibc-Tb-y5O"/>
@@ -1650,12 +1610,29 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xj0-Cw-71q">
                                 <rect key="frame" x="0.0" y="140" width="414" height="756"/>
                             </mapView>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmH-S2-1BV">
+                                <rect key="frame" x="20" y="160" width="40" height="40"/>
+                                <color key="backgroundColor" name="Interface"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HJm-49-1tx"/>
+                                    <constraint firstAttribute="width" constant="40" id="l1t-Oz-jXW"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="location.fill" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="locationButtonPressed:" destination="Lcm-pK-ovO" eventType="touchUpInside" id="SVX-dQ-K5o"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="a7c-mN-1n8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Xj0-Cw-71q" firstAttribute="leading" secondItem="a7c-mN-1n8" secondAttribute="leading" id="16v-Yl-VnS"/>
                             <constraint firstAttribute="bottom" secondItem="Xj0-Cw-71q" secondAttribute="bottom" id="7kN-DB-oSp"/>
+                            <constraint firstItem="tmH-S2-1BV" firstAttribute="leading" secondItem="a7c-mN-1n8" secondAttribute="leading" constant="20" id="Vu1-vz-bir"/>
+                            <constraint firstItem="tmH-S2-1BV" firstAttribute="top" secondItem="a7c-mN-1n8" secondAttribute="top" constant="20" id="gYy-1d-QeW"/>
                             <constraint firstItem="Xj0-Cw-71q" firstAttribute="trailing" secondItem="a7c-mN-1n8" secondAttribute="trailing" id="rQe-dz-iNg"/>
                             <constraint firstItem="Xj0-Cw-71q" firstAttribute="top" secondItem="a7c-mN-1n8" secondAttribute="top" id="yJn-RQ-Fma"/>
                         </constraints>
@@ -1669,6 +1646,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bookStopButton" destination="VZr-9Y-rPW" id="mAp-im-kLn"/>
+                        <outlet property="mapView" destination="Xj0-Cw-71q" id="RuM-EK-7E8"/>
+                        <outletCollection property="buttons" destination="tmH-S2-1BV" collectionClass="NSMutableArray" id="qFB-3w-40K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xLZ-WC-nA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1759,9 +1738,6 @@
                                 <color key="textColor" name="Interface"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -1775,9 +1751,6 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -1791,11 +1764,6 @@
                                         <state key="normal" title="Sign Up">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="signUpPressed:" destination="QJF-4w-IrE" eventType="touchUpInside" id="and-Oz-f48"/>
                                         </connections>
@@ -1821,11 +1789,6 @@
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="loginPressed:" destination="QJF-4w-IrE" eventType="touchUpInside" id="VR3-0L-tYF"/>
                                         </connections>
@@ -1873,11 +1836,11 @@
                         <outlet property="signUpSecondPasswordTextField" destination="SIs-ZY-sCd" id="odp-Uq-9fM"/>
                         <outlet property="titleLabel" destination="gWw-ny-lz4" id="Uns-dG-UK8"/>
                         <outlet property="titleLabel2" destination="WVW-BP-DPH" id="i4I-An-C9d"/>
-                        <outletCollection property="labelsToRound" destination="WVW-BP-DPH" collectionClass="NSMutableArray" id="wOr-j6-efF"/>
-                        <outletCollection property="labelsToRound" destination="gWw-ny-lz4" collectionClass="NSMutableArray" id="0xZ-QK-5ia"/>
-                        <outletCollection property="buttonsToRound" destination="Jg1-r2-KnS" collectionClass="NSMutableArray" id="oFz-Ju-3SG"/>
-                        <outletCollection property="buttonsToRound" destination="KFk-h0-cnG" collectionClass="NSMutableArray" id="jsO-r1-9sx"/>
-                        <outletCollection property="buttonsToRound" destination="eyx-nz-tql" collectionClass="NSMutableArray" id="TIV-qp-l0w"/>
+                        <outletCollection property="labels" destination="WVW-BP-DPH" collectionClass="NSMutableArray" id="wOr-j6-efF"/>
+                        <outletCollection property="labels" destination="gWw-ny-lz4" collectionClass="NSMutableArray" id="0xZ-QK-5ia"/>
+                        <outletCollection property="buttons" destination="Jg1-r2-KnS" collectionClass="NSMutableArray" id="oFz-Ju-3SG"/>
+                        <outletCollection property="buttons" destination="KFk-h0-cnG" collectionClass="NSMutableArray" id="jsO-r1-9sx"/>
+                        <outletCollection property="buttons" destination="eyx-nz-tql" collectionClass="NSMutableArray" id="TIV-qp-l0w"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="LoginToMain" id="OFs-Hh-Nq1"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="GuestToMain" id="DOJ-S0-buZ"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="SignToMain" id="Cmc-VE-ar6"/>
@@ -1901,7 +1864,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mko-3p-Sm4" userLabel="Top">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="252"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWH-Xp-imD">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWH-Xp-imD" userLabel="General View">
                                                 <rect key="frame" x="209.66666666666663" y="8" width="198.33333333333337" height="236"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun.max" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LMs-Mp-uYJ">
@@ -1935,7 +1898,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwC-2o-Rz9">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwC-2o-Rz9" userLabel="Icon View">
                                                 <rect key="frame" x="6" y="8" width="198.66666666666666" height="236"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZB9-Ku-8cu">
@@ -2010,7 +1973,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBH-56-Gll" userLabel="Middle">
                                         <rect key="frame" x="0.0" y="278" width="414" height="252"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNg-M4-hY5">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNg-M4-hY5" userLabel="Temp View">
                                                 <rect key="frame" x="209.66666666666663" y="8" width="198.33333333333337" height="236"/>
                                                 <subviews>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Jkw-yx-Q2o">
@@ -2139,7 +2102,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0P-cX-1KU" userLabel="View1">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0P-cX-1KU" userLabel="Wind View">
                                                 <rect key="frame" x="6" y="8" width="198.66666666666666" height="236"/>
                                                 <subviews>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="IBg-sf-8w2">
@@ -2471,6 +2434,12 @@
                         <outlet property="windArrow" destination="A3J-lz-XMu" id="CJM-LB-hRV"/>
                         <outlet property="windLoader" destination="IBg-sf-8w2" id="lQg-Gx-DPn"/>
                         <outlet property="windTitle" destination="yhL-RL-tBg" id="nub-NK-cYY"/>
+                        <outletCollection property="views" destination="dWH-Xp-imD" collectionClass="NSMutableArray" id="YMA-Ia-cvi"/>
+                        <outletCollection property="views" destination="rwC-2o-Rz9" collectionClass="NSMutableArray" id="Qjv-vE-Ty5"/>
+                        <outletCollection property="views" destination="tNg-M4-hY5" collectionClass="NSMutableArray" id="JFj-d5-wU4"/>
+                        <outletCollection property="views" destination="a0P-cX-1KU" collectionClass="NSMutableArray" id="ZAs-FN-soy"/>
+                        <outletCollection property="views" destination="vdl-ms-fj6" collectionClass="NSMutableArray" id="Xcn-tx-RX6"/>
+                        <outletCollection property="views" destination="2bA-Na-d3a" collectionClass="NSMutableArray" id="zD7-Xj-6vb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dci-pb-vhV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2523,6 +2492,7 @@
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>
         <image name="gamecontroller.fill" catalog="system" width="128" height="80"/>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="message.circle" catalog="system" width="128" height="121"/>
         <image name="paperplane.circle" catalog="system" width="128" height="121"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>

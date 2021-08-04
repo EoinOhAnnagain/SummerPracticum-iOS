@@ -27,27 +27,18 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     @IBOutlet weak var titleLabel2: UILabel!
     
     
-    @IBOutlet var buttonsToRound: [UIButton]!
-    @IBOutlet var labelsToRound: [UILabel]!
+    @IBOutlet var buttons: [UIButton]!
+    @IBOutlet var labels: [UILabel]!
     
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        infoLabel.text = ""
-        
-        if SpeechService.shared.renderStopButton() {
-            bookStopButton.image = UIImage(systemName: "play.slash")
-        } else {
-            bookStopButton.image = nil
-        }
-    }
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         logOut()
-        round()
+        roundCorners(buttons)
+        roundCorners(labels)
         title()
         
         loginEmailTextField.delegate = self
@@ -59,10 +50,7 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         
     }
   
-    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
-        SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
-    }
+  
     
     func title() {
         titleLabel.text = ""
@@ -198,28 +186,6 @@ extension LoginViewController {
     
 }
 
-//MARK: - Rounding
-
-extension LoginViewController {
-    
-    func round() {
-        for b in buttonsToRound {
-            roundButtons(b)
-        }
-        for l in labelsToRound {
-            roundLabels(l)
-        }
-    }
-    
-    func roundButtons(_ name: UIButton) {
-        name.layer.cornerRadius = 0.4 * name.bounds.size.height
-    }
-    
-    func roundLabels(_ name: UILabel) {
-        name.layer.cornerRadius = 0.3 * name.bounds.size.height
-    }
-}
-
 
 // MARK: - Manage Return Key
 
@@ -232,4 +198,32 @@ extension LoginViewController: UITextFieldDelegate {
         }
         return view.endEditing(true)
     }
+}
+
+//MARK: - Audio Book Control
+
+extension LoginViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if SpeechService.shared.renderStopButton() {
+            bookStopButton.image = UIImage(systemName: "play.slash")
+        } else {
+            bookStopButton.image = nil
+        }
+    }
+
+    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
+        SpeechService.shared.stopSpeeching()
+        bookStopButton.image = nil
+    }
+}
+
+//MARK: - Get Stops
+
+extension LoginViewController {
+    
+    
+    
 }
