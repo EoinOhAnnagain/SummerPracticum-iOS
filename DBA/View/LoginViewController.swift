@@ -31,17 +31,7 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     @IBOutlet var labels: [UILabel]!
     
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        infoLabel.text = ""
-        
-        if SpeechService.shared.renderStopButton() {
-            bookStopButton.image = UIImage(systemName: "play.slash")
-        } else {
-            bookStopButton.image = nil
-        }
-    }
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +50,7 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         
     }
   
-    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
-        SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
-    }
+  
     
     func title() {
         titleLabel.text = ""
@@ -211,4 +198,32 @@ extension LoginViewController: UITextFieldDelegate {
         }
         return view.endEditing(true)
     }
+}
+
+//MARK: - Audio Book Control
+
+extension LoginViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if SpeechService.shared.renderStopButton() {
+            bookStopButton.image = UIImage(systemName: "play.slash")
+        } else {
+            bookStopButton.image = nil
+        }
+    }
+
+    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
+        SpeechService.shared.stopSpeeching()
+        bookStopButton.image = nil
+    }
+}
+
+//MARK: - Get Stops
+
+extension LoginViewController {
+    
+    
+    
 }
