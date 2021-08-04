@@ -25,8 +25,6 @@ class ChatViewController: UIViewController {
     
     @IBOutlet weak var chatPicker: UIPickerView!
     
-    var busStops = ["H1", "H2", "H3", "6", "1", "4", "7", "7a", "7b", "7n", "9", "11", "13", "14", "15", "15a", "15b", "15d", "16", "25", "25a", "25b", "25d", "25n", "25x", "26", "27", "27a", "27b", "27x", "29a", "29n", "31/a", "31b", "31d", "31n", "32", "32x", "33", "33s", "33n", "33x", "37", "38a", "38b", "39", "39a", "39x", "40", "40b", "40d", "40e", "41", "41b", "41c", "41x", "42", "41d", "42d", "42n", "43", "44", "44b", "46a", "46e", "46n", "47", "49", "49n", "51d", "51x", "53", "53a", "54a", "56a", "61", "65", "65b", "66", "66a", "66b", "66e", "66n", "66x", "67", "67n", "67x", "68/a", "68x", "69", "69n", "69x", "70", "70d", "70n", "77a", "77n", "77x", "79/a", "83", "84/a", "84n", "84x", "88n", "90", "116", "118", "120", "122", "123", "130", "140", "142", "145", "150", "151", "155", "747", "757"]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,12 +173,12 @@ extension ChatViewController: UITableViewDelegate {
 
 extension ChatViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        return 2 
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
-            return busStops.count + 1
+            return K.routeNames.count + 1
         } else {
             return 2
         }
@@ -201,7 +199,7 @@ extension ChatViewController: UIPickerViewDelegate {
             if row == 0 {
                 return "General"
             } else {
-                return busStops[row-1]
+                return K.routeNames[row-1]
             }
         } else {
             let selected = pickerView.selectedRow(inComponent: 0)
@@ -221,13 +219,21 @@ extension ChatViewController: UIPickerViewDelegate {
         
         pickerView.reloadComponent(1)
         
+        
+        
+        
+        
+        
+        
+        
+        
         let chosenRouteNumber = pickerView.selectedRow(inComponent: 0)
         let chosenRoute: String?
         
         if chosenRouteNumber == 0 {
             chosenRoute = "messages"
         } else {
-            chosenRoute = busStops[chosenRouteNumber-1]
+            chosenRoute = K.routeNames[chosenRouteNumber-1]
         }
         
         let chosenDirectionNumber = pickerView.selectedRow(inComponent: 1)
