@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A00FAF026BB4AAF0088A491 /* stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A00FAEF26BB4AAF0088A491 /* stops.json */; };
 		6A04DD0426B6EED0003031EC /* AboutUsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A04DD0226B6EED0003031EC /* AboutUsCellTableViewCell.swift */; };
 		6A04DD0526B6EED0003031EC /* AboutUsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A04DD0326B6EED0003031EC /* AboutUsCellTableViewCell.xib */; };
 		6A09552E26A39642004FA1FD /* ChosenBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A09552D26A39642004FA1FD /* ChosenBookViewController.swift */; };
@@ -51,6 +52,7 @@
 		18943BC021D0F47085E646B2 /* Pods-DBA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBA.release.xcconfig"; path = "Target Support Files/Pods-DBA/Pods-DBA.release.xcconfig"; sourceTree = "<group>"; };
 		2F7DF73008B5561DDFADA62C /* Pods-DBA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBA.debug.xcconfig"; path = "Target Support Files/Pods-DBA/Pods-DBA.debug.xcconfig"; sourceTree = "<group>"; };
 		5AFBC5AC62CFA2512042B848 /* Pods_DBA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DBA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A00FAEF26BB4AAF0088A491 /* stops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stops.json; sourceTree = "<group>"; };
 		6A04DD0226B6EED0003031EC /* AboutUsCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsCellTableViewCell.swift; sourceTree = "<group>"; };
 		6A04DD0326B6EED0003031EC /* AboutUsCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutUsCellTableViewCell.xib; sourceTree = "<group>"; };
 		6A09552D26A39642004FA1FD /* ChosenBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenBookViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				6A2E78DB26BAF78A001BD7A0 /* routes.json */,
 				6A9455752693D88200EA47B9 /* Constants.swift */,
 				6AEF380A26B84DD6001A8A31 /* Sensitive.swift */,
+				6A00FAEF26BB4AAF0088A491 /* stops.json */,
 				6A37B3B226B9F953004800A7 /* GeneralFunctions.swift */,
 			);
 			path = DBA;
@@ -275,6 +278,7 @@
 				6A1E1BDD2686765C00A51DF1 /* LaunchScreen.storyboard in Resources */,
 				6AEF380726B842A8001A8A31 /* GoogleService-Info.plist in Resources */,
 				6ABDDF9B269C98890058A93D /* ChatCell.xib in Resources */,
+				6A00FAF026BB4AAF0088A491 /* stops.json in Resources */,
 				6A2E78DC26BAF78B001BD7A0 /* routes.json in Resources */,
 				6A04DD0526B6EED0003031EC /* AboutUsCellTableViewCell.xib in Resources */,
 				6A1E1BDA2686765C00A51DF1 /* Assets.xcassets in Resources */,

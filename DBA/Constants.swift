@@ -8,6 +8,7 @@
 struct K {
     
     static var routeNames: [String] = []
+    static var stopsLocations: [Pin] = []
     
     static let color = "Interface"
     

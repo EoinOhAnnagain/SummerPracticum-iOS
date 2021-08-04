@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
+import CoreLocation
 
 class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     
@@ -43,7 +44,8 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         roundCorners(labels)
         title()
         
-        parseJSON()
+        parseRoutesJSON()
+        parseStopsJSON()
         
         loginEmailTextField.delegate = self
         loginPasswordTextField.delegate = self
@@ -226,12 +228,12 @@ extension LoginViewController {
     }
 }
 
-//MARK: - Get Stops
+//MARK: - Get Routes
 
 extension LoginViewController {
     
-    func parseJSON() {
-        print("Started parsing")
+    func parseStopsJSON() {
+        print("Started stops parsing")
         guard let jsonURL = Bundle.main.path(forResource: "routes", ofType: "json") else {
             print("There was an issue")
             return
@@ -249,7 +251,7 @@ extension LoginViewController {
             let decodedData = try JSONDecoder().decode(Person.self, from: Data(jsonString.utf8))
             
             
-            for data in decodedData.test {
+            for data in decodedData.routes {
                 K.routeNames.append(data.route_short_name)
             }
             
@@ -279,12 +281,110 @@ extension LoginViewController {
 
 struct Person: Codable {
     
-    let test: [test]
+    let routes: [routes]
     
 }
 
-struct test: Codable {
+struct routes: Codable {
     
     let route_short_name: String
+    
+}
+
+
+
+//MARK: - Get Stops
+
+extension LoginViewController {
+    
+    func parseRoutesJSON() {
+        print("Started routes parsing")
+        guard let jsonRoutesURL = Bundle.main.path(forResource: "stops", ofType: "json") else {
+            print("There was an issue")
+            return
+        }
+        guard let jsonRoutesString = try? String(contentsOf: URL(fileURLWithPath: jsonRoutesURL), encoding: String.Encoding.utf8) else {
+            print("Uh oh")
+            return
+        }
+        
+        //jsonString
+        
+        
+        
+        do {
+            
+            let decodedRoutesData = try JSONDecoder().decode(People.self, from: Data(jsonRoutesString.utf8))
+            
+            
+            for data in decodedRoutesData.Stops {
+                
+                let lat = data.Latitude
+                let long = data.Longitude
+                let routeData = data.RouteData
+                
+                
+                var nameEnglish: String?
+                if data.ShortCommonName_en != nil {
+                    nameEnglish = data.ShortCommonName_en
+                } else {
+                    nameEnglish = "UNKNOWN"
+                }
+                
+                //let nameEnglish = data.ShortCommonName_en
+                
+                var nameIrish: String?
+                if data.ShortCommonName_en != nil {
+                    nameIrish = data.ShortCommonName_en
+                } else {
+                    nameIrish = "UNKNOWN"
+                }
+                //let nameIrish = data.ShortCommonName_ga
+                
+                let stopNumber = data.PlateCode
+                
+                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, titleGa: nameIrish!, routes: routeData, stopNumber: stopNumber))
+                
+            }
+            
+            //K.routeNames.sort()
+            
+            
+            print("Routes Parsing Complete")
+            
+            
+//            let route_short_name = decodedData.test[0].route_short_name
+//
+//
+//            let person = test(route_short_name: route_short_name)
+//
+//
+//            print(person.route_short_name)
+            
+            
+            
+        } catch {
+            print("Error occured when decoding: \(error.localizedDescription)\n\(error)")
+        }
+        
+        
+        
+    }
+}
+
+struct People: Codable {
+    
+    let Stops: [Stops]
+    
+}
+
+struct Stops: Codable {
+    
+    let Latitude: Float
+    let Longitude: Float
+    let RouteData: String
+    let ShortCommonName_en: String?
+    let ShortCommonName_ga: String?
+    let PlateCode: Int
     
 }

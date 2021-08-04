@@ -13,17 +13,10 @@ struct Pin {
     let lat: CLLocationDegrees
     let long: CLLocationDegrees
     let isStop: Bool
-    let title: String
-    let subtitle: String
+    let titleEn: String
+    let titleGa: String
+    let routes: String
+    let stopNumber: Int
     
 }
 
-struct Result: Codable {
-    let data: [Routes]
-}
-
-struct Routes: Codable {
-    
-    let route_name: String
-    
-}
