@@ -26,15 +26,7 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
     
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if SpeechService.shared.renderStopButton() {
-            bookStopButton.image = UIImage(systemName: "play.slash")
-        } else {
-            bookStopButton.image = nil
-        }
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,10 +51,6 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
-        SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
-    }
 
     func setUp() {
         if userEmail != nil {
@@ -202,6 +190,29 @@ extension ContactUsViewController: UIPickerViewDelegate {
         } else {
             return K.contact.pickerOptions[row - 1]
         }
+    }
+    
+}
+
+
+//MARK: - Audio Book Control
+
+extension ContactUsViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if SpeechService.shared.renderStopButton() {
+            bookStopButton.image = UIImage(systemName: "play.slash")
+        } else {
+            bookStopButton.image = nil
+        }
+    }
+    
+    
+    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
+        SpeechService.shared.stopSpeeching()
+        navigationItem.setRightBarButton(nil, animated: true)
     }
     
 }

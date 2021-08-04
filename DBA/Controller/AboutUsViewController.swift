@@ -21,15 +21,7 @@ class AboutUsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var tableViewData = [cellData]()
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if SpeechService.shared.renderStopButton() {
-            bookStopButton.image = UIImage(systemName: "play.slash")
-        } else {
-            bookStopButton.image = nil
-        }
-    }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +42,7 @@ class AboutUsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
-        SpeechService.shared.stopSpeeching()
-        navigationItem.setRightBarButton(nil, animated: true)
-    }
+   
 
     
     /*
@@ -111,4 +100,26 @@ extension AboutUsViewController: UITableViewDelegate {
         }
     }
     
+}
+
+
+//MARK: - Audio Book Control
+
+extension AboutUsViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if SpeechService.shared.renderStopButton() {
+            bookStopButton.image = UIImage(systemName: "play.slash")
+        } else {
+            bookStopButton.image = nil
+        }
+        
+    }
+    
+    @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
+        SpeechService.shared.stopSpeeching()
+        navigationItem.setRightBarButton(nil, animated: true)
+    }
 }
