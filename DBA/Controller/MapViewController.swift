@@ -15,10 +15,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     
-   
+    var chosenRoute: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         GMSServices.provideAPIKey(S.googleMapsAPIKey)
         
@@ -26,7 +28,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         // Do any additional setup after loading the view.
         
-        
+        print(chosenRoute!)
         
         
         
@@ -44,13 +46,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.settings.myLocationButton = true
         view.addSubview(mapView)
         
-        generateStopPins(mapView)
+        let cr: String = chosenRoute!
+        
+        generateStopPins(mapView, cr)
         
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         marker.title = "You Are Here"
-        marker.snippet = "Bitch"
+        marker.snippet = ":)"
         marker.icon = UIImage(systemName: "figure.wave.circle.fill")
         marker.map = mapView
         locationManager.stopUpdatingLocation()
@@ -64,16 +68,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //    }
     
  
-    func generateStopPins(_ mapView: GMSMapView) {
+    func generateStopPins(_ mapView: GMSMapView, _ cr: String) {
         
         for stop in K.stopsLocations {
-            let stopMarker = GMSMarker()
-            print(stop.titleEn)
-            stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
-            stopMarker.icon = UIImage(systemName: "bus.doubledecker")
-            stopMarker.title = stop.titleEn
-            stopMarker.snippet = stop.routes
-            stopMarker.map = mapView
+            for route in stop.busesAtStop {
+                if route == cr {
+                    let stopMarker = GMSMarker()
+                    stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
+        //            stopMarker.icon = UIImage(systemName: "bus.doubledecker")
+                    stopMarker.title = stop.titleEn
+                    stopMarker.snippet = stop.routes
+                    stopMarker.map = mapView
+                }
+            }
         }
     }
     
