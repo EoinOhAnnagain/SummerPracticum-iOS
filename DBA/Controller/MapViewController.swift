@@ -13,7 +13,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
-    @IBOutlet var buttons: [UIButton]!
     let locationManager = CLLocationManager()
     
    
@@ -22,25 +21,39 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         GMSServices.provideAPIKey(S.googleMapsAPIKey)
-        roundCorners(buttons)
         
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
         // Do any additional setup after loading the view.
+        
+        
+        
+        
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else {
+            return
+        }
         // Create a GMSCameraPosition that tells the map to display the
         // coordinate -33.86,151.20 at zoom level 6.
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+        let coordinate = location.coordinate
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 16.0)
         let mapView = GMSMapView.map(withFrame: view.frame, camera: camera)
+        mapView.settings.myLocationButton = true
         view.addSubview(mapView)
+        
+        generateStopPins(mapView)
         
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
+        marker.position = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        marker.title = "You Are Here"
+        marker.snippet = "Bitch"
+        marker.icon = UIImage(systemName: "figure.wave.circle.fill")
         marker.map = mapView
-        
-        
-        
-        
+        locationManager.stopUpdatingLocation()
     }
     
     //    override func viewDidAppear(_ animated: Bool) {
@@ -50,15 +63,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //        locationManager.startUpdatingLocation()
     //    }
     
-    @IBAction func locationButtonPressed(_ sender: UIButton) {
-        //        locationManager.startUpdatingLocation()
+ 
+    func generateStopPins(_ mapView: GMSMapView) {
+        
+        for stop in K.stopsLocations {
+            let stopMarker = GMSMarker()
+            print(stop.titleEn)
+            stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
+            stopMarker.icon = UIImage(systemName: "bus.doubledecker")
+            stopMarker.title = stop.titleEn
+            stopMarker.snippet = stop.routes
+            stopMarker.map = mapView
+        }
     }
     
+
     
     
     
     
-    
+}
+
+extension GMSMarker {
+    func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 }
 
 //MARK: - Audio Book Control

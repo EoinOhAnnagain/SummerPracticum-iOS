@@ -1501,6 +1501,7 @@
                                         <state key="normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="message.circle" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="default"/>
                                         </state>
                                         <connections>
                                             <action selector="chatButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QSi-Em-zSr"/>
@@ -1606,49 +1607,8 @@
                     <view key="view" contentMode="scaleToFill" id="J08-aQ-CjX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="zR1-3w-xlA">
-                                <rect key="frame" x="20" y="160" width="50" height="93"/>
-                                <subviews>
-                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqg-wr-VrW">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
-                                        <color key="backgroundColor" name="Interface"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="Wij-Ds-Q3n"/>
-                                        </constraints>
-                                        <state key="normal" title="Legal">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmH-S2-1BV">
-                                        <rect key="frame" x="0.0" y="53" width="50" height="40"/>
-                                        <color key="backgroundColor" name="Interface"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="HJm-49-1tx"/>
-                                            <constraint firstAttribute="width" constant="40" id="l1t-Oz-jXW"/>
-                                        </constraints>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal">
-                                            <imageReference key="image" image="location.fill" catalog="system" symbolScale="large"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="locationButtonPressed:" destination="Lcm-pK-ovO" eventType="touchUpInside" id="SVX-dQ-K5o"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="Bqg-wr-VrW" firstAttribute="top" secondItem="zR1-3w-xlA" secondAttribute="top" id="EF3-77-yCI"/>
-                                    <constraint firstItem="Bqg-wr-VrW" firstAttribute="leading" secondItem="zR1-3w-xlA" secondAttribute="leading" id="o6c-x9-cFs"/>
-                                    <constraint firstAttribute="width" constant="50" id="sWY-ia-UM0"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="a7c-mN-1n8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="zR1-3w-xlA" firstAttribute="leading" secondItem="a7c-mN-1n8" secondAttribute="leading" constant="20" id="YEz-F5-oST"/>
-                            <constraint firstItem="zR1-3w-xlA" firstAttribute="top" secondItem="a7c-mN-1n8" secondAttribute="top" constant="20" id="jB1-J0-I1V"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="yUW-hc-80c">
                         <barButtonItem key="rightBarButtonItem" image="book.fill" catalog="system" width="80" id="VZr-9Y-rPW">
@@ -1659,7 +1619,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bookStopButton" destination="VZr-9Y-rPW" id="mAp-im-kLn"/>
-                        <outletCollection property="buttons" destination="tmH-S2-1BV" collectionClass="NSMutableArray" id="qFB-3w-40K"/>
                         <segue destination="etP-KT-HfC" kind="presentation" identifier="mapLegalSegue" id="6BZ-2L-eQX"/>
                     </connections>
                 </viewController>
@@ -2539,7 +2498,6 @@
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>
         <image name="gamecontroller.fill" catalog="system" width="128" height="80"/>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
-        <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="message.circle" catalog="system" width="128" height="121"/>
         <image name="paperplane.circle" catalog="system" width="128" height="121"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>

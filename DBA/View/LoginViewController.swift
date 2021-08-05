@@ -337,7 +337,12 @@ extension LoginViewController {
                 
                 let stopNumber = data.PlateCode
                 
-                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, titleGa: nameIrish!, routes: routeData, stopNumber: stopNumber))
+                let routesArray = String(routeData.filter { !" ".contains($0) }).components(separatedBy: ",")
+                
+                print(routesArray)
+                
+                
+                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, titleGa: nameIrish!, routes: routeData, stopNumber: stopNumber, busesAtStop: routesArray))
                 
             }
             
