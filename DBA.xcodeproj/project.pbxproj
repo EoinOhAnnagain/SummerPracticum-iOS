@@ -37,7 +37,7 @@
 		6ABDDF93269C94380058A93D /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABDDF92269C94380058A93D /* Messages.swift */; };
 		6ABDDF9A269C98890058A93D /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABDDF98269C98890058A93D /* ChatCell.swift */; };
 		6ABDDF9B269C98890058A93D /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABDDF99269C98890058A93D /* ChatCell.xib */; };
-		6ABDDF9E269CE9600058A93D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6ABDDF9D269CE9600058A93D /* IQKeyboardManagerSwift */; };
+		6ABDDF9E269CE9600058A93D /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6ABDDF9D269CE9600058A93D /* SwiftPackageProductDependency */; };
 		6AC1A8DF26B241EF00A08AF9 /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC1A8DE26B241EF00A08AF9 /* ContactUsViewController.swift */; };
 		6AC219F026987D100064B6AC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC219EF26987D100064B6AC /* ChatViewController.swift */; };
 		6AC4B37E26A637770072BEE3 /* Books in Resources */ = {isa = PBXBuildFile; fileRef = 6AC4B37D26A637770072BEE3 /* Books */; };
@@ -99,7 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F59B1AE1D215686AF8CB9E3F /* Pods_DBA.framework in Frameworks */,
-				6ABDDF9E269CE9600058A93D /* IQKeyboardManagerSwift in Frameworks */,
+				6ABDDF9E269CE9600058A93D /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +222,7 @@
 				6A1E1BCA2686765600A51DF1 /* Frameworks */,
 				6A1E1BCB2686765600A51DF1 /* Resources */,
 				64B866BAC545632A7E9AFB76 /* [CP] Embed Pods Frameworks */,
+				F9C8602652615132F220EC11 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,7 +230,7 @@
 			);
 			name = DBA;
 			packageProductDependencies = (
-				6ABDDF9D269CE9600058A93D /* IQKeyboardManagerSwift */,
+				6ABDDF9D269CE9600058A93D /* SwiftPackageProductDependency */,
 			);
 			productName = DBA;
 			productReference = 6A1E1BCD2686765600A51DF1 /* DBA.app */;
@@ -259,7 +260,7 @@
 			);
 			mainGroup = 6A1E1BC42686765600A51DF1;
 			packageReferences = (
-				6ABDDF9C269CE9600058A93D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				6ABDDF9C269CE9600058A93D /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 6A1E1BCE2686765600A51DF1 /* Products */;
 			projectDirPath = "";
@@ -328,6 +329,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9C8602652615132F220EC11 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DBA/Pods-DBA-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DBA/Pods-DBA-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DBA/Pods-DBA-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -569,7 +587,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6ABDDF9C269CE9600058A93D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		6ABDDF9C269CE9600058A93D /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
 			requirement = {
@@ -580,9 +598,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6ABDDF9D269CE9600058A93D /* IQKeyboardManagerSwift */ = {
+		6ABDDF9D269CE9600058A93D /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6ABDDF9C269CE9600058A93D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = 6ABDDF9C269CE9600058A93D /* RemoteSwiftPackageReference */;
 			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
