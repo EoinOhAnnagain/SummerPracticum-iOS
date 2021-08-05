@@ -46,9 +46,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.settings.myLocationButton = true
         view.addSubview(mapView)
         
-        let cr: String = chosenRoute!
-        
-        generateStopPins(mapView, cr)
+        generateStopPins(mapView)
         
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
@@ -68,14 +66,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //    }
     
  
-    func generateStopPins(_ mapView: GMSMapView, _ cr: String) {
+    func generateStopPins(_ mapView: GMSMapView) {
         
         for stop in K.stopsLocations {
             for route in stop.busesAtStop {
-                if route == cr {
+                if route == chosenRoute {
                     let stopMarker = GMSMarker()
                     stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
-        //            stopMarker.icon = UIImage(systemName: "bus.doubledecker")
+                    stopMarker.icon = UIImage(systemName: "bus.doubledecker")
                     stopMarker.title = stop.titleEn
                     stopMarker.snippet = stop.routes
                     stopMarker.map = mapView
