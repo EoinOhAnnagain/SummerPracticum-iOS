@@ -26,6 +26,7 @@
 		6A76039126A26DFF00DE482C /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A76038F26A26DFF00DE482C /* BookCollectionViewCell.swift */; };
 		6A76039226A26DFF00DE482C /* BookCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A76039026A26DFF00DE482C /* BookCollectionViewCell.xib */; };
 		6A78A642268A0819003BA1ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A78A641268A0819003BA1ED /* LoginViewController.swift */; };
+		6A7FBA8226BC4C6C005CA8E3 /* MapLegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7FBA8126BC4C6C005CA8E3 /* MapLegalViewController.swift */; };
 		6A868B0E26BA051F00983067 /* MapPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A868B0D26BA051F00983067 /* MapPins.swift */; };
 		6A9455762693D88200EA47B9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9455752693D88200EA47B9 /* Constants.swift */; };
 		6AAC5F1D268C8FCB00451DD2 /* weatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC5F1C268C8FCB00451DD2 /* weatherManager.swift */; };
@@ -37,7 +38,7 @@
 		6ABDDF93269C94380058A93D /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABDDF92269C94380058A93D /* Messages.swift */; };
 		6ABDDF9A269C98890058A93D /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABDDF98269C98890058A93D /* ChatCell.swift */; };
 		6ABDDF9B269C98890058A93D /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABDDF99269C98890058A93D /* ChatCell.xib */; };
-		6ABDDF9E269CE9600058A93D /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6ABDDF9D269CE9600058A93D /* SwiftPackageProductDependency */; };
+		6ABDDF9E269CE9600058A93D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6ABDDF9D269CE9600058A93D /* IQKeyboardManagerSwift */; };
 		6AC1A8DF26B241EF00A08AF9 /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC1A8DE26B241EF00A08AF9 /* ContactUsViewController.swift */; };
 		6AC219F026987D100064B6AC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC219EF26987D100064B6AC /* ChatViewController.swift */; };
 		6AC4B37E26A637770072BEE3 /* Books in Resources */ = {isa = PBXBuildFile; fileRef = 6AC4B37D26A637770072BEE3 /* Books */; };
@@ -73,6 +74,7 @@
 		6A76038F26A26DFF00DE482C /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A76039026A26DFF00DE482C /* BookCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookCollectionViewCell.xib; sourceTree = "<group>"; };
 		6A78A641268A0819003BA1ED /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = DBA/View/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
+		6A7FBA8126BC4C6C005CA8E3 /* MapLegalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLegalViewController.swift; sourceTree = "<group>"; };
 		6A868B0D26BA051F00983067 /* MapPins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPins.swift; sourceTree = "<group>"; };
 		6A9455752693D88200EA47B9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6AAC5F1C268C8FCB00451DD2 /* weatherManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weatherManager.swift; sourceTree = "<group>"; };
@@ -99,7 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F59B1AE1D215686AF8CB9E3F /* Pods_DBA.framework in Frameworks */,
-				6ABDDF9E269CE9600058A93D /* BuildFile in Frameworks */,
+				6ABDDF9E269CE9600058A93D /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +175,7 @@
 				6A76039026A26DFF00DE482C /* BookCollectionViewCell.xib */,
 				6A04DD0226B6EED0003031EC /* AboutUsCellTableViewCell.swift */,
 				6A04DD0326B6EED0003031EC /* AboutUsCellTableViewCell.xib */,
+				6A7FBA8126BC4C6C005CA8E3 /* MapLegalViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,7 +233,7 @@
 			);
 			name = DBA;
 			packageProductDependencies = (
-				6ABDDF9D269CE9600058A93D /* SwiftPackageProductDependency */,
+				6ABDDF9D269CE9600058A93D /* IQKeyboardManagerSwift */,
 			);
 			productName = DBA;
 			productReference = 6A1E1BCD2686765600A51DF1 /* DBA.app */;
@@ -260,7 +263,7 @@
 			);
 			mainGroup = 6A1E1BC42686765600A51DF1;
 			packageReferences = (
-				6ABDDF9C269CE9600058A93D /* RemoteSwiftPackageReference */,
+				6ABDDF9C269CE9600058A93D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 6A1E1BCE2686765600A51DF1 /* Products */;
 			projectDirPath = "";
@@ -360,6 +363,7 @@
 				6ACC952226AE117E00CDEA95 /* MapViewController.swift in Sources */,
 				6A09552E26A39642004FA1FD /* ChosenBookViewController.swift in Sources */,
 				6ACC952426AE441900CDEA95 /* CodeBreakerRulesViewController.swift in Sources */,
+				6A7FBA8226BC4C6C005CA8E3 /* MapLegalViewController.swift in Sources */,
 				6A76039126A26DFF00DE482C /* BookCollectionViewCell.swift in Sources */,
 				6ABDDF9A269C98890058A93D /* ChatCell.swift in Sources */,
 				6AAC5F23268CA6C200451DD2 /* WeatherViewController.swift in Sources */,
@@ -587,7 +591,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6ABDDF9C269CE9600058A93D /* RemoteSwiftPackageReference */ = {
+		6ABDDF9C269CE9600058A93D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
 			requirement = {
@@ -598,9 +602,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6ABDDF9D269CE9600058A93D /* SwiftPackageProductDependency */ = {
+		6ABDDF9D269CE9600058A93D /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6ABDDF9C269CE9600058A93D /* RemoteSwiftPackageReference */;
+			package = 6ABDDF9C269CE9600058A93D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

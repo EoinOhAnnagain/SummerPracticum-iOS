@@ -61,6 +61,12 @@ struct K {
         ]
     }
     
+    struct map {
+        
+        static let legal = "mapLegalSegue"
+        
+    }
+    
     struct aboutUs {
         static let cellID = "aboutUsCell"
         static let cellNibName = "AboutUsCellTableViewCell"

@@ -39,6 +39,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         marker.map = mapView
         
         
+        
+        
     }
     
     //    override func viewDidAppear(_ animated: Bool) {

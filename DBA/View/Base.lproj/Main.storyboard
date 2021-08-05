@@ -1607,27 +1607,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmH-S2-1BV">
-                                <rect key="frame" x="20" y="160" width="40" height="40"/>
-                                <color key="backgroundColor" name="Interface"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="zR1-3w-xlA">
+                                <rect key="frame" x="20" y="160" width="50" height="93"/>
+                                <subviews>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqg-wr-VrW">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
+                                        <color key="backgroundColor" name="Interface"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Wij-Ds-Q3n"/>
+                                        </constraints>
+                                        <state key="normal" title="Legal">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmH-S2-1BV">
+                                        <rect key="frame" x="0.0" y="53" width="50" height="40"/>
+                                        <color key="backgroundColor" name="Interface"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="HJm-49-1tx"/>
+                                            <constraint firstAttribute="width" constant="40" id="l1t-Oz-jXW"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="location.fill" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="locationButtonPressed:" destination="Lcm-pK-ovO" eventType="touchUpInside" id="SVX-dQ-K5o"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="HJm-49-1tx"/>
-                                    <constraint firstAttribute="width" constant="40" id="l1t-Oz-jXW"/>
+                                    <constraint firstItem="Bqg-wr-VrW" firstAttribute="top" secondItem="zR1-3w-xlA" secondAttribute="top" id="EF3-77-yCI"/>
+                                    <constraint firstItem="Bqg-wr-VrW" firstAttribute="leading" secondItem="zR1-3w-xlA" secondAttribute="leading" id="o6c-x9-cFs"/>
+                                    <constraint firstAttribute="width" constant="50" id="sWY-ia-UM0"/>
                                 </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal">
-                                    <imageReference key="image" image="location.fill" catalog="system" symbolScale="large"/>
-                                </state>
-                                <connections>
-                                    <action selector="locationButtonPressed:" destination="Lcm-pK-ovO" eventType="touchUpInside" id="SVX-dQ-K5o"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="a7c-mN-1n8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="tmH-S2-1BV" firstAttribute="leading" secondItem="a7c-mN-1n8" secondAttribute="leading" constant="20" id="Vu1-vz-bir"/>
-                            <constraint firstItem="tmH-S2-1BV" firstAttribute="top" secondItem="a7c-mN-1n8" secondAttribute="top" constant="20" id="gYy-1d-QeW"/>
+                            <constraint firstItem="zR1-3w-xlA" firstAttribute="leading" secondItem="a7c-mN-1n8" secondAttribute="leading" constant="20" id="YEz-F5-oST"/>
+                            <constraint firstItem="zR1-3w-xlA" firstAttribute="top" secondItem="a7c-mN-1n8" secondAttribute="top" constant="20" id="jB1-J0-I1V"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="yUW-hc-80c">
@@ -1640,11 +1660,46 @@
                     <connections>
                         <outlet property="bookStopButton" destination="VZr-9Y-rPW" id="mAp-im-kLn"/>
                         <outletCollection property="buttons" destination="tmH-S2-1BV" collectionClass="NSMutableArray" id="qFB-3w-40K"/>
+                        <segue destination="etP-KT-HfC" kind="presentation" identifier="mapLegalSegue" id="6BZ-2L-eQX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xLZ-WC-nA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1533" y="319"/>
+        </scene>
+        <!--Map Legal View Controller-->
+        <scene sceneID="cme-gD-OZy">
+            <objects>
+                <viewController id="etP-KT-HfC" customClass="MapLegalViewController" customModule="DBA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a7I-l2-zKg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dGJ-An-Czw">
+                                <rect key="frame" x="20" y="20" width="374" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" name="Interface"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kWe-uP-U9z"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dGJ-An-Czw" firstAttribute="leading" secondItem="kWe-uP-U9z" secondAttribute="leading" constant="20" id="Ld7-Mm-NyE"/>
+                            <constraint firstItem="kWe-uP-U9z" firstAttribute="trailing" secondItem="dGJ-An-Czw" secondAttribute="trailing" constant="20" id="Tme-Du-f2N"/>
+                            <constraint firstItem="dGJ-An-Czw" firstAttribute="top" secondItem="kWe-uP-U9z" secondAttribute="top" constant="20" id="ZEB-Nt-BwI"/>
+                            <constraint firstItem="kWe-uP-U9z" firstAttribute="bottom" secondItem="dGJ-An-Czw" secondAttribute="bottom" constant="20" id="pVX-ue-tiC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="legalText" destination="dGJ-An-Czw" id="BFW-mk-9ST"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qqg-Nw-caA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-433" y="319"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="t7U-15-v2c">
