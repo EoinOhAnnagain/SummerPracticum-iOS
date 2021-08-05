@@ -34,10 +34,14 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     var routeNames: [String] = []
     
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
+    }
   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         logOut()
         roundCorners(buttons)
@@ -361,5 +365,6 @@ extension LoginViewController {
         
     }
 }
+
 
 

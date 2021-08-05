@@ -7,5 +7,6 @@ target 'DBA' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'ShimmerSwift'
+  pod 'GoogleMaps', '5.1.0'
 
 end
