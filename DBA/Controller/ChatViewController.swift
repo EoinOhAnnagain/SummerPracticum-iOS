@@ -11,6 +11,8 @@ import IQKeyboardManagerSwift
 
 class ChatViewController: UIViewController {
     
+    
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
@@ -28,6 +30,8 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         loadMessages()
         
@@ -90,9 +94,7 @@ class ChatViewController: UIViewController {
     }
 
     
-    @IBAction func dismissPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
+  
     /*
      // MARK: - Navigation
      

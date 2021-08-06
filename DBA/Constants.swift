@@ -23,6 +23,7 @@ struct K {
     
     static let weatherSegue = "toWeather"
     static let mapSegue = "Map"
+    static let nearMe = "nearMeSegue"
     static let toSignUp = "MainToSignUp"
     static let contactUs = "toContactUs"
     
@@ -59,6 +60,12 @@ struct K {
             "Bug in Login/SignUp",
             "Report Abuse of Chat",
         ]
+    }
+    
+    struct map {
+        
+        static let legal = "mapLegalSegue"
+        
     }
     
     struct aboutUs {
