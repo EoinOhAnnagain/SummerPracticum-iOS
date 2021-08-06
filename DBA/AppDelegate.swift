@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import IQKeyboardManagerSwift
 import CoreLocation
+import GoogleMaps
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
+        //Google Maps API Key
+        GMSServices.provideAPIKey(S.googleMapsAPIKey)
         
         return true
     }
@@ -146,20 +149,24 @@ extension AppDelegate {
                 
                 //let nameEnglish = data.ShortCommonName_en
                 
-                var nameIrish: String?
-                if data.ShortCommonName_en != nil {
-                    nameIrish = data.ShortCommonName_en
-                } else {
-                    nameIrish = "UNKNOWN"
-                }
-                //let nameIrish = data.ShortCommonName_ga
+//                var nameIrish: String?
+//                if data.ShortCommonName_en != nil {
+//                    nameIrish = data.ShortCommonName_en
+//                } else {
+//                    nameIrish = "UNKNOWN"
+//                }
+//                //let nameIrish = data.ShortCommonName_ga
                 
                 let stopNumber = data.PlateCode
                 
                 let routesArray = String(routeData.filter { !" ".contains($0) }).components(separatedBy: ",")
                 
+                let routeDescription = data.RouteDescription
+                let descriptionArray = routeDescription.components(separatedBy: " - ")
                 
-                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, titleGa: nameIrish!, routes: routeData, stopNumber: stopNumber, busesAtStop: routesArray))
+                
+                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, routes: routeData, stopNumber: stopNumber, routeDescription: descriptionArray, busesAtStop: routesArray))
+                
                 
             }
             

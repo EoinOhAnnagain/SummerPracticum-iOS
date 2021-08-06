@@ -18,12 +18,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var chosenRoute: String?
     var nearMeChosen = false
     
+    @IBOutlet weak var mapView: GMSMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         
         GMSServices.provideAPIKey(S.googleMapsAPIKey)
+        
+        
         
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
@@ -41,11 +45,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         // coordinate -33.86,151.20 at zoom level 6.
         let coordinate = location.coordinate
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 16.0)
-        let mapView = GMSMapView.map(withFrame: view.frame, camera: camera)
-        mapView.settings.myLocationButton = true
-        mapView.settings.compassButton = true
-        mapView.clear()
-        view.addSubview(mapView)
+        //let mapView = GMSMapView.map(withFrame: view.frame, camera: camera)
+        mapView.camera = camera
+        mapView.isMyLocationEnabled = true
+        
+        
+//        mapView.settings.myLocationButton = true
+//        mapView.settings.compassButton = true
+//        view.addSubview(mapView)
         
         
         // Creates a marker in the center of the map.
@@ -54,8 +61,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         marker.position = userLocation
         marker.title = "You Are Here"
         marker.snippet = ":)"
-        marker.icon = UIImage(systemName: "figure.wave.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))
         marker.map = mapView
+        marker.icon = UIImage(systemName: "figure.wave.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))
         locationManager.stopUpdatingLocation()
         
         if nearMeChosen {

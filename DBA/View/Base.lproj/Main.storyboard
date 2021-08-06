@@ -1605,8 +1605,37 @@
                     <view key="view" contentMode="scaleToFill" id="J08-aQ-CjX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bl4-lV-JZb">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxA-r6-88j" customClass="GMSMapView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RH2-i9-pA0">
+                                        <rect key="frame" x="184" y="346" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="LxA-r6-88j" firstAttribute="leading" secondItem="Bl4-lV-JZb" secondAttribute="leading" id="1ep-ar-nNy"/>
+                                    <constraint firstAttribute="bottom" secondItem="LxA-r6-88j" secondAttribute="bottom" id="4An-1B-7Uk"/>
+                                    <constraint firstAttribute="trailing" secondItem="LxA-r6-88j" secondAttribute="trailing" id="LAx-bf-c5J"/>
+                                    <constraint firstItem="LxA-r6-88j" firstAttribute="top" secondItem="Bl4-lV-JZb" secondAttribute="top" id="maS-vc-T38"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="a7c-mN-1n8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="a7c-mN-1n8" firstAttribute="trailing" secondItem="Bl4-lV-JZb" secondAttribute="trailing" id="8vz-PJ-1HJ"/>
+                            <constraint firstItem="Bl4-lV-JZb" firstAttribute="leading" secondItem="a7c-mN-1n8" secondAttribute="leading" id="NQg-gO-ibU"/>
+                            <constraint firstItem="a7c-mN-1n8" firstAttribute="bottom" secondItem="Bl4-lV-JZb" secondAttribute="bottom" id="RvP-8w-3ns"/>
+                            <constraint firstItem="Bl4-lV-JZb" firstAttribute="top" secondItem="a7c-mN-1n8" secondAttribute="top" id="da7-2K-XAx"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="yUW-hc-80c">
                         <barButtonItem key="rightBarButtonItem" image="book.fill" catalog="system" width="80" id="VZr-9Y-rPW">
@@ -1617,6 +1646,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bookStopButton" destination="VZr-9Y-rPW" id="mAp-im-kLn"/>
+                        <outlet property="mapView" destination="LxA-r6-88j" id="BcE-Ow-Axa"/>
                         <segue destination="etP-KT-HfC" kind="presentation" identifier="mapLegalSegue" id="6BZ-2L-eQX"/>
                     </connections>
                 </viewController>
