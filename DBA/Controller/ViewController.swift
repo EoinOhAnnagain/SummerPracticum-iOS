@@ -78,6 +78,10 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: K.mapSegue, sender: self)
     }
     
+    @IBAction func nearMePressed(_ sender: UIButton) {
+        performSegue(withIdentifier: K.nearMe, sender: self)
+    }
+    
     @IBAction func chatButtonPressed(_ sender: UIButton) {
         if userEmailString == nil {
             showProUserOnlyAlert("Chat")
@@ -124,6 +128,9 @@ class ViewController: UIViewController {
         } else if segue.identifier == K.mapSegue {
             let destinationVC = segue.destination as! MapViewController
             destinationVC.chosenRoute = K.routeNames[routePickerView.selectedRow(inComponent: 0)]
+        } else if segue.identifier == K.nearMe {
+            let destinationVC = segue.destination as! MapViewController
+            destinationVC.nearMeChosen = true
         }
     }
     

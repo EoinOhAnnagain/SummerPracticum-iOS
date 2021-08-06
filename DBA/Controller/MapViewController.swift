@@ -16,6 +16,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     var chosenRoute: String?
+    var nearMeChosen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +28,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         // Do any additional setup after loading the view.
-        
-        print(chosenRoute!)
         
         
         
@@ -44,18 +43,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 16.0)
         let mapView = GMSMapView.map(withFrame: view.frame, camera: camera)
         mapView.settings.myLocationButton = true
+        mapView.settings.compassButton = true
+        mapView.clear()
         view.addSubview(mapView)
         
-        generateStopPins(mapView)
         
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let userLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        marker.position = userLocation
         marker.title = "You Are Here"
         marker.snippet = ":)"
-        marker.icon = UIImage(systemName: "figure.wave.circle.fill")
+        marker.icon = UIImage(systemName: "figure.wave.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))
+        
         marker.map = mapView
         locationManager.stopUpdatingLocation()
+        
+        if nearMeChosen {
+            generateStopsNearMePins(mapView, userLocation)
+        } else {
+            generateRouteStopPins(mapView)
+        }
     }
     
     //    override func viewDidAppear(_ animated: Bool) {
@@ -65,15 +73,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //        locationManager.startUpdatingLocation()
     //    }
     
- 
-    func generateStopPins(_ mapView: GMSMapView) {
-        
+    
+    func generateRouteStopPins(_ mapView: GMSMapView) {
         for stop in K.stopsLocations {
             for route in stop.busesAtStop {
                 if route == chosenRoute {
                     let stopMarker = GMSMarker()
                     stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
-                    stopMarker.icon = UIImage(systemName: "bus.doubledecker")
+                    stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
                     stopMarker.title = stop.titleEn
                     stopMarker.snippet = stop.routes
                     stopMarker.map = mapView
@@ -82,22 +89,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-
-    
-    
-    
-    
-}
-
-extension GMSMarker {
-    func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return newImage
+    func generateStopsNearMePins(_ mapView: GMSMapView, _ userLocation: CLLocationCoordinate2D) {
+        
+        let region = CLCircularRegion(center: userLocation, radius: 1000.0, identifier: "RegionID")
+        for stop in K.stopsLocations {
+            if region.contains(CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)) {
+                let stopMarker = GMSMarker()
+                stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
+                stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
+                stopMarker.title = stop.titleEn
+                stopMarker.snippet = stop.routes
+                stopMarker.map = mapView
+            }
+        }
     }
+    
 }
+
+
+
+
+
 
 //MARK: - Audio Book Control
 
