@@ -161,11 +161,9 @@ extension AppDelegate {
                 
                 let routesArray = String(routeData.filter { !" ".contains($0) }).components(separatedBy: ",")
                 
-                let routeDescription = data.RouteDescription
-                let descriptionArray = routeDescription.components(separatedBy: " - ")
                 
                 
-                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, routes: routeData, stopNumber: stopNumber, routeDescription: descriptionArray, busesAtStop: routesArray))
+                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, routes: routeData, stopNumber: stopNumber, busesAtStop: routesArray))
                 
                 
             }

@@ -88,7 +88,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
                     stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
                     stopMarker.title = stop.titleEn
-                    stopMarker.snippet = stop.routes
+                    stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
                     stopMarker.map = mapView
                 }
             }
@@ -104,7 +104,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
                 stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
                 stopMarker.title = stop.titleEn
-                stopMarker.snippet = stop.routes
+                stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
                 stopMarker.map = mapView
             }
         }
