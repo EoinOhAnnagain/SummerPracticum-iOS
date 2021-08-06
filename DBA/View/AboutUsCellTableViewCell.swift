@@ -15,6 +15,8 @@ class AboutUsCellTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        roundCorners(profileImage)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
