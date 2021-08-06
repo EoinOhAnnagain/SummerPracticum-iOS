@@ -18,6 +18,9 @@ struct Pin {
     let routes: String
     let stopNumber: Int
     
+    
+    let busesAtStop: [String] 
+    
 }
 
 struct stopsJSONArray: Codable {

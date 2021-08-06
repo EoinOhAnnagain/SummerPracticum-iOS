@@ -27,8 +27,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var weatherLoader: UIActivityIndicatorView!
     
-    @IBOutlet weak var startingPicker: UIPickerView!
-    @IBOutlet weak var endingPicker: UIPickerView!
+    @IBOutlet weak var routePickerView: UIPickerView!
     
     @IBOutlet var buttons: [UIButton]!
     
@@ -55,10 +54,9 @@ class ViewController: UIViewController {
         
         roundCorners(buttons)
         
-        startingPicker.dataSource = self
-        endingPicker.dataSource = self
-        startingPicker.delegate = self
-        endingPicker.delegate = self
+        
+        routePickerView.dataSource = self
+        routePickerView.delegate = self
         
         weatherManager.delegate = self
         locationManager.delegate = self
@@ -74,26 +72,15 @@ class ViewController: UIViewController {
 
     
     
-    
+//MARK: - Segues
     
     @IBAction func mapButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "Mappy", sender: self)
+        performSegue(withIdentifier: K.mapSegue, sender: self)
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == K.weatherSegue {
-            let destinationVC = segue.destination as! WeatherViewController
-            destinationVC.weather = weatherModel
-        } else if segue.identifier == K.contactUs {
-            let destinationVC = segue.destination as! ContactUsViewController
-            if userEmailString != nil {
-                destinationVC.userEmail = userEmailString
-            }
-        }
+    @IBAction func nearMePressed(_ sender: UIButton) {
+        performSegue(withIdentifier: K.nearMe, sender: self)
     }
-    
-    
     
     @IBAction func chatButtonPressed(_ sender: UIButton) {
         if userEmailString == nil {
@@ -126,6 +113,27 @@ class ViewController: UIViewController {
     @IBAction func aboutUsPressed(_ sender: Any) {
         performSegue(withIdentifier: K.toUs, sender: self)
     }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.weatherSegue {
+            let destinationVC = segue.destination as! WeatherViewController
+            destinationVC.weather = weatherModel
+        } else if segue.identifier == K.contactUs {
+            let destinationVC = segue.destination as! ContactUsViewController
+            if userEmailString != nil {
+                destinationVC.userEmail = userEmailString
+            }
+        } else if segue.identifier == K.mapSegue {
+            let destinationVC = segue.destination as! MapViewController
+            destinationVC.chosenRoute = K.routeNames[routePickerView.selectedRow(inComponent: 0)]
+        } else if segue.identifier == K.nearMe {
+            let destinationVC = segue.destination as! MapViewController
+            destinationVC.nearMeChosen = true
+        }
+    }
+    
 }
 
 
