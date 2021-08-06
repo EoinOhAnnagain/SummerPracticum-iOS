@@ -55,7 +55,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         marker.title = "You Are Here"
         marker.snippet = ":)"
         marker.icon = UIImage(systemName: "figure.wave.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))
-        
         marker.map = mapView
         locationManager.stopUpdatingLocation()
         
