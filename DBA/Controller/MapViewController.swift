@@ -20,12 +20,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var nearMeControlsView: UIView!
+    @IBOutlet weak var routeControlsView: UIView!
     
     @IBOutlet weak var legalButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
     
     @IBOutlet weak var distanceSlider: UISlider!
     @IBOutlet weak var sliderLabel: UILabel!
+    @IBOutlet weak var routePicker: UIPickerView!
     
     @IBOutlet var buttons: [UIButton]!
     
@@ -37,6 +39,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         roundCorners(buttons)
         
+        routePicker.delegate = self
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
@@ -47,6 +50,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         
     }
+    
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -88,7 +92,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if nearMeChosen {
             generateStopsNearMePins()
         } else {
-            generateRouteStopPins(mapView)
+            generateRouteStopPins()
         }
         
         
@@ -102,7 +106,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //    }
     
     
-    func generateRouteStopPins(_ mapView: GMSMapView) {
+    func generateRouteStopPins() {
+        mapView.clear()
         for stop in K.stopsLocations {
             for route in stop.busesAtStop {
                 if route == chosenRoute {
@@ -149,7 +154,14 @@ extension MapViewController {
     
     @IBAction func viewControllerPressed(_ sender: UIButton) {
         if nearMeChosen {
-            nearMeControlsView.alpha = 1
+            UIView.animate(withDuration: 0.25) {
+                self.nearMeControlsView.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.25) {
+                self.routeControlsView.alpha = 1
+            }
+            
         }
     }
     
@@ -165,7 +177,9 @@ extension MapViewController {
 extension MapViewController {
     
     @IBAction func hideNearMeControls(_ sender: UIButton) {
-        nearMeControlsView.alpha = 0
+        UIView.animate(withDuration: 0.25) {
+            self.nearMeControlsView.alpha = 0
+        }
     }
     
     @IBAction func sliderDidSlide(_ sender: UISlider) {
@@ -198,4 +212,36 @@ extension MapViewController {
         SpeechService.shared.stopSpeeching()
         bookStopButton.image = nil
     }
+}
+
+
+//MARK: - Route Picker Controls
+
+extension MapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return K.routeNames.count
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return K.routeNames[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        chosenRoute = K.routeNames[row]
+        generateRouteStopPins()
+    }
+    
+    @IBAction func hideRouteViewPressed(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.25) {
+            self.routeControlsView.alpha = 0
+        }
+    }
+    
+    
 }

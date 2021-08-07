@@ -1633,27 +1633,11 @@
                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cj-y8-eXP" userLabel="Near Me Contols View">
                                         <rect key="frame" x="0.0" y="635.66666666666663" width="414" height="120.33333333333337"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="s20-hY-5Cm">
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="s20-hY-5Cm">
                                                 <rect key="frame" x="20" y="20.000000000000004" width="374" height="60.333333333333343"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2w-s4-JAY">
-                                                        <rect key="frame" x="0.0" y="15.333333333333371" width="30" height="30"/>
-                                                        <color key="backgroundColor" name="Interface"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="6Mm-VC-kSI"/>
-                                                            <constraint firstAttribute="width" constant="30" id="Mcq-bv-UER"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <imageReference key="image" image="eye.slash" catalog="system" symbolScale="large"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="hideNearMeControls:" destination="Lcm-pK-ovO" eventType="touchUpInside" id="Iem-lU-MVu"/>
-                                                        </connections>
-                                                    </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9ei-Nk-ewL">
-                                                        <rect key="frame" x="50" y="0.0" width="324" height="60.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="60.333333333333336"/>
                                                         <subviews>
                                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="12" translatesAutoresizingMaskIntoConstraints="NO" id="I4Z-ls-N5r">
                                                                 <rect key="frame" x="-2" y="0.0" width="328" height="31"/>
@@ -1676,6 +1660,22 @@
                                                             <constraint firstItem="I4Z-ls-N5r" firstAttribute="leading" secondItem="9ei-Nk-ewL" secondAttribute="leading" id="sVL-NR-Cpv"/>
                                                         </constraints>
                                                     </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2w-s4-JAY">
+                                                        <rect key="frame" x="344" y="30.333333333333371" width="30" height="30"/>
+                                                        <color key="backgroundColor" name="Interface"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="6Mm-VC-kSI"/>
+                                                            <constraint firstAttribute="width" constant="30" id="Mcq-bv-UER"/>
+                                                        </constraints>
+                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <imageReference key="image" image="eye.slash" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="hideNearMeControls:" destination="Lcm-pK-ovO" eventType="touchUpInside" id="Iem-lU-MVu"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -1685,6 +1685,62 @@
                                             <constraint firstAttribute="bottom" secondItem="s20-hY-5Cm" secondAttribute="bottom" constant="40" id="VZO-H2-hlq"/>
                                             <constraint firstItem="s20-hY-5Cm" firstAttribute="leading" secondItem="1cj-y8-eXP" secondAttribute="leading" constant="20" id="fh9-Bs-42I"/>
                                             <constraint firstItem="s20-hY-5Cm" firstAttribute="top" secondItem="1cj-y8-eXP" secondAttribute="top" constant="20" id="otG-AK-fzZ"/>
+                                        </constraints>
+                                    </view>
+                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pA9-3U-YpZ" userLabel="Route Contols View">
+                                        <rect key="frame" x="0.0" y="575.66666666666663" width="414" height="180.33333333333337"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Snh-R8-W7b">
+                                                <rect key="frame" x="20" y="19.999999999999993" width="374" height="120.33333333333331"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bDz-Vf-uhR">
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="120.33333333333333"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select a route:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXs-St-TMG">
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="20.333333333333332"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" name="Interface"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VTQ-th-HLs">
+                                                                <rect key="frame" x="2" y="20.333333333333371" width="320" height="100"/>
+                                                                <color key="tintColor" name="Interface"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="100" id="P3E-8J-EZT"/>
+                                                                </constraints>
+                                                            </pickerView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="gXs-St-TMG" firstAttribute="leading" secondItem="bDz-Vf-uhR" secondAttribute="leading" id="cED-u8-jrT"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSn-mP-WtR">
+                                                        <rect key="frame" x="344" y="90.333333333333371" width="30" height="30"/>
+                                                        <color key="backgroundColor" name="Interface"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="Qgm-eA-9hx"/>
+                                                            <constraint firstAttribute="height" constant="30" id="Rku-ul-vRW"/>
+                                                        </constraints>
+                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <imageReference key="image" image="eye.slash" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="hideRouteViewPressed:" destination="Lcm-pK-ovO" eventType="touchUpInside" id="UJB-dz-QA4"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120.33" id="FaZ-t8-mvv"/>
+                                            <constraint firstAttribute="bottom" secondItem="Snh-R8-W7b" secondAttribute="bottom" constant="40" id="M8K-BD-fBF"/>
+                                            <constraint firstAttribute="trailing" secondItem="Snh-R8-W7b" secondAttribute="trailing" constant="20" id="bR9-5e-OUU"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="130" id="cee-Th-xKC"/>
+                                            <constraint firstItem="Snh-R8-W7b" firstAttribute="top" secondItem="pA9-3U-YpZ" secondAttribute="top" constant="20" id="fTy-sl-WIu"/>
+                                            <constraint firstItem="Snh-R8-W7b" firstAttribute="leading" secondItem="pA9-3U-YpZ" secondAttribute="leading" constant="20" id="lf8-Aw-coI"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHI-pv-MLQ">
@@ -1726,12 +1782,15 @@
                                     <constraint firstAttribute="trailing" secondItem="LxA-r6-88j" secondAttribute="trailing" id="LAx-bf-c5J"/>
                                     <constraint firstItem="fHI-pv-MLQ" firstAttribute="top" secondItem="RH2-i9-pA0" secondAttribute="bottom" constant="20" id="LEl-QG-Idf"/>
                                     <constraint firstItem="RH2-i9-pA0" firstAttribute="top" secondItem="Bl4-lV-JZb" secondAttribute="top" constant="20" id="Ouc-0S-Vqa"/>
+                                    <constraint firstAttribute="bottom" secondItem="pA9-3U-YpZ" secondAttribute="bottom" id="PhH-xS-I2u"/>
                                     <constraint firstItem="1cj-y8-eXP" firstAttribute="leading" secondItem="Bl4-lV-JZb" secondAttribute="leading" id="Ptc-cJ-1ua"/>
                                     <constraint firstAttribute="trailing" secondItem="fHI-pv-MLQ" secondAttribute="trailing" constant="20" id="Q7d-Nf-bCm"/>
                                     <constraint firstAttribute="bottom" secondItem="1cj-y8-eXP" secondAttribute="bottom" id="SPP-Rx-FcV"/>
+                                    <constraint firstAttribute="trailing" secondItem="pA9-3U-YpZ" secondAttribute="trailing" id="Yhn-cz-U1a"/>
                                     <constraint firstAttribute="bottom" secondItem="Tuw-kD-4Oz" secondAttribute="bottom" constant="40" id="YjV-Bk-MiR"/>
                                     <constraint firstAttribute="trailing" secondItem="RH2-i9-pA0" secondAttribute="trailing" constant="20" id="dok-IW-vID"/>
                                     <constraint firstAttribute="trailing" secondItem="Tuw-kD-4Oz" secondAttribute="trailing" constant="20" id="fH9-H3-4Ck"/>
+                                    <constraint firstItem="pA9-3U-YpZ" firstAttribute="leading" secondItem="Bl4-lV-JZb" secondAttribute="leading" id="htn-cX-ZdB"/>
                                     <constraint firstItem="LxA-r6-88j" firstAttribute="top" secondItem="Bl4-lV-JZb" secondAttribute="top" id="maS-vc-T38"/>
                                 </constraints>
                             </view>
@@ -1759,17 +1818,20 @@
                         <outlet property="locationButton" destination="fHI-pv-MLQ" id="tEH-4Q-0kc"/>
                         <outlet property="mapView" destination="LxA-r6-88j" id="BcE-Ow-Axa"/>
                         <outlet property="nearMeControlsView" destination="1cj-y8-eXP" id="C6U-mB-Kgn"/>
+                        <outlet property="routeControlsView" destination="pA9-3U-YpZ" id="yVp-zw-EeW"/>
+                        <outlet property="routePicker" destination="VTQ-th-HLs" id="rQZ-eX-hTW"/>
                         <outlet property="sliderLabel" destination="m83-Dr-TTg" id="FMI-bU-nUm"/>
                         <outletCollection property="buttons" destination="RH2-i9-pA0" collectionClass="NSMutableArray" id="vdL-bk-2MX"/>
                         <outletCollection property="buttons" destination="fHI-pv-MLQ" collectionClass="NSMutableArray" id="X7h-Hh-xyS"/>
                         <outletCollection property="buttons" destination="d2w-s4-JAY" collectionClass="NSMutableArray" id="Jxh-b1-kxR"/>
                         <outletCollection property="buttons" destination="Tuw-kD-4Oz" collectionClass="NSMutableArray" id="uyU-A7-ASd"/>
+                        <outletCollection property="buttons" destination="wSn-mP-WtR" collectionClass="NSMutableArray" id="qt2-JM-S7v"/>
                         <segue destination="etP-KT-HfC" kind="presentation" identifier="mapLegalSegue" id="6BZ-2L-eQX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xLZ-WC-nA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1533" y="319"/>
+            <point key="canvasLocation" x="-1533.3333333333335" y="318.75"/>
         </scene>
         <!--Map Legal View Controller-->
         <scene sceneID="cme-gD-OZy">
