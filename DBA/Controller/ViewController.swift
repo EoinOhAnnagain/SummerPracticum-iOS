@@ -37,6 +37,7 @@ class ViewController: UIViewController {
     var weatherModel: WeatherModel?
     let locationManager = CLLocationManager()
     
+    @IBOutlet weak var weatherWidgetView: UIView!
     
     var weatherTimer: Timer?
 
@@ -44,6 +45,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        roundCorners(weatherWidgetView)
         
         let fadeTextAnimation = CATransition()
         fadeTextAnimation.duration = 0.5

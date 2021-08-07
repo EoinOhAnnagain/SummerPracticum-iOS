@@ -14,7 +14,6 @@ struct Pin {
     let long: CLLocationDegrees
     let isStop: Bool
     let titleEn: String
-    let titleGa: String
     let routes: String
     let stopNumber: Int
     
@@ -35,7 +34,6 @@ struct Stops: Codable {
     let Longitude: Float
     let RouteData: String
     let ShortCommonName_en: String?
-    let ShortCommonName_ga: String?
     let PlateCode: Int
     
 }
