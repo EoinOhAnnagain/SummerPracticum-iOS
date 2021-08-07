@@ -37,7 +37,9 @@ class ViewController: UIViewController {
     var weatherModel: WeatherModel?
     let locationManager = CLLocationManager()
     
+    @IBOutlet var views: [UIView]!
     @IBOutlet weak var weatherWidgetView: UIView!
+    @IBOutlet weak var routesView: UIView!
     
     var weatherTimer: Timer?
 
@@ -45,9 +47,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        roundCorners(weatherWidgetView)
         
         let fadeTextAnimation = CATransition()
         fadeTextAnimation.duration = 0.5
@@ -57,6 +56,7 @@ class ViewController: UIViewController {
         navigationItem.title = "D B A"
         
         roundCorners(buttons)
+        roundCorners(views)
         
         
         routePickerView.dataSource = self
