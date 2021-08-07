@@ -33,6 +33,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var userLocation: CLLocationCoordinate2D?
     var radius: Double = 1000
+    let Dublin = GMSCameraPosition.camera(withLatitude: 53.29, longitude: -6.2603, zoom: 10.5)
+    var locationButtonUsed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,8 +65,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         // coordinate -33.86,151.20 at zoom level 6.
         let coordinate = location.coordinate
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 13.0)
+        
         //let mapView = GMSMapView.map(withFrame: view.frame, camera: camera)
-        mapView.camera = camera
+        if nearMeChosen || locationButtonUsed {
+            mapView.camera = camera
+            mapView.animate(toViewingAngle: 45)
+        } else {
+            mapView.camera = Dublin
+        }
         mapView.settings.compassButton = true
         
         
@@ -84,8 +92,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         marker.snippet = ":)"
         marker.map = mapView
         //marker.icon = UIImage(systemName: "figure.wave.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))
-        mapView.animate(toViewingAngle: 45)
-              
+        
               
         locationManager.stopUpdatingLocation()
         
@@ -95,6 +102,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             generateRouteStopPins()
         }
         
+        locationButtonUsed = false
         
     }
     
@@ -104,6 +112,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //        locationManager.delegate = self
     //        locationManager.startUpdatingLocation()
     //    }
+    
+    
+    func generateStopsNearMePins() {
+        mapView.clear()
+        let region = CLCircularRegion(center: userLocation!, radius: radius, identifier: "RegionID")
+        for stop in K.stopsLocations {
+            if region.contains(CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)) {
+                let stopMarker = GMSMarker()
+                stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
+                stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
+                stopMarker.title = stop.titleEn
+                stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
+                stopMarker.map = mapView
+            }
+        }
+    }
     
     
     func generateRouteStopPins() {
@@ -118,21 +142,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
                     stopMarker.map = mapView
                 }
-            }
-        }
-    }
-    
-    func generateStopsNearMePins() {
-        mapView.clear()
-        let region = CLCircularRegion(center: userLocation!, radius: radius, identifier: "RegionID")
-        for stop in K.stopsLocations {
-            if region.contains(CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)) {
-                let stopMarker = GMSMarker()
-                stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
-                stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
-                stopMarker.title = stop.titleEn
-                stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
-                stopMarker.map = mapView
             }
         }
     }
@@ -166,7 +175,10 @@ extension MapViewController {
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
+       
+        locationButtonUsed = true
         locationManager.startUpdatingLocation()
+        
     }
     
 }
@@ -235,6 +247,7 @@ extension MapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         chosenRoute = K.routeNames[row]
         generateRouteStopPins()
+        mapView.camera = Dublin
     }
     
     @IBAction func hideRouteViewPressed(_ sender: UIButton) {

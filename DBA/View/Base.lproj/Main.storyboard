@@ -1688,13 +1688,13 @@
                                         </constraints>
                                     </view>
                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pA9-3U-YpZ" userLabel="Route Contols View">
-                                        <rect key="frame" x="0.0" y="575.66666666666663" width="414" height="180.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="459.66666666666663" width="414" height="296.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Snh-R8-W7b">
-                                                <rect key="frame" x="20" y="19.999999999999993" width="374" height="120.33333333333331"/>
+                                                <rect key="frame" x="20" y="20.000000000000014" width="374" height="236.33333333333337"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bDz-Vf-uhR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="120.33333333333333"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="236.33333333333334"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select a route:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXs-St-TMG">
                                                                 <rect key="frame" x="0.0" y="0.0" width="324" height="20.333333333333332"/>
@@ -1703,11 +1703,8 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VTQ-th-HLs">
-                                                                <rect key="frame" x="2" y="20.333333333333371" width="320" height="100"/>
+                                                                <rect key="frame" x="2" y="20.333333333333371" width="320" height="216"/>
                                                                 <color key="tintColor" name="Interface"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="100" id="P3E-8J-EZT"/>
-                                                                </constraints>
                                                             </pickerView>
                                                         </subviews>
                                                         <constraints>
@@ -1715,7 +1712,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSn-mP-WtR">
-                                                        <rect key="frame" x="344" y="90.333333333333371" width="30" height="30"/>
+                                                        <rect key="frame" x="344" y="206.33333333333337" width="30" height="30"/>
                                                         <color key="backgroundColor" name="Interface"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="Qgm-eA-9hx"/>
