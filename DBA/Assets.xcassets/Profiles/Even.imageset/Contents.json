@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "8C211FC8-BD2C-476F-A47E-6F1731CCE0E6_1_201_a.jpeg",
+      "filename" : "1501628332149_.pic.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "1501628332149_.pic@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "1501628332149_.pic@3x.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }
