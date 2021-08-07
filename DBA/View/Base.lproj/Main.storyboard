@@ -26,13 +26,8 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TVx-1F-9Gu">
                                         <rect key="frame" x="20" y="20" width="374" height="40"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type here..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-0u-Hpi">
-                                                <rect key="frame" x="0.0" y="0.0" width="314" height="40"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2B-go-ILD">
-                                                <rect key="frame" x="334" y="0.0" width="40" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                 <color key="backgroundColor" name="Interface"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="M9V-JK-hBs"/>
@@ -44,8 +39,27 @@
                                                     <imageReference key="image" image="paperplane.circle" catalog="system" symbolScale="large"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
                                                 </state>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type here..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-0u-Hpi">
+                                                <rect key="frame" x="60" y="0.0" width="254" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVs-WF-kAL">
+                                                <rect key="frame" x="334" y="0.0" width="40" height="40"/>
+                                                <color key="backgroundColor" name="Interface"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="9jF-zJ-iPP"/>
+                                                    <constraint firstAttribute="height" constant="40" id="zP8-CV-1B7"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <imageReference key="image" image="paperplane.circle" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
+                                                </state>
                                                 <connections>
-                                                    <action selector="sendPressed:" destination="76j-rU-nC6" eventType="touchUpInside" id="Fqb-c9-PFZ"/>
+                                                    <action selector="sendPressed:" destination="76j-rU-nC6" eventType="touchUpInside" id="IFA-VR-3nH"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1468,7 +1482,7 @@
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <imageReference key="image" image="message.fill" catalog="system" symbolScale="large"/>
+                                            <imageReference key="image" image="ellipsis.bubble.fill" catalog="system" symbolScale="large"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="semibold"/>
                                         </state>
                                         <connections>
@@ -2737,12 +2751,12 @@
         <image name="book.fill" catalog="system" width="128" height="102"/>
         <image name="checkmark.seal.fill" catalog="system" width="128" height="128"/>
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>
+        <image name="ellipsis.bubble.fill" catalog="system" width="128" height="110"/>
         <image name="eye" catalog="system" width="128" height="81"/>
         <image name="eye.slash" catalog="system" width="128" height="86"/>
         <image name="figure.wave" catalog="system" width="81" height="128"/>
         <image name="gamecontroller.fill" catalog="system" width="128" height="80"/>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
-        <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="paperplane.circle" catalog="system" width="128" height="121"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="playpause" catalog="system" width="128" height="80"/>
