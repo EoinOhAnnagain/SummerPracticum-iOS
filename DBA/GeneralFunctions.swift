@@ -73,6 +73,14 @@ func roundCorners(_ toRound: UIView) {
     }
 }
 
+func roundCorners(_ toRound: UIPickerView) {
+    if (0.4 * toRound.bounds.size.height) > 25 {
+        toRound.layer.cornerRadius = 25
+    } else {
+        toRound.layer.cornerRadius = 0.4 * toRound.bounds.size.height
+    }
+}
+
 func roundCorners(_ toRound: UIImageView) {
     if (0.4 * toRound.bounds.size.height) > 25 {
         toRound.layer.cornerRadius = 25
