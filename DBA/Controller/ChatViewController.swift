@@ -25,13 +25,17 @@ class ChatViewController: UIViewController {
     
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
+    @IBOutlet weak var chatPickerView: UIView!
     @IBOutlet weak var chatPicker: UIPickerView!
     
+    @IBOutlet var views: [UIView]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+        roundCorners(chatPicker)
+        roundCorners(views)
         
         loadMessages()
         
@@ -47,6 +51,7 @@ class ChatViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+   
     
     
     func loadMessages() {
@@ -194,6 +199,16 @@ extension ChatViewController: UIPickerViewDataSource {
 
 extension ChatViewController: UIPickerViewDelegate {
     
+    @IBAction func routeButtonPressed(_ sender: UIButton) {
+        textFieldShouldReturn(messageTextField)
+        
+        UIView.animate(withDuration: 0.25) {
+            self.chatPickerView.alpha = 1
+        }
+    }
+    
+    
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         
@@ -220,14 +235,6 @@ extension ChatViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         pickerView.reloadComponent(1)
-        
-        
-        
-        
-        
-        
-        
-        
         
         let chosenRouteNumber = pickerView.selectedRow(inComponent: 0)
         let chosenRoute: String?
@@ -256,12 +263,17 @@ extension ChatViewController: UIPickerViewDelegate {
         
         print(chosenChat)
         loadMessages()
+        
+        UIView.animate(withDuration: 0.5) {
+            self.chatPickerView.alpha = 0
+        }
     }
 }
 
 // MARK: - Manage Return Key and Send Messages
 
 extension ChatViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         send()
         return view.endEditing(true)

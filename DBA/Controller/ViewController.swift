@@ -37,6 +37,9 @@ class ViewController: UIViewController {
     var weatherModel: WeatherModel?
     let locationManager = CLLocationManager()
     
+    @IBOutlet var views: [UIView]!
+    @IBOutlet weak var weatherWidgetView: UIView!
+    @IBOutlet weak var routesView: UIView!
     
     var weatherTimer: Timer?
 
@@ -53,6 +56,7 @@ class ViewController: UIViewController {
         navigationItem.title = "D B A"
         
         roundCorners(buttons)
+        roundCorners(views)
         
         
         routePickerView.dataSource = self
