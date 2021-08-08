@@ -53,7 +53,7 @@
                                                     <action selector="routeButtonPressed:" destination="76j-rU-nC6" eventType="touchUpInside" id="gfr-X1-qjM"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type here..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-0u-Hpi">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Message" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-0u-Hpi">
                                                 <rect key="frame" x="60" y="0.0" width="254" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="send"/>
@@ -217,11 +217,81 @@
                         <outlet property="tableView" destination="PcN-na-rMH" id="99w-6w-8cO"/>
                         <outletCollection property="views" destination="DQj-AP-qgg" collectionClass="NSMutableArray" id="vzE-VC-ybE"/>
                         <outletCollection property="views" destination="QxZ-rB-9AH" collectionClass="NSMutableArray" id="f0w-u1-Ar2"/>
+                        <segue destination="ITg-kb-25a" kind="presentation" identifier="conductRulesSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="flipHorizontal" id="Zgm-iO-Do1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfi-49-6PX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1533.3333333333335" y="-1216.0714285714284"/>
+        </scene>
+        <!--Conduct View Controller-->
+        <scene sceneID="TgD-03-Ym3">
+            <objects>
+                <viewController id="ITg-kb-25a" customClass="ConductViewController" customModule="DBA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rFe-yd-lIO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OAC-Ht-Dea">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WB1-4I-cJh">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat Code of Conduct" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15E-E8-i9q">
+                                            <rect key="frame" x="20" y="20" width="374" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                            <color key="textColor" name="Interface"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZi-zX-qGl">
+                                            <rect key="frame" x="8" y="70" width="398" height="762"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <color key="textColor" name="Interface"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="qZi-zX-qGl" secondAttribute="trailing" constant="8" id="HXb-Rb-q88"/>
+                                        <constraint firstItem="15E-E8-i9q" firstAttribute="leading" secondItem="WB1-4I-cJh" secondAttribute="leading" constant="20" id="QcA-uw-N3Z"/>
+                                        <constraint firstItem="15E-E8-i9q" firstAttribute="top" secondItem="WB1-4I-cJh" secondAttribute="top" constant="20" id="kyJ-Nl-2iL"/>
+                                        <constraint firstAttribute="bottom" secondItem="qZi-zX-qGl" secondAttribute="bottom" constant="20" id="t2g-CQ-Cg0"/>
+                                        <constraint firstItem="qZi-zX-qGl" firstAttribute="leading" secondItem="WB1-4I-cJh" secondAttribute="leading" constant="8" id="xnc-3b-LLF"/>
+                                        <constraint firstItem="qZi-zX-qGl" firstAttribute="top" secondItem="15E-E8-i9q" secondAttribute="bottom" constant="20" id="yqB-6I-D0X"/>
+                                        <constraint firstAttribute="trailing" secondItem="15E-E8-i9q" secondAttribute="trailing" constant="20" id="zAj-ph-6ef"/>
+                                    </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="pE0-tx-ZuD" appends="YES" id="0Mq-RR-2ZA"/>
+                                    </connections>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Jlo-XH-kd3"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="OAC-Ht-Dea" secondAttribute="bottom" id="3Ce-2s-ohj"/>
+                            <constraint firstAttribute="trailing" secondItem="OAC-Ht-Dea" secondAttribute="trailing" id="c5h-8g-yaw"/>
+                            <constraint firstItem="OAC-Ht-Dea" firstAttribute="top" secondItem="Jlo-XH-kd3" secondAttribute="top" id="kak-jk-yc1"/>
+                            <constraint firstItem="OAC-Ht-Dea" firstAttribute="leading" secondItem="Jlo-XH-kd3" secondAttribute="leading" id="oBv-YW-pa5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="conductText" destination="qZi-zX-qGl" id="q4T-yY-0uI"/>
+                        <outlet property="tap" destination="pE0-tx-ZuD" id="obf-kG-EGz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6GU-JQ-vmW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="pE0-tx-ZuD">
+                    <connections>
+                        <action selector="tapper:" destination="ITg-kb-25a" id="3fV-3n-KpO"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-433" y="-1216"/>
         </scene>
         <!--Books-->
         <scene sceneID="Jnk-Ll-hSd">
@@ -1988,7 +2058,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGJ-An-Czw">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="dGJ-An-Czw">
                                 <rect key="frame" x="0.0" y="40" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>

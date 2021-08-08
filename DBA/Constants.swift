@@ -35,6 +35,7 @@ struct K {
     struct chat {
         static let chatCellID = "chatCell"
         static let chatNib = "ChatCell"
+        static let segueToConduct = "conductRulesSegue"
         
         struct FStore {
             static let collectionName = "messages"

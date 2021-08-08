@@ -56,7 +56,7 @@ class ChatViewController: UIViewController {
     
     
     @IBAction func conductButtonPressed(_ sender: UIButton) {
-        
+        performSegue(withIdentifier: K.chat.segueToConduct, sender: self)
     }
     
     
@@ -195,7 +195,7 @@ extension ChatViewController: UIPickerViewDataSource {
         if component == 0 {
             return K.routeNames.count + 1
         } else {
-            return 2
+            return 3
         }
     }
 }
@@ -222,19 +222,19 @@ extension ChatViewController: UIPickerViewDelegate {
         
         if component == 0 {
             if row == 0 {
-                return "Please select a route"
+                return "Route"
             } else {
                 return K.routeNames[row-1]
             }
         } else {
-            if pickerView.selectedRow(inComponent: 0) == 0 {
-                return ""
+            
+            if row == 0 {
+                return "Diresction:"
+            } else if row == 1 {
+                return "Inbound"
             } else {
-                if row == 0 {
-                    return "Inbound"
-                } else {
-                    return "Outbound"
-                }
+                return "Outbound"
+                
             }
         }
     }
@@ -247,7 +247,7 @@ extension ChatViewController: UIPickerViewDelegate {
         let chosenRoute: String?
         
         if chosenRouteNumber == 0 {
-            
+            return
         } else {
             chosenRoute = K.routeNames[chosenRouteNumber-1]
             
@@ -256,21 +256,25 @@ extension ChatViewController: UIPickerViewDelegate {
             let chosenDirection: String?
             
             if chosenDirectionNumber == 0 {
-                chosenDirection = "In"
-                chatName.text = "\(chosenRoute!): Inbound"
+                return
             } else {
-                chosenDirection = "Out"
-                chatName.text = "\(chosenRoute!): Outbound"
+                
+                if chosenDirectionNumber == 1 {
+                    chosenDirection = "In"
+                    chatName.text = "Route \(chosenRoute!): Inbound"
+                } else {
+                    chosenDirection = "Out"
+                    chatName.text = "Route \(chosenRoute!): Outbound"
+                }
+                
+                
+                
+                chosenChat = "\(chosenRoute!)\(chosenDirection!)"
+                
+                
+                print(chosenChat)
+                loadMessages()
             }
-            
-            
-           
-            chosenChat = "\(chosenRoute!)\(chosenDirection!)"
-           
-            
-            print(chosenChat)
-            loadMessages()
-            
             
         }
     }
