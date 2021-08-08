@@ -133,16 +133,16 @@ extension ChatViewController: UITableViewDataSource {
         cell.label.text = message.body
         
         if message.sender == Auth.auth().currentUser?.email {
-            cell.leftSpeechBubble.isHidden = false
-            cell.rightSpeechBubble.isHidden = true
+            cell.leftSpeechBubble.isHidden = true
+            cell.rightSpeechBubble.isHidden = false
             
             cell.chatBubble.backgroundColor = UIColor.clear
             cell.label.textColor = UIColor(named: K.color)
             cell.chatBubble.layer.borderWidth = 3
             cell.chatBubble.layer.borderColor = UIColor(named: K.color)?.cgColor
         } else {
-            cell.rightSpeechBubble.isHidden = false
-            cell.leftSpeechBubble.isHidden = true
+            cell.rightSpeechBubble.isHidden = true
+            cell.leftSpeechBubble.isHidden = false
             
             cell.chatBubble.backgroundColor = UIColor(named: K.color)
             cell.label.textColor = UIColor.black

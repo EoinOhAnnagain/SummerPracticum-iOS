@@ -81,7 +81,7 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
                 reason = K.contact.pickerOptions[picked]
             }
             
-            let toRecipients = ["eoin1711@gmail.com", "eoin.ohannagain@ucdconnect.ie", "eugene.egan1@ucdconnect.ie", "ming-han.ta@ucdconnect.ie", "junzheng.liu@ucdconnect.ie"]
+            let toRecipients = ["eoin.ohannagain@ucdconnect.ie", "eugene.egan1@ucdconnect.ie", "ming-han.ta@ucdconnect.ie", "junzheng.liu@ucdconnect.ie", "eoin1711@gmail.com"]
             
             let mc: MFMailComposeViewController = MFMailComposeViewController()
             
@@ -136,6 +136,8 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
             resultLabel.text = "Message Successfully Sent"
             resultLabel.alpha = 1
             resultLabel.textColor = .green
+            issueTextView.text = ""
+            emailTextField.text = ""
         default:
             resultLabel.alpha = 0
             break
@@ -192,6 +194,13 @@ extension ContactUsViewController: UIPickerViewDelegate {
         }
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == 2 {
+            placeholderLabel.text = "Requested book must be from Project Gutenberg"
+        } else {
+            placeholderLabel.text = "Message:"
+        }
+    }
 }
 
 
