@@ -16,6 +16,8 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var chatName: UILabel!
+    @IBOutlet weak var conductButton: UIButton!
     
     let db = Firestore.firestore()
     
@@ -36,6 +38,7 @@ class ChatViewController: UIViewController {
         
         roundCorners(chatPicker)
         roundCorners(views)
+        roundCorners(conductButton)
         
         loadMessages()
         
@@ -51,55 +54,59 @@ class ChatViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-   
+    
+    @IBAction func conductButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: K.chat.segueToConduct, sender: self)
+    }
+    
     
     
     func loadMessages() {
         db.collection(chosenChat).order(by: K.chat.FStore.dateField).addSnapshotListener { (querySnapshot, error) in
-                self.messages = []
-                if let e = error {
-                    print(e.localizedDescription)
-                } else {
+            self.messages = []
+            if let e = error {
+                print(e.localizedDescription)
+            } else {
+                
+                if let snapshotDocuments = querySnapshot?.documents {
                     
-                    if let snapshotDocuments = querySnapshot?.documents {
-            
-                        if snapshotDocuments.count == 0 {
-                            let newMessage =  Message(sender: "Debug", body: "This chat is currently empty...\nWhy not be the first to post", date: 0)
-                            self.messages.append(newMessage)
-                            
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-                            }
-                            
-                            
-                            
-                        } else {
-                            for doc in snapshotDocuments {
-                                let data = doc.data()
-                                if let messageSender = data[K.chat.FStore.senderField] as? String, let messageText = data[K.chat.FStore.textField] as? String, let messageDate = data[K.chat.FStore.dateField] {
-                                    let newMessage = Message(sender: messageSender, body: messageText, date: messageDate as! NSNumber)
-                                    self.messages.append(newMessage)
-                                    
-                                    DispatchQueue.main.async {
-                                        self.tableView.reloadData()
-                                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                                        self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-                                    }
-                                    
-                                } else {
-                                    print("oh no")
+                    if snapshotDocuments.count == 0 {
+                        let newMessage =  Message(sender: "Debug", body: "This chat is currently empty...\nWhy not be the first to post", date: 0)
+                        self.messages.append(newMessage)
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                            let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                            self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+                        }
+                        
+                        
+                        
+                    } else {
+                        for doc in snapshotDocuments {
+                            let data = doc.data()
+                            if let messageSender = data[K.chat.FStore.senderField] as? String, let messageText = data[K.chat.FStore.textField] as? String, let messageDate = data[K.chat.FStore.dateField] {
+                                let newMessage = Message(sender: messageSender, body: messageText, date: messageDate as! NSNumber)
+                                self.messages.append(newMessage)
+                                
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                                    self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
                                 }
+                                
+                            } else {
+                                print("oh no")
                             }
                         }
                     }
                 }
             }
+        }
     }
-
     
-  
+    
+    
     /*
      // MARK: - Navigation
      
@@ -126,16 +133,16 @@ extension ChatViewController: UITableViewDataSource {
         cell.label.text = message.body
         
         if message.sender == Auth.auth().currentUser?.email {
-            cell.leftSpeechBubble.isHidden = false
-            cell.rightSpeechBubble.isHidden = true
+            cell.leftSpeechBubble.isHidden = true
+            cell.rightSpeechBubble.isHidden = false
             
             cell.chatBubble.backgroundColor = UIColor.clear
             cell.label.textColor = UIColor(named: K.color)
             cell.chatBubble.layer.borderWidth = 3
             cell.chatBubble.layer.borderColor = UIColor(named: K.color)?.cgColor
         } else {
-            cell.rightSpeechBubble.isHidden = false
-            cell.leftSpeechBubble.isHidden = true
+            cell.rightSpeechBubble.isHidden = true
+            cell.leftSpeechBubble.isHidden = false
             
             cell.chatBubble.backgroundColor = UIColor(named: K.color)
             cell.label.textColor = UIColor.black
@@ -160,6 +167,7 @@ extension ChatViewController: UITableViewDelegate {
         let formattedDate = dateFormatter(messageDate)
         let formattedTime = timeFormatter(messageDate)
         infoLabel.text = "Message sent at \(formattedTime) on \(formattedDate)"
+        infoLabel.alpha = 0.7
     }
     
     func dateFormatter(_ unformatted: NSNumber) -> String {
@@ -187,7 +195,7 @@ extension ChatViewController: UIPickerViewDataSource {
         if component == 0 {
             return K.routeNames.count + 1
         } else {
-            return 2
+            return 3
         }
     }
 }
@@ -214,20 +222,19 @@ extension ChatViewController: UIPickerViewDelegate {
         
         if component == 0 {
             if row == 0 {
-                return "General"
+                return "Route"
             } else {
                 return K.routeNames[row-1]
             }
         } else {
-            let selected = pickerView.selectedRow(inComponent: 0)
-            if selected == 0 {
-                return ""
+            
+            if row == 0 {
+                return "Diresction:"
+            } else if row == 1 {
+                return "Inbound"
             } else {
-                if row == 0 {
-                    return "Inbound"
-                } else {
-                    return "Outbound"
-                }
+                return "Outbound"
+                
             }
         }
     }
@@ -240,34 +247,50 @@ extension ChatViewController: UIPickerViewDelegate {
         let chosenRoute: String?
         
         if chosenRouteNumber == 0 {
-            chosenRoute = "messages"
+            return
         } else {
             chosenRoute = K.routeNames[chosenRouteNumber-1]
+            
+            
+            let chosenDirectionNumber = pickerView.selectedRow(inComponent: 1)
+            let chosenDirection: String?
+            
+            if chosenDirectionNumber == 0 {
+                return
+            } else {
+                
+                if chosenDirectionNumber == 1 {
+                    chosenDirection = "In"
+                    chatName.text = "Route \(chosenRoute!): Inbound"
+                } else {
+                    chosenDirection = "Out"
+                    chatName.text = "Route \(chosenRoute!): Outbound"
+                }
+                
+                
+                
+                chosenChat = "\(chosenRoute!)\(chosenDirection!)"
+                
+                
+                print(chosenChat)
+                loadMessages()
+            }
+            
         }
-        
-        let chosenDirectionNumber = pickerView.selectedRow(inComponent: 1)
-        let chosenDirection: String?
-        
-        if chosenDirectionNumber == 0 {
-            chosenDirection = "In"
-        } else {
-            chosenDirection = "Out"
-        }
-        
-        
-        if chosenRoute == "messages" {
-            chosenChat = chosenRoute!
-        } else {
-            chosenChat = "\(chosenRoute!)\(chosenDirection!)"
-        }
-        
-        print(chosenChat)
-        loadMessages()
-        
+    }
+    
+    @IBAction func checkmarkButtonPressed(_ sender: UIButton) {
         UIView.animate(withDuration: 0.5) {
             self.chatPickerView.alpha = 0
         }
     }
+    
+    @IBAction func generalButtonPressed(_ sender: UIButton) {
+        chosenChat = "messages"
+        chatName.text = "General Messages"
+        loadMessages()
+    }
+    
 }
 
 // MARK: - Manage Return Key and Send Messages
