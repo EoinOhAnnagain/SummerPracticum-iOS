@@ -151,6 +151,15 @@ extension ChatViewController: UITableViewDataSource {
             cell.chatBubble.layer.borderColor = UIColor.clear.cgColor
         }
         
+        print(message.sender)
+        
+//        if K.chat.admins.contains(message.sender) {
+//            cell.chatBubble.backgroundColor = .green
+//            cell.label.textColor = UIColor.purple
+//            cell.chatBubble.layer.borderWidth = 3
+//            cell.chatBubble.layer.borderColor = UIColor.purple.cgColor
+//        }
+//
         
         return cell
     }
@@ -342,11 +351,12 @@ extension ChatViewController: UITextFieldDelegate {
     }
     
     func profanityFilter(_ text: String) -> Bool {
-        if K.chat.bannedWords.contains("fuck") {
-            print("returning true")
-            return true
+        for i in K.chat.bannedWords {
+            let regex = "(?=.*\(i)*)"
+            if (text.range(of:regex, options: .regularExpression) != nil) {
+                return true
+            }
         }
-        print("returning false")
         return false
     }
     
