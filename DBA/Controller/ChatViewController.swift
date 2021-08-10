@@ -153,13 +153,15 @@ extension ChatViewController: UITableViewDataSource {
         
         print(message.sender)
         
-//        if K.chat.admins.contains(message.sender) {
-//            cell.chatBubble.backgroundColor = .green
-//            cell.label.textColor = UIColor.purple
-//            cell.chatBubble.layer.borderWidth = 3
-//            cell.chatBubble.layer.borderColor = UIColor.purple.cgColor
-//        }
-//
+        if K.chat.admins.contains(message.sender) {
+            print("\n\nFOUND\n\n")
+            cell.chatBubble.backgroundColor = .purple
+            cell.label.textColor = UIColor.systemBlue
+            cell.chatBubble.layer.borderWidth = 3
+            cell.chatBubble.layer.borderColor = UIColor.systemBlue.cgColor
+            
+        }
+
         
         return cell
     }
