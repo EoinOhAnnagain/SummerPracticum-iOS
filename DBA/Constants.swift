@@ -37,6 +37,9 @@ struct K {
         static let chatNib = "ChatCell"
         static let segueToConduct = "conductRulesSegue"
         
+        
+        static let bannedWords = ["fuck", "bitch", "bastard", "wanker"]
+        
         struct FStore {
             static let collectionName = "messages"
             static let senderField = "sender"

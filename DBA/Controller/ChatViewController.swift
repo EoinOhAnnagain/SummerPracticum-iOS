@@ -89,6 +89,7 @@ class ChatViewController: UIViewController {
                                 let newMessage = Message(sender: messageSender, body: messageText, date: messageDate as! NSNumber)
                                 self.messages.append(newMessage)
                                 
+                                
                                 DispatchQueue.main.async {
                                     self.tableView.reloadData()
                                     let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
@@ -167,7 +168,8 @@ extension ChatViewController: UITableViewDelegate {
         let formattedDate = dateFormatter(messageDate)
         let formattedTime = timeFormatter(messageDate)
         infoLabel.text = "Message sent at \(formattedTime) on \(formattedDate)"
-        infoLabel.alpha = 0.7
+        infoLabel.alpha = 1
+        infoLabel.textColor = .lightGray
     }
     
     func dateFormatter(_ unformatted: NSNumber) -> String {
@@ -306,17 +308,23 @@ extension ChatViewController: UITextFieldDelegate {
         
         if let messageText = messageTextField.text, let messageSender = Auth.auth().currentUser?.email {
             if messageText != "" {
-                db.collection(chosenChat).addDocument(data: [
-                    K.chat.FStore.senderField: messageSender,
-                    K.chat.FStore.textField: messageText,
-                    K.chat.FStore.dateField: Int(Date().timeIntervalSince1970)
-                ]) { (error) in
-                    if let e = error {
-                        print(e.localizedDescription)
-                    } else {
-                        print("saved data")
-                        DispatchQueue.main.async {
-                            self.messageTextField.text = ""
+                if profanityFilter(messageText.lowercased()) {
+                    infoLabel.text = "Your message may not contain profanity"
+                    infoLabel.textColor = .red
+                    infoLabel.alpha = 1
+                } else {
+                    db.collection(chosenChat).addDocument(data: [
+                        K.chat.FStore.senderField: messageSender,
+                        K.chat.FStore.textField: messageText,
+                        K.chat.FStore.dateField: Int(Date().timeIntervalSince1970)
+                    ]) { (error) in
+                        if let e = error {
+                            print(e.localizedDescription)
+                        } else {
+                            print("saved data")
+                            DispatchQueue.main.async {
+                                self.messageTextField.text = ""
+                            }
                         }
                     }
                 }
@@ -332,6 +340,16 @@ extension ChatViewController: UITextFieldDelegate {
         send()
         view.endEditing(true)
     }
+    
+    func profanityFilter(_ text: String) -> Bool {
+        if K.chat.bannedWords.contains("fuck") {
+            print("returning true")
+            return true
+        }
+        print("returning false")
+        return false
+    }
+    
 }
 
 
