@@ -66,7 +66,7 @@ struct K {
             "Bug in Login/SignUp",
             "Report Abuse of Chat",
         ]
-        static let addresses = ["autoresponce.dba@gmail.com", "eoin.ohannagain@ucdconnect.ie", "eugene.egan1@ucdconnect.ie", "ming-han.ta@ucdconnect.ie", "junzheng.liu@ucdconnect.ie", "eoin1711@gmail.com"]
+        
     }
     
     struct map {
