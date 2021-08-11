@@ -138,12 +138,17 @@ extension LoginViewController {
         if let email = loginEmailTextField.text, let password = loginPasswordTextField.text {
             if email != "" && password != "" {
                 
-                Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                Auth.auth().signIn(withEmail: email, password: password) { [self] authResult, error in
                     if let e = error {
                         self.infoLabel.text = e.localizedDescription
                     } else {
-                        self.infoLabel.text = "👍🏻"
-                        self.performSegue(withIdentifier: K.loggedIn, sender: self)
+                        if Auth.auth().currentUser!.isEmailVerified == false {
+                            self.infoLabel.text = "Please verify email"
+                            logOut()
+                        } else {
+                            self.infoLabel.text = "👍🏻"
+                            self.performSegue(withIdentifier: K.loggedIn, sender: self)
+                        }
                     }
                 }
             } else {
@@ -176,8 +181,23 @@ extension LoginViewController {
                                 self.infoLabel.text = e.localizedDescription
                                 
                             } else {
-                                self.infoLabel.text = "👍🏻"
-                                self.performSegue(withIdentifier: K.signedUp, sender: self)
+                                
+                                Auth.auth().currentUser?.sendEmailVerification { error in
+                                    if let e = error{
+                                        print(e.localizedDescription)
+                                        self.infoLabel.text = e.localizedDescription
+                                        
+                                    } else {
+                                        
+                                        self.infoLabel.text = "👍🏻 Please check your email for a verification link"
+                                        self.loginEmailTextField.text = self.signUpEmailTextField.text
+                                        self.loginPasswordTextField.text = self.signUpPasswordTextField.text
+                                        self.signUpPasswordTextField.text = ""
+                                        self.signUpEmailTextField.text = ""
+                                        self.signUpSecondPasswordTextField.text = ""
+                                    }
+                                    
+                                }
                             }
                         }
                     } else {
