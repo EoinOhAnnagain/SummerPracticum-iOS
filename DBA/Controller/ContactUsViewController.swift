@@ -81,7 +81,6 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
                 reason = K.contact.pickerOptions[picked]
             }
             
-            let toRecipients = ["eoin.ohannagain@ucdconnect.ie", "eugene.egan1@ucdconnect.ie", "ming-han.ta@ucdconnect.ie", "junzheng.liu@ucdconnect.ie", "eoin1711@gmail.com"]
             
             let mc: MFMailComposeViewController = MFMailComposeViewController()
             
@@ -106,7 +105,7 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
                 } else {
                     
                     mc.mailComposeDelegate = self
-                    mc.setToRecipients(toRecipients)
+                    mc.setToRecipients(K.contact.addresses)
                     mc.setSubject("\(reason!) - \(email!)")
                     
                     
