@@ -37,7 +37,7 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .darkContent
     }
-  
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +58,8 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         // Do any additional setup after loading the view.
         
     }
-  
-  
+    
+    
     
     func title() {
         titleLabel.text = ""
@@ -102,7 +102,7 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         }
     }
     
-   
+    
     
     
     func logOut() {
@@ -165,21 +165,28 @@ extension LoginViewController {
     func signUp() {
         if let email = signUpEmailTextField.text, let password = signUpPasswordTextField.text, let password2 = signUpSecondPasswordTextField.text {
             if email != "" && password != "" && password2 != "" {
-                if password == password2 {
-                    
-                    self.infoLabel.text = "Signing up new user"
-                    Auth.auth().createUser(withEmail: email, password: password) { AuthResult, error in
-                        if let e = error{
-                            print(e.localizedDescription)
-                            self.infoLabel.text = e.localizedDescription
-                            
-                        } else {
-                            self.infoLabel.text = "👍🏻"
-                            self.performSegue(withIdentifier: K.signedUp, sender: self)
+                print(password.count)
+                if password.count >= 8 {
+                    if password == password2 {
+                        
+                        self.infoLabel.text = "Signing up new user"
+                        Auth.auth().createUser(withEmail: email, password: password) { AuthResult, error in
+                            if let e = error{
+                                print(e.localizedDescription)
+                                self.infoLabel.text = e.localizedDescription
+                                
+                            } else {
+                                self.infoLabel.text = "👍🏻"
+                                self.performSegue(withIdentifier: K.signedUp, sender: self)
+                            }
                         }
+                    } else {
+                        self.infoLabel.text = "Passwords do not match"
+                        self.signUpPasswordTextField.text = ""
+                        self.signUpSecondPasswordTextField.text = ""
                     }
                 } else {
-                    self.infoLabel.text = "Passwords do not match"
+                    self.infoLabel.text = "Password must be at least 8 characters long"
                     self.signUpPasswordTextField.text = ""
                     self.signUpSecondPasswordTextField.text = ""
                 }
@@ -224,7 +231,7 @@ extension LoginViewController {
             bookStopButton.image = nil
         }
     }
-
+    
     @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
         SpeechService.shared.stopSpeeching()
         bookStopButton.image = nil
