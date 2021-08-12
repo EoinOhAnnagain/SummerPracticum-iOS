@@ -16,8 +16,8 @@ class DBATests: XCTestCase {
     let chat = ChatViewController()
     
     func testProfanityFilter() {
-        
         // Test profanity filter
+        
         var result = chat.profanityFilter("I love you")
         XCTAssertFalse(result, "Filter flagged \"I love you\"")
         result = chat.profanityFilter("I love you fucker")
@@ -28,10 +28,20 @@ class DBATests: XCTestCase {
         XCTAssertTrue(result, "Filter failed to flag \"I love you bastard\"")
         result = chat.profanityFilter("I love you wanker")
         XCTAssertTrue(result, "Filter failed to flag \"I love you wanker\"")
-        
     }
     
+//MARK: - Test BookVC
     
+    let book = BookViewController()
+    
+    func testNumberOfBooks() {
+        //Test no books have been removed from the app
+        
+        let result = K.bookTitles.count
+        XCTAssertGreaterThan(result, 20, "There are books misssing from the app. Total is \(K.bookTitles.count)")
+    }
+    
+
     
 
 //    override func setUpWithError() throws {
