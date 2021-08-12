@@ -137,7 +137,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 if route == chosenRoute {
                     let stopMarker = GMSMarker()
                     stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
-                    stopMarker.icon = UIImage(named: "busPin")
+                    stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
                     stopMarker.title = stop.titleEn
                     stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
                     stopMarker.map = mapView

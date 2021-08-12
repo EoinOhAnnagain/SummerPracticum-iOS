@@ -433,22 +433,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Error" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="OrJ-2g-e8G">
-                                <rect key="frame" x="10" y="64" width="394" height="712"/>
+                                <rect key="frame" x="10" y="64" width="394" height="700"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fq0-gy-eJs">
-                                <rect key="frame" x="20" y="796" width="374" height="60"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Fq0-gy-eJs">
+                                <rect key="frame" x="20" y="784" width="374" height="58"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8GN-JB-mpq">
-                                        <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="58.333333333333336" height="58"/>
                                         <color key="backgroundColor" name="Interface"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="46b-uZ-qwP"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="lbo-Rn-Hgl"/>
-                                        </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -460,8 +456,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAZ-D3-oOZ">
-                                        <rect key="frame" x="76.666666666666671" y="0.0" width="67.000000000000014" height="60"/>
+                                        <rect key="frame" x="63.333333333333329" y="0.0" width="58" height="58"/>
                                         <color key="backgroundColor" name="Interface"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="TAZ-D3-oOZ" secondAttribute="height" multiplier="1:1" id="ejw-GU-5zt"/>
+                                        </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -473,7 +472,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDq-4h-Fgn">
-                                        <rect key="frame" x="153.66666666666666" y="0.0" width="66.666666666666657" height="60"/>
+                                        <rect key="frame" x="126.33333333333333" y="0.0" width="58.333333333333329" height="58"/>
                                         <color key="backgroundColor" name="Interface"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
@@ -486,7 +485,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ac-VP-FbF">
-                                        <rect key="frame" x="230.33333333333337" y="0.0" width="67" height="60"/>
+                                        <rect key="frame" x="189.66666666666666" y="0.0" width="58" height="58"/>
                                         <color key="backgroundColor" name="Interface"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
@@ -498,8 +497,21 @@
                                             <action selector="forwardPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="1uL-fc-qQa"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkV-yO-t0A">
+                                        <rect key="frame" x="252.66666666666671" y="0.0" width="58.333333333333343" height="58"/>
+                                        <color key="backgroundColor" name="Interface"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageReference key="image" image="textformat" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="fontButtonPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="Phl-vg-pcE"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpu-nC-9fe">
-                                        <rect key="frame" x="307.33333333333331" y="0.0" width="66.666666666666686" height="60"/>
+                                        <rect key="frame" x="316" y="0.0" width="58" height="58"/>
                                         <color key="backgroundColor" name="Interface"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
@@ -512,18 +524,117 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="eqi-Eg-I2c"/>
-                                </constraints>
                             </stackView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rT-ZT-9Aa">
+                                <rect key="frame" x="0.0" y="764" width="414" height="98"/>
+                                <subviews>
+                                    <stackView opaque="NO" tag="2" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dt1-Kc-HcH">
+                                        <rect key="frame" x="20" y="20" width="374" height="58"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2W-4i-EwP">
+                                                <rect key="frame" x="0.0" y="0.0" width="58.333333333333336" height="58"/>
+                                                <color key="backgroundColor" name="Interface"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <imageReference key="image" image="arrowshape.turn.up.backward" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="dismissPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="ead-R0-NWL"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lf0-KW-9Xh">
+                                                <rect key="frame" x="63.333333333333329" y="0.0" width="58" height="58"/>
+                                                <color key="backgroundColor" name="Interface"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Lf0-KW-9Xh" secondAttribute="height" multiplier="1:1" id="dT4-Ux-pf3"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <imageReference key="image" image="minus" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="decreaseFontSize:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="deX-cD-Fc0"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avb-rK-3k2">
+                                                <rect key="frame" x="126.33333333333333" y="0.0" width="58.333333333333329" height="58"/>
+                                                <color key="backgroundColor" name="Interface"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="defaultFontSize:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="LtC-7Z-vzh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iRU-mU-Upf">
+                                                <rect key="frame" x="189.66666666666666" y="0.0" width="58" height="58"/>
+                                                <color key="backgroundColor" name="Interface"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="increaseFontSize:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="Yt2-Kn-4G9"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lg6-fV-bd6">
+                                                <rect key="frame" x="252.66666666666671" y="0.0" width="58.333333333333343" height="58"/>
+                                                <color key="backgroundColor" name="Interface"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <imageReference key="image" image="textformat" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="fontButtonPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="w3F-QR-R5v"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Si-KA-tN7">
+                                                <rect key="frame" x="316" y="0.0" width="58" height="58"/>
+                                                <color key="backgroundColor" name="Interface"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <imageReference key="image" image="playpause" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="mediaButtonPressed:" destination="EJB-2K-zfZ" eventType="touchUpInside" id="UaE-11-SYY"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="dt1-Kc-HcH" secondAttribute="bottom" constant="20" id="3li-DK-HMc"/>
+                                    <constraint firstItem="dt1-Kc-HcH" firstAttribute="leading" secondItem="7rT-ZT-9Aa" secondAttribute="leading" constant="20" id="RTZ-Yj-gQP"/>
+                                    <constraint firstItem="dt1-Kc-HcH" firstAttribute="top" secondItem="7rT-ZT-9Aa" secondAttribute="top" constant="20" id="fQX-se-VKD"/>
+                                    <constraint firstAttribute="trailing" secondItem="dt1-Kc-HcH" secondAttribute="trailing" constant="20" id="xdf-AX-xsX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pxw-5Y-lXa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="pxw-5Y-lXa" firstAttribute="bottom" secondItem="Fq0-gy-eJs" secondAttribute="bottom" constant="20" id="2BY-Sv-NdF"/>
                             <constraint firstItem="pxw-5Y-lXa" firstAttribute="trailing" secondItem="Fq0-gy-eJs" secondAttribute="trailing" constant="20" id="3Mg-w5-XMp"/>
                             <constraint firstItem="Fq0-gy-eJs" firstAttribute="centerX" secondItem="eI5-bF-Wii" secondAttribute="centerX" id="CjE-Ug-tXn"/>
+                            <constraint firstItem="7rT-ZT-9Aa" firstAttribute="bottom" secondItem="pxw-5Y-lXa" secondAttribute="bottom" id="D3J-XM-nM5"/>
                             <constraint firstItem="Fq0-gy-eJs" firstAttribute="leading" secondItem="pxw-5Y-lXa" secondAttribute="leading" constant="20" id="DjR-Uh-rnW"/>
-                            <constraint firstAttribute="bottom" secondItem="Fq0-gy-eJs" secondAttribute="bottom" constant="40" id="jeX-md-GkM"/>
+                            <constraint firstItem="7rT-ZT-9Aa" firstAttribute="leading" secondItem="pxw-5Y-lXa" secondAttribute="leading" id="IJG-sw-S2P"/>
+                            <constraint firstItem="pxw-5Y-lXa" firstAttribute="trailing" secondItem="7rT-ZT-9Aa" secondAttribute="trailing" id="O7o-SN-Kf9"/>
+                            <constraint firstItem="7rT-ZT-9Aa" firstAttribute="top" secondItem="OrJ-2g-e8G" secondAttribute="bottom" id="gvZ-ny-M9X"/>
                             <constraint firstItem="OrJ-2g-e8G" firstAttribute="trailing" secondItem="pxw-5Y-lXa" secondAttribute="trailing" constant="-10" id="l9l-xD-mnE"/>
                             <constraint firstItem="OrJ-2g-e8G" firstAttribute="leading" secondItem="pxw-5Y-lXa" secondAttribute="leading" constant="10" id="mY3-po-6y0"/>
                             <constraint firstItem="OrJ-2g-e8G" firstAttribute="top" secondItem="pxw-5Y-lXa" secondAttribute="top" constant="20" id="oKy-Im-0Tu"/>
@@ -533,12 +644,20 @@
                     <navigationItem key="navigationItem" id="dEU-FU-Di2"/>
                     <connections>
                         <outlet property="bookText" destination="OrJ-2g-e8G" id="U8b-TT-BeC"/>
+                        <outlet property="fontView" destination="7rT-ZT-9Aa" id="7lY-Bg-I6X"/>
                         <outlet property="mediaButton" destination="dpu-nC-9fe" id="UXd-B2-jSD"/>
                         <outletCollection property="buttons" destination="8GN-JB-mpq" collectionClass="NSMutableArray" id="QBE-DH-mlJ"/>
                         <outletCollection property="buttons" destination="TAZ-D3-oOZ" collectionClass="NSMutableArray" id="tCn-cg-jV8"/>
                         <outletCollection property="buttons" destination="WDq-4h-Fgn" collectionClass="NSMutableArray" id="szP-e4-X5u"/>
                         <outletCollection property="buttons" destination="2ac-VP-FbF" collectionClass="NSMutableArray" id="CKN-cS-Pjx"/>
                         <outletCollection property="buttons" destination="dpu-nC-9fe" collectionClass="NSMutableArray" id="Qxo-fm-D26"/>
+                        <outletCollection property="buttons" destination="TkV-yO-t0A" collectionClass="NSMutableArray" id="nGm-JY-Ac5"/>
+                        <outletCollection property="buttons" destination="D2W-4i-EwP" collectionClass="NSMutableArray" id="coi-Uk-irn"/>
+                        <outletCollection property="buttons" destination="Lf0-KW-9Xh" collectionClass="NSMutableArray" id="ZPQ-a1-tn2"/>
+                        <outletCollection property="buttons" destination="avb-rK-3k2" collectionClass="NSMutableArray" id="vDn-IR-oBG"/>
+                        <outletCollection property="buttons" destination="iRU-mU-Upf" collectionClass="NSMutableArray" id="X6Y-6E-8wu"/>
+                        <outletCollection property="buttons" destination="lg6-fV-bd6" collectionClass="NSMutableArray" id="clE-qj-51x"/>
+                        <outletCollection property="buttons" destination="7Si-KA-tN7" collectionClass="NSMutableArray" id="5UO-hh-IWD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvU-Yt-Sh9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2104,13 +2223,13 @@
                                                 <color key="textColor" name="Interface"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1@2.com" borderStyle="roundedRect" placeholder="Login Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qEi-6Z-2Aw">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="eoin1711@gmail.com" borderStyle="roundedRect" placeholder="Login Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qEi-6Z-2Aw">
                                                 <rect key="frame" x="0.0" y="61.333333333333314" width="358" height="51.333333333333343"/>
                                                 <color key="textColor" name="Interface"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FpX-Rb-R0b">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="11111111" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FpX-Rb-R0b">
                                                 <rect key="frame" x="0.0" y="122.66666666666669" width="358" height="51"/>
                                                 <color key="textColor" name="Interface"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2921,6 +3040,7 @@
         <image name="bus.doubledecker.fill" catalog="system" width="122" height="128"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="checkmark.seal.fill" catalog="system" width="128" height="128"/>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>
         <image name="ellipsis.bubble.fill" catalog="system" width="128" height="110"/>
         <image name="exclamationmark.shield" catalog="system" width="128" height="118"/>
@@ -2929,13 +3049,16 @@
         <image name="figure.wave" catalog="system" width="81" height="128"/>
         <image name="gamecontroller.fill" catalog="system" width="128" height="80"/>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
+        <image name="minus" catalog="system" width="128" height="24"/>
         <image name="paperplane.circle" catalog="system" width="128" height="121"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="playpause" catalog="system" width="128" height="80"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>
         <image name="sun.max" catalog="system" width="128" height="124"/>
         <image name="sunrise" catalog="system" width="128" height="97"/>
         <image name="sunset" catalog="system" width="128" height="97"/>
+        <image name="textformat" catalog="system" width="128" height="78"/>
         <image name="xmark.seal.fill" catalog="system" width="128" height="128"/>
         <namedColor name="BookChapterBackground">
             <color red="1" green="1" blue="1" alpha="0.89999997615814209" colorSpace="custom" customColorSpace="sRGB"/>
