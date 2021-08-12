@@ -41,6 +41,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         roundCorners(buttons)
         
+        mapView.delegate = self
         routePicker.delegate = self
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
@@ -119,12 +120,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let region = CLCircularRegion(center: userLocation!, radius: radius, identifier: "RegionID")
         for stop in K.stopsLocations {
             if region.contains(CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)) {
-                let stopMarker = GMSMarker()
-                stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
-                stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
-                stopMarker.title = stop.titleEn
-                stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
-                stopMarker.map = mapView
+                generateStopMarker(stop)
             }
         }
     }
@@ -135,15 +131,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         for stop in K.stopsLocations {
             for route in stop.busesAtStop {
                 if route == chosenRoute {
-                    let stopMarker = GMSMarker()
-                    stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
-                    stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
-                    stopMarker.title = stop.titleEn
-                    stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
-                    stopMarker.map = mapView
+                    generateStopMarker(stop)
                 }
             }
         }
+    }
+    
+    func generateStopMarker(_ stop: Pin) {
+        let stopMarker = GMSMarker()
+        stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
+        stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
+        stopMarker.title = stop.titleEn
+        stopMarker.snippet = "Stop Number: \(stop.stopNumber)\nAtcoCode: \(stop.AtcoCode)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
+        stopMarker.map = mapView
     }
   
     
@@ -255,6 +255,36 @@ extension MapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             self.routeControlsView.alpha = 0
         }
     }
+    
+    
+}
+
+
+//MARK: - Marker Events
+
+extension MapViewController: GMSMapViewDelegate {
+    
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        print("\nTAP INFO\n")
+    }
+    
+    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
+        print("\nLONG PRESS INFO\n")
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print("\nOPENED MARKER\n")
+        return false
+    }
+}
+
+
+
+//MARK: - JSON Times
+
+extension MapViewController {
+    
+    
     
     
 }
