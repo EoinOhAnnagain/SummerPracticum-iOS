@@ -93,7 +93,7 @@ class StopTimesViewController: UIViewController, StopTimesManagerDelegate {
             
         } else {
             UIView.animate(withDuration: 0.5) {
-                self.stopTimesView.text = "\n\nThere are currently no upcomming busses.\n:("
+                self.stopTimesView.text = "\n\nThere are currently no upcoming buses.\n:("
                 self.loader.stopAnimating()
                 self.stopTimesView.alpha = 1
             }
