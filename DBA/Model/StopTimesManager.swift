@@ -82,12 +82,13 @@ struct StopTimesManager {
                 
                 let routeNumber = data.route_number
                 let countDown = data.countDownInSeconds
-                let arrivalTime = data.arrivalTime
-                let timeDifference = data.timeChange
+                //let arrivalTime = data.arrivalTime
+                //let timeDifference = data.timeChange
                 
+                let countDownString = intToTime(countDown)
+                let arrivalTime = currentTimePlus(countDown)
                 
-                
-                let result = StopTimes(countDown: countDown, route: routeNumber, arrivalTime: arrivalTime)
+                let result = StopTimes(remainingTime: countDownString, route: routeNumber, arrivalTime: arrivalTime)
                 
                 timesArray.append(result)
                 

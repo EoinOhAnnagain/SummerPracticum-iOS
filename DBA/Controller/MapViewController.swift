@@ -154,7 +154,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         stopMarker.userData = stop.AtcoCode
         
-        stopMarker.snippet = "Route(s): \(stop.routes.trimmingCharacters(in: .whitespaces))\nTap for arrival times.\nLong press for routing."
+        stopMarker.snippet = "Route(s): \(stop.routes.trimmingCharacters(in: .whitespaces))\n\nTap for arrival times.\nLong press for routing."
         
         stopMarker.map = mapView
     }
