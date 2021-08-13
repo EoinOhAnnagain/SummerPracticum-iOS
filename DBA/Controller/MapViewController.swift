@@ -36,14 +36,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let Dublin = GMSCameraPosition.camera(withLatitude: 53.29, longitude: -6.2603, zoom: 10.5)
     var locationButtonUsed = false
     
+    var markerTitleForSegue: String?
+    var markerAtcoCodeForSegue: String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         roundCorners(buttons)
         
+        
+        mapView.delegate = self
         routePicker.delegate = self
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
+        
+        
+        
+        
         
         
         
@@ -119,12 +129,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let region = CLCircularRegion(center: userLocation!, radius: radius, identifier: "RegionID")
         for stop in K.stopsLocations {
             if region.contains(CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)) {
-                let stopMarker = GMSMarker()
-                stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
-                stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
-                stopMarker.title = stop.titleEn
-                stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
-                stopMarker.map = mapView
+                generateStopMarker(stop)
             }
         }
     }
@@ -135,15 +140,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         for stop in K.stopsLocations {
             for route in stop.busesAtStop {
                 if route == chosenRoute {
-                    let stopMarker = GMSMarker()
-                    stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
-                    stopMarker.icon = UIImage(systemName: "bus.doubledecker", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
-                    stopMarker.title = stop.titleEn
-                    stopMarker.snippet = "Stop Number: \(stop.stopNumber)\n\(stop.routes.trimmingCharacters(in: .whitespaces))"
-                    stopMarker.map = mapView
+                    generateStopMarker(stop)
                 }
             }
         }
+    }
+    
+    func generateStopMarker(_ stop: Pin) {
+        let stopMarker = GMSMarker()
+        stopMarker.position = CLLocationCoordinate2D(latitude: stop.lat, longitude: stop.long)
+        stopMarker.icon = GMSMarker.markerImage(with: .purple)
+        stopMarker.title = "\(stop.titleEn)\n\(stop.stopNumber)"
+        
+        stopMarker.userData = stop.AtcoCode
+        
+        stopMarker.snippet = "Route(s): \(stop.routes.trimmingCharacters(in: .whitespaces))\nTap for arrival times.\nLong press for routing."
+        
+        stopMarker.map = mapView
     }
   
     
@@ -255,6 +268,68 @@ extension MapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             self.routeControlsView.alpha = 0
         }
     }
+    
+    
+}
+
+
+//MARK: - Marker Events
+
+extension MapViewController: GMSMapViewDelegate {
+    
+    
+    
+    
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        print("\nTAPPED MARKER\n")
+        markerTitleForSegue = marker.title!
+        markerAtcoCodeForSegue = (marker.userData! as! String)
+        performSegue(withIdentifier: K.map.times, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.map.times {
+            let destinationVC = segue.destination as! StopTimesViewController
+            destinationVC.stopName = markerTitleForSegue
+            destinationVC.stopAtcoCode = markerAtcoCodeForSegue
+        }
+    }
+    
+    
+    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
+        print("\nLONG PRESS INFO\n")
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print("\nOPENED MARKER\n")
+        
+        return false
+    }
+    
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        
+        let view = Bundle.main.loadNibNamed("InfoWindow", owner: self, options: nil)![0] as! InfoWindow
+        
+        let frame = CGRect(x: 0, y: 0, width: 200, height: view.frame.height)
+        view.frame = frame
+        
+        view.titleLabel.text = marker.title
+        view.snippetLabel.text = marker.snippet
+        roundCorners(view.infoView)
+        
+        
+        
+        return view
+    }
+}
+
+
+
+//MARK: - JSON Times
+
+extension MapViewController {
+    
+    
     
     
 }

@@ -72,6 +72,7 @@ struct K {
     struct map {
         
         static let legal = "mapLegalSegue"
+        static let times = "mapToTimes"
         
     }
     

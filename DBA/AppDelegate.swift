@@ -147,6 +147,7 @@ extension AppDelegate {
                     nameEnglish = "UNKNOWN"
                 }
                 
+                let atcoCode = data.AtcoCode
                 //let nameEnglish = data.ShortCommonName_en
                 
 //                var nameIrish: String?
@@ -163,7 +164,7 @@ extension AppDelegate {
                 
                 
                 
-                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, routes: routeData, stopNumber: stopNumber, busesAtStop: routesArray))
+                K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, routes: routeData, stopNumber: stopNumber, AtcoCode: atcoCode, busesAtStop: routesArray))
                 
                 
             }

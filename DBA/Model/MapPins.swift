@@ -16,6 +16,8 @@ struct Pin {
     let titleEn: String
     let routes: String
     let stopNumber: Int
+    let AtcoCode: String
+    
     
     
     let busesAtStop: [String] 
@@ -35,6 +37,7 @@ struct Stops: Codable {
     let RouteData: String
     let ShortCommonName_en: String?
     let PlateCode: Int
+    let AtcoCode: String
     
 }
 
