@@ -298,6 +298,9 @@ extension MapViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
         print("\nLONG PRESS INFO\n")
+        print(marker.position.latitude)
+        print(marker.position.longitude)
+        
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
