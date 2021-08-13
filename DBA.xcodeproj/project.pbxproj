@@ -225,11 +225,8 @@
 				6A76039026A26DFF00DE482C /* BookCollectionViewCell.xib */,
 				6A04DD0226B6EED0003031EC /* AboutUsCellTableViewCell.swift */,
 				6A04DD0326B6EED0003031EC /* AboutUsCellTableViewCell.xib */,
-				6A7FBA8126BC4C6C005CA8E3 /* MapLegalViewController.swift */,
-				6A00244226C0241000FC5A77 /* ConductViewController.swift */,
 				6A2FF6A426C5F8420048645D /* InfoWindow.xib */,
 				6A2FF6A626C5F8660048645D /* InfoWindow.swift */,
-				6A2FF6A826C607F00048645D /* StopTimesViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -241,6 +238,9 @@
 				6A1E1BD42686765600A51DF1 /* ViewController.swift */,
 				6AAC5F22268CA6C200451DD2 /* WeatherViewController.swift */,
 				6AC219EF26987D100064B6AC /* ChatViewController.swift */,
+				6A7FBA8126BC4C6C005CA8E3 /* MapLegalViewController.swift */,
+				6A00244226C0241000FC5A77 /* ConductViewController.swift */,
+				6A2FF6A826C607F00048645D /* StopTimesViewController.swift */,
 				6ABDDF8E269BB9580058A93D /* BookViewController.swift */,
 				6ABDDF90269BB9840058A93D /* AboutUsViewController.swift */,
 				6A0CC06C269F377E00BB0A93 /* CodebreakerViewController.swift */,

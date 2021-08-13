@@ -73,20 +73,29 @@ struct StopTimesManager {
             
             let decodedData = try decoder.decode([stopTimesJSON].self, from: stopTimesData)
             
+            var timesArray: [StopTimes] = []
+            
             print("decoded data")
             print(decodedData)
 
-            let x = StopTimes(countDown: 5, route: "1")
-            let y = StopTimes(countDown: 4, route: "2")
-            let z = StopTimes(countDown: 3, route: "3")
-            let a = StopTimes(countDown: 2, route: "4")
-            let b = StopTimes(countDown: 1, route: "5")
-            let c = StopTimes(countDown: 0, route: "6")
+            for data in decodedData {
+                
+                let routeNumber = data.route_number
+                let countDown = data.countDownInSeconds
+                let arrivalTime = data.arrivalTime
+                let timeDifference = data.timeChange
+                
+                
+                
+                let result = StopTimes(countDown: countDown, route: routeNumber, arrivalTime: arrivalTime)
+                
+                timesArray.append(result)
+                
+            }
 
-            let stopArray = [x, y, z, a, b, c]
             print("returning array")
-            print(stopArray)
-            return stopArray
+            print(timesArray)
+            return timesArray
 
         } catch {
             print(error.localizedDescription)

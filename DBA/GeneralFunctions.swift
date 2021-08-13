@@ -88,3 +88,21 @@ func roundCorners(_ toRound: UIImageView) {
         toRound.layer.cornerRadius = 0.4 * toRound.bounds.size.height
     }
 }
+
+
+//MARK: - Time/Date
+
+func currentTime() -> String {
+    let currentDateTime = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HH:mm"
+    return dateFormatter.string(from: currentDateTime)
+}
+
+func currentDate() -> String {
+    let currentDateTime = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yy"
+    return dateFormatter.string(from: currentDateTime)
+}
+
