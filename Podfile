@@ -9,6 +9,8 @@ target 'DBA' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'GoogleMaps', '5.1.0'
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
   
   target 'DBATests' do
     inherit! :search_paths

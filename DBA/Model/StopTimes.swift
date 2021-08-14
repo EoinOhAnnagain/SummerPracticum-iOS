@@ -9,8 +9,10 @@ import Foundation
 
 struct StopTimes {
     
-    let countDown: Int
+    let remainingTime: String
     let route: String
+    
+    let arrivalTime: String
     
 }
 
@@ -21,5 +23,7 @@ struct stopTimesJSON: Codable {
     
     let countDownInSeconds: Int
     let route_number: String
+    //let arrivalTime: String
+    //let timeChange: Int
     
 }
