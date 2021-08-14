@@ -43,6 +43,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var markerAtcoCodeForSegue: String?
     
     var routeDrawn = false
+    var originMarker: GMSMarker?
+    var destinationMarker: GMSMarker?
     
     
     override func viewDidLoad() {
@@ -302,23 +304,53 @@ extension MapViewController: GMSMapViewDelegate {
     
     
     func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
+        mapView.clear()
         print("\nLONG PRESS INFO\n")
         print(marker.position.latitude)
         print(marker.position.longitude)
-        getDirections(marker.position.latitude, marker.position.longitude)
+        originMarker = marker
+        originMarker!.icon = GMSMarker.markerImage(with: .green)
+        originMarker!.map = mapView
+        
+        
         
     }
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        if routeDrawn {
-            routeDrawn = false
-            if nearMeChosen {
-                generateStopsNearMePins()
-            } else {
-                generateRouteStopPins()
-            }
+//        if routeDrawn {
+//            routeDrawn = false
+//            if nearMeChosen {
+//                generateStopsNearMePins()
+//            } else {
+//                generateRouteStopPins()
+//            }
+//        }
+        
+//        if destinationMarker != nil {
+//            destinationMarker!.map = nil
+//        }
+        
+        if originMarker == nil {
+            return
         }
+        
+        mapView.clear()
+        
+        originMarker!.icon = GMSMarker.markerImage(with: .green)
+        originMarker!.map = mapView
+        
+        let marker = GMSMarker()
+        
+        marker.position = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        marker.icon = GMSMarker.markerImage(with: .green)
+        marker.isTappable = false
+        marker.map = mapView
+        
+        destinationMarker = marker
+        
+        getDirections(originMarker!, destinationMarker!)
     }
+ 
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         print("\nOPENED MARKER\n")
@@ -350,13 +382,13 @@ extension MapViewController: GMSMapViewDelegate {
 extension MapViewController {
     
     
-    func getDirections(_ sourceLat: CLLocationDegrees, _ sourceLon: CLLocationDegrees) {
+    func getDirections(_ source: GMSMarker, _ destination: GMSMarker) {
         
         
         
-        var url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(sourceLat),\(sourceLon)"
+        var url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.position.latitude),\(source.position.longitude)"
         
-        url.append("&destination=53.29323339287316,-6.202983856201172")
+        url.append("&destination=\(destination.position.latitude),\(destination.position.longitude)")
         
         url.append("&key=\(S.googleMapsAPIKey)&mode=transit&%20transit_mode=bus&transit_routing_preference=fewer_transfers")
         
