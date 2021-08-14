@@ -20,7 +20,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var chosenRoute: String?
     var nearMeChosen = false
     
-    @IBOutlet weak var destinationPicker: UIPickerView!
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var nearMeControlsView: UIView!
@@ -54,7 +53,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         mapView.delegate = self
         routePicker.delegate = self
-        destinationPicker.delegate = self
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
@@ -252,31 +250,16 @@ extension MapViewController {
 extension MapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if pickerView.tag == 0 {
-            return 1
-        }
-        return 2
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView.tag == 0 {
-            return K.routeNames.count
-        }
-        if component == 0 {
-            return K.routeNames.count
-        }
-        return 1
+        return K.routeNames.count
     }
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView.tag == 0 {
-            return K.routeNames[row]
-        }
-        if component == 0 {
-            return K.routeNames[row]
-        }
-        return "test"
+        return K.routeNames[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

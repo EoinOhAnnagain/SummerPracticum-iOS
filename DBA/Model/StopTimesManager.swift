@@ -42,7 +42,9 @@ struct StopTimesManager {
                 if let safeData = data {
                     
                     print(safeData)
-                    print("Got this far")
+                    print("\nGot this far\n")
+                    print(safeData)
+                    print("\n")
                     if let times = self.parseJSON(safeData) {
                         print("Were in the endgame now")
                         print("delegate:")
@@ -72,7 +74,7 @@ struct StopTimesManager {
         do {
             
             let decodedData = try decoder.decode([stopTimesJSON].self, from: stopTimesData)
-            
+            print("here???")
             var timesArray: [StopTimes] = []
             
             print("decoded data")
@@ -81,7 +83,7 @@ struct StopTimesManager {
             for data in decodedData {
                 
                 let routeNumber = data.route_number
-                let countDown = data.countDownInSeconds
+                let countDown = data.countdown
                 //let arrivalTime = data.arrivalTime
                 //let timeDifference = data.timeChange
                 
