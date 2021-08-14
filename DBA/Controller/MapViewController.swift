@@ -404,6 +404,11 @@ extension MapViewController {
                 
                 let routes = jsonData["routes"].arrayValue
                 
+                let status = jsonData["status"].stringValue
+                print(status)
+                
+                if status == "OK" {
+                
                 for route in routes {
                     let overview_polyline = route["overview_polyline"].dictionary
                     let points = overview_polyline?["points"]?.string
@@ -420,7 +425,11 @@ extension MapViewController {
                         let duration = legs[0]["duration"]
                         let text = duration["text"]
                         
+                        
                     }
+                    }
+                } else {
+                    print("No available route")
                 }
                 
             } catch let error {
