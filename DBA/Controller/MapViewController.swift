@@ -8,6 +8,8 @@
 import UIKit
 import GoogleMaps
 import CoreLocation
+import Alamofire
+import SwiftyJSON
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -17,6 +19,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var chosenRoute: String?
     var nearMeChosen = false
+    
+    @IBOutlet weak var destinationPicker: UIPickerView!
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var nearMeControlsView: UIView!
@@ -39,6 +43,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var markerTitleForSegue: String?
     var markerAtcoCodeForSegue: String?
     
+    var routeDrawn = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +54,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         mapView.delegate = self
         routePicker.delegate = self
+        destinationPicker.delegate = self
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
@@ -245,16 +252,31 @@ extension MapViewController {
 extension MapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        if pickerView.tag == 0 {
+            return 1
+        }
+        return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return K.routeNames.count
+        if pickerView.tag == 0 {
+            return K.routeNames.count
+        }
+        if component == 0 {
+            return K.routeNames.count
+        }
+        return 1
     }
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return K.routeNames[row]
+        if pickerView.tag == 0 {
+            return K.routeNames[row]
+        }
+        if component == 0 {
+            return K.routeNames[row]
+        }
+        return "test"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -300,7 +322,19 @@ extension MapViewController: GMSMapViewDelegate {
         print("\nLONG PRESS INFO\n")
         print(marker.position.latitude)
         print(marker.position.longitude)
+        getDirections(marker.position.latitude, marker.position.longitude)
         
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        if routeDrawn {
+            routeDrawn = false
+            if nearMeChosen {
+                generateStopsNearMePins()
+            } else {
+                generateRouteStopPins()
+            }
+        }
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
@@ -328,11 +362,61 @@ extension MapViewController: GMSMapViewDelegate {
 
 
 
-//MARK: - JSON Times
+//MARK: - Routing
 
 extension MapViewController {
     
     
-    
+    func getDirections(_ sourceLat: CLLocationDegrees, _ sourceLon: CLLocationDegrees) {
+        
+        
+        
+        var url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(sourceLat),\(sourceLon)"
+        
+        url.append("&destination=53.29323339287316,-6.202983856201172")
+        
+        url.append("&key=\(S.googleMapsAPIKey)&mode=transit&%20transit_mode=bus&transit_routing_preference=fewer_transfers")
+        
+        AF.request(url).responseJSON { (response) in
+            guard let data = response.data else {
+                return
+            }
+            
+            do {
+                let jsonData = try JSON(data: data)
+                
+                print(jsonData)
+                
+                let routes = jsonData["routes"].arrayValue
+                
+                for route in routes {
+                    let overview_polyline = route["overview_polyline"].dictionary
+                    let points = overview_polyline?["points"]?.string
+                    if (points != nil) {
+                        let path = GMSPath.init(fromEncodedPath: points ?? "")
+                        let polyline = GMSPolyline.init(path: path)
+                        polyline.strokeColor = .systemPurple
+                        polyline.strokeWidth = 5
+                        polyline.map = self.mapView
+                        
+                        self.routeDrawn = true
+                        
+                        let legs = route["legs"]
+                        let duration = legs[0]["duration"]
+                        let text = duration["text"]
+                        
+                    }
+                }
+                
+            } catch let error {
+                print(error.localizedDescription)
+            }
+            
+            
+        }
+        
+        
+        
+    }
     
 }

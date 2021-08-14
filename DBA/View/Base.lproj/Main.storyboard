@@ -2079,6 +2079,21 @@
                                             <constraint firstItem="Snh-R8-W7b" firstAttribute="leading" secondItem="pA9-3U-YpZ" secondAttribute="leading" constant="20" id="lf8-Aw-coI"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MzE-fM-YWh">
+                                        <rect key="frame" x="0.0" y="500" width="414" height="256"/>
+                                        <subviews>
+                                            <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWR-hw-SEO">
+                                                <rect key="frame" x="5" y="20" width="404" height="216"/>
+                                            </pickerView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="fWR-hw-SEO" secondAttribute="trailing" constant="5" id="5Cp-eI-DPY"/>
+                                            <constraint firstItem="fWR-hw-SEO" firstAttribute="leading" secondItem="MzE-fM-YWh" secondAttribute="leading" constant="5" id="5YK-1E-IwD"/>
+                                            <constraint firstAttribute="bottom" secondItem="fWR-hw-SEO" secondAttribute="bottom" constant="20" id="YMj-DE-Gvy"/>
+                                            <constraint firstItem="fWR-hw-SEO" firstAttribute="top" secondItem="MzE-fM-YWh" secondAttribute="top" constant="20" id="gR3-mR-iI2"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHI-pv-MLQ">
                                         <rect key="frame" x="364" y="70" width="30" height="30"/>
                                         <color key="backgroundColor" name="Interface"/>
@@ -2115,13 +2130,16 @@
                                     <constraint firstItem="LxA-r6-88j" firstAttribute="leading" secondItem="Bl4-lV-JZb" secondAttribute="leading" id="1ep-ar-nNy"/>
                                     <constraint firstAttribute="trailing" secondItem="1cj-y8-eXP" secondAttribute="trailing" id="4A5-rv-z9k"/>
                                     <constraint firstAttribute="bottom" secondItem="LxA-r6-88j" secondAttribute="bottom" id="4An-1B-7Uk"/>
+                                    <constraint firstAttribute="trailing" secondItem="MzE-fM-YWh" secondAttribute="trailing" id="BtV-rM-N9o"/>
                                     <constraint firstAttribute="trailing" secondItem="LxA-r6-88j" secondAttribute="trailing" id="LAx-bf-c5J"/>
                                     <constraint firstItem="fHI-pv-MLQ" firstAttribute="top" secondItem="RH2-i9-pA0" secondAttribute="bottom" constant="20" id="LEl-QG-Idf"/>
                                     <constraint firstItem="RH2-i9-pA0" firstAttribute="top" secondItem="Bl4-lV-JZb" secondAttribute="top" constant="20" id="Ouc-0S-Vqa"/>
                                     <constraint firstAttribute="bottom" secondItem="pA9-3U-YpZ" secondAttribute="bottom" id="PhH-xS-I2u"/>
                                     <constraint firstItem="1cj-y8-eXP" firstAttribute="leading" secondItem="Bl4-lV-JZb" secondAttribute="leading" id="Ptc-cJ-1ua"/>
                                     <constraint firstAttribute="trailing" secondItem="fHI-pv-MLQ" secondAttribute="trailing" constant="20" id="Q7d-Nf-bCm"/>
+                                    <constraint firstAttribute="bottom" secondItem="MzE-fM-YWh" secondAttribute="bottom" id="RJz-1V-SXd"/>
                                     <constraint firstAttribute="bottom" secondItem="1cj-y8-eXP" secondAttribute="bottom" id="SPP-Rx-FcV"/>
+                                    <constraint firstItem="MzE-fM-YWh" firstAttribute="leading" secondItem="Bl4-lV-JZb" secondAttribute="leading" id="Xch-mc-bKO"/>
                                     <constraint firstAttribute="trailing" secondItem="pA9-3U-YpZ" secondAttribute="trailing" id="Yhn-cz-U1a"/>
                                     <constraint firstAttribute="bottom" secondItem="Tuw-kD-4Oz" secondAttribute="bottom" constant="40" id="YjV-Bk-MiR"/>
                                     <constraint firstAttribute="trailing" secondItem="RH2-i9-pA0" secondAttribute="trailing" constant="20" id="dok-IW-vID"/>
@@ -2149,6 +2167,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bookStopButton" destination="VZr-9Y-rPW" id="mAp-im-kLn"/>
+                        <outlet property="destinationPicker" destination="fWR-hw-SEO" id="L6N-KK-HGX"/>
                         <outlet property="distanceSlider" destination="I4Z-ls-N5r" id="bQw-hi-vJe"/>
                         <outlet property="legalButton" destination="RH2-i9-pA0" id="kDb-MT-Zj3"/>
                         <outlet property="locationButton" destination="fHI-pv-MLQ" id="tEH-4Q-0kc"/>
