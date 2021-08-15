@@ -489,6 +489,12 @@ extension MapViewController {
                             for leg in legs {
                                 let steps = leg["steps"].arrayValue
                                 
+                                //
+                                
+                                
+                                
+                                
+                                
                                 for step in steps {
                                     let html_instructions = step["html_instructions"].string
                                     
@@ -496,6 +502,19 @@ extension MapViewController {
                                     directions.append("\n")
                                     
                                     let steps2 = step["steps"].arrayValue
+                                    
+                                    if step["travel_mode"].string == "TRANSIT" {
+                                        
+                                        let transitDetails = step["transit_details"].dictionary
+                                        
+                                        let stopsNumber = transitDetails!["num_stops"]!.int
+                                        let routeNumber = transitDetails!["line"]!["short_name"].string
+                                        let startStop = transitDetails!["departure_stop"]!["name"].string
+                                        
+                                        
+                                        directions.append("Your bus is the \(routeNumber!) from stop \(stopsNumber!) - \(startStop!)\n")
+                                        
+                                    }
                                     
                                     for step2 in steps2 {
                                         let html_instructions2 = step2["html_instructions"].string
@@ -527,7 +546,13 @@ extension MapViewController {
                             }
                             
                         }
+                        
+                        self.getFares(route)
+                        
                     }
+                    
+                    
+                    
                 } else {
                     self.destinationLabel.text = "Sorry.\nNo routes are available."
                 }
@@ -564,3 +589,23 @@ extension MapViewController {
     
 }
 
+//MARK: - Backend
+
+extension MapViewController {
+    
+    func getFares(_ route: JSON) {
+    
+        let fareInfo = route["legs"][0]["steps"].arrayValue
+        
+        for i in fareInfo {
+            
+            
+            
+        }
+        
+        
+        
+    }
+    
+    
+}
