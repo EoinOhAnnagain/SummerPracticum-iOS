@@ -110,7 +110,7 @@ func currentTimePlus(_ currentOffset: Int) -> String {
     print("\n")
     let currentDateTime = Date()
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm:ss"
+    dateFormatter.dateFormat = "HH:mm"
     print(currentDateTime)
     let currentDateTimeIncreased = currentDateTime + Double(currentOffset)
     print(currentDateTimeIncreased)
@@ -126,7 +126,7 @@ func intToTime(_ seconds: Int) -> String {
         result += "\(seconds / 3600)h "
     }
     
-    result += "\((seconds % 3600) / 60)m \((seconds % 3600) % 60)s"
+    result += "\((seconds % 3600) / 60)m"
     
     return result
 }

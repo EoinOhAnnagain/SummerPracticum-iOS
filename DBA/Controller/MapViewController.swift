@@ -33,6 +33,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var routePicker: UIPickerView!
     
     @IBOutlet var buttons: [UIButton]!
+    @IBOutlet var views: [UIView]!
+    
+    @IBOutlet weak var originLabel: UILabel!
+    @IBOutlet weak var destinationLabel: UILabel!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBOutlet weak var routingView: UIView!
+    
+    @IBOutlet weak var routingButton: UIButton!
+    @IBOutlet weak var routeDetailsButton: UIButton!
     
     var userLocation: CLLocationCoordinate2D?
     var radius: Double = 1000
@@ -51,6 +61,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         roundCorners(buttons)
+        roundCorners(views)
         
         
         mapView.delegate = self
@@ -59,8 +70,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         
         
-        
-        
+        datePicker.minimumDate = Date()
+        routingView.alpha = 0
         
         
         
@@ -69,6 +80,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         
     }
+    
+    
     
     
     
@@ -90,10 +103,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             mapView.camera = Dublin
         }
-        mapView.settings.compassButton = true
         
         
-        mapView.isMyLocationEnabled = true
+        
+        //mapView.isMyLocationEnabled = true
         
         
 //        mapView.settings.myLocationButton = true
@@ -312,9 +325,25 @@ extension MapViewController: GMSMapViewDelegate {
         originMarker!.icon = GMSMarker.markerImage(with: .green)
         originMarker!.map = mapView
         
+        routingButton.alpha = 0
+        routeDetailsButton.alpha = 0
+        destinationLabel.text = "Destination: Tap the map to place a destination pin"
+        
+        let title = marker.title
+        
+        routingView.alpha = 1
+        
+        originLabel.text = "Origin: \(locationName(title!))"
+        
+    }
+    
+    func locationName(_ title: String) -> String {
+        let result = title.components(separatedBy: "\n")
+        return  "\(result[0]) - \(result[1])"
         
         
     }
+    
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
 //        if routeDrawn {
@@ -348,15 +377,26 @@ extension MapViewController: GMSMapViewDelegate {
         
         destinationMarker = marker
         
-        getDirections(originMarker!, destinationMarker!)
+  
+        destinationLabel.text = "Destination chosen.\nOptional: Choose a departure date/time"
+        UIView.animate(withDuration: 0.25) {
+            self.routingButton.alpha = 1
+        }
+        
     }
  
-    
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        print("\nOPENED MARKER\n")
-        
-        return false
+    @IBAction func routingButtonPressed(_ sender: UIButton) {
+        getDirections(originMarker!, destinationMarker!)
     }
+    
+    @IBAction func routeDetailsButtonPressed(_ sender: UIButton) {
+        
+    }
+//    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+//        print("\nOPENED MARKER\n")
+//
+//        return false
+//    }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         
@@ -391,6 +431,15 @@ extension MapViewController {
         url.append("&destination=\(destination.position.latitude),\(destination.position.longitude)")
         
         url.append("&key=\(S.googleMapsAPIKey)&mode=transit&%20transit_mode=bus&transit_routing_preference=fewer_transfers")
+       
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy 'at' HH:mm"
+        let formattedDate = dateFormatter.string(from: datePicker.date)
+        
+        //dateFormatter.timeZone = NSTimeZone(name: "IST") as TimeZone?
+        print()
+       
+        url.append("&departure_time=\(Int(datePicker.date.timeIntervalSince1970))")
         
         AF.request(url).responseJSON { (response) in
             guard let data = response.data else {
@@ -425,21 +474,56 @@ extension MapViewController {
                         let duration = legs[0]["duration"]
                         let text = duration["text"]
                         
+                       
+                        self.destinationLabel.text = "Showing Route for \(formattedDate)"
+                        UIView.animate(withDuration: 0.25) {
+                            self.routeDetailsButton.alpha = 1
+                        }
                         
                     }
                     }
                 } else {
-                    print("No available route")
+                    self.destinationLabel.text = "Sorry.\nNo routes are available."
                 }
                 
             } catch let error {
                 print(error.localizedDescription)
+                self.destinationLabel.text = "Sorry.\nSomething went  wrong."
             }
             
             
         }
         
         
+        
+    }
+    
+    @IBAction func hideRoutingView(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.25) {
+            self.routingView.alpha = 0
+        }
+        
+        if nearMeChosen {
+            generateStopsNearMePins()
+        } else {
+            generateRouteStopPins()
+        }
+        
+        originMarker = nil
+        
+        
+    }
+    
+    
+    
+}
+
+
+//MARK: - Date Picker
+
+extension MapViewController  {
+    
+    @objc func datePickerValueChanged(sender: UIDatePicker) {
         
     }
     
