@@ -56,6 +56,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var originMarker: GMSMarker?
     var destinationMarker: GMSMarker?
     
+    var directionsSansHTML: String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +73,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         
         datePicker.minimumDate = Date()
-        routingView.alpha = 0
         
         
         
@@ -312,6 +313,10 @@ extension MapViewController: GMSMapViewDelegate {
             let destinationVC = segue.destination as! StopTimesViewController
             destinationVC.stopName = markerTitleForSegue
             destinationVC.stopAtcoCode = markerAtcoCodeForSegue
+        } else if segue.identifier == K.map.details {
+            print(directionsSansHTML!)
+            let destinationVC = segue.destination as! DirectionDetailsViewController
+            destinationVC.directions = directionsSansHTML!
         }
     }
     
@@ -391,6 +396,8 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     @IBAction func routeDetailsButtonPressed(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: K.map.details, sender: self)
         
     }
     //    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
@@ -493,7 +500,7 @@ extension MapViewController {
                                     for step2 in steps2 {
                                         let html_instructions2 = step2["html_instructions"].string
                                         
-                                        directions.append(html_instructions2 ?? "Missing Instructions")
+                                        directions.append("  \(html_instructions2 ?? "Missing Instructions")")
                                         directions.append("\n")
                                     }
                                     directions.append("\n")
@@ -502,10 +509,15 @@ extension MapViewController {
                                 
                             }
                             
-                            print("\n\n\(directions)\n\n")
+                            let alteredDirections = stringSplitter(directions, "<div")
+                            var directionsPreped = "\n"
                             
-                            let directionsSansHTML = directions.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-                            print(directionsSansHTML)
+                            for i in alteredDirections {
+                                directionsPreped.append(i)
+                                directionsPreped.append("\n  <")
+                            }
+                            
+                            self.directionsSansHTML = directionsPreped.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
                             
                             
                             
@@ -552,13 +564,3 @@ extension MapViewController {
     
 }
 
-
-//MARK: - Date Picker
-
-extension MapViewController  {
-    
-    @objc func datePickerValueChanged(sender: UIDatePicker) {
-        
-    }
-    
-}
