@@ -109,9 +109,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         //mapView.isMyLocationEnabled = true
         
         
-//        mapView.settings.myLocationButton = true
-//        mapView.settings.compassButton = true
-//        view.addSubview(mapView)
+        //        mapView.settings.myLocationButton = true
+        //        mapView.settings.compassButton = true
+        //        view.addSubview(mapView)
         
         
         // Creates a marker in the center of the map.
@@ -123,7 +123,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         marker.map = mapView
         //marker.icon = UIImage(systemName: "figure.wave.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))
         
-              
+        
         locationManager.stopUpdatingLocation()
         
         if nearMeChosen {
@@ -178,7 +178,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         stopMarker.map = mapView
     }
-  
+    
     
 }
 
@@ -208,7 +208,7 @@ extension MapViewController {
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
-       
+        
         locationButtonUsed = true
         locationManager.startUpdatingLocation()
         
@@ -333,31 +333,31 @@ extension MapViewController: GMSMapViewDelegate {
         
         routingView.alpha = 1
         
-        originLabel.text = "Origin: \(locationName(title!))"
+        let titleArray = stringSplitter(title!, "\n")
+        
+        originLabel.text = "Origin: \(titleArray[0]) - \(titleArray[1])"
         
     }
     
-    func locationName(_ title: String) -> String {
-        let result = title.components(separatedBy: "\n")
-        return  "\(result[0]) - \(result[1])"
-        
-        
-    }
+//    func locationName(_ title: String) -> String {
+//        let result = title.components(separatedBy: "\n")
+//        return  "\(result[0]) - \(result[1])"
+//    }
     
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-//        if routeDrawn {
-//            routeDrawn = false
-//            if nearMeChosen {
-//                generateStopsNearMePins()
-//            } else {
-//                generateRouteStopPins()
-//            }
-//        }
+        //        if routeDrawn {
+        //            routeDrawn = false
+        //            if nearMeChosen {
+        //                generateStopsNearMePins()
+        //            } else {
+        //                generateRouteStopPins()
+        //            }
+        //        }
         
-//        if destinationMarker != nil {
-//            destinationMarker!.map = nil
-//        }
+        //        if destinationMarker != nil {
+        //            destinationMarker!.map = nil
+        //        }
         
         if originMarker == nil {
             return
@@ -377,14 +377,15 @@ extension MapViewController: GMSMapViewDelegate {
         
         destinationMarker = marker
         
-  
+        
         destinationLabel.text = "Destination chosen.\nOptional: Choose a departure date/time"
         UIView.animate(withDuration: 0.25) {
             self.routingButton.alpha = 1
+            self.routeDetailsButton.alpha = 0
         }
         
     }
- 
+    
     @IBAction func routingButtonPressed(_ sender: UIButton) {
         getDirections(originMarker!, destinationMarker!)
     }
@@ -392,11 +393,11 @@ extension MapViewController: GMSMapViewDelegate {
     @IBAction func routeDetailsButtonPressed(_ sender: UIButton) {
         
     }
-//    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-//        print("\nOPENED MARKER\n")
-//
-//        return false
-//    }
+    //    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+    //        print("\nOPENED MARKER\n")
+    //
+    //        return false
+    //    }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         
@@ -431,15 +432,17 @@ extension MapViewController {
         url.append("&destination=\(destination.position.latitude),\(destination.position.longitude)")
         
         url.append("&key=\(S.googleMapsAPIKey)&mode=transit&%20transit_mode=bus&transit_routing_preference=fewer_transfers")
-       
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy 'at' HH:mm"
         let formattedDate = dateFormatter.string(from: datePicker.date)
         
         //dateFormatter.timeZone = NSTimeZone(name: "IST") as TimeZone?
         print()
-       
+        
         url.append("&departure_time=\(Int(datePicker.date.timeIntervalSince1970))")
+        
+        print("\n\n\(url)\n\n")
         
         AF.request(url).responseJSON { (response) in
             guard let data = response.data else {
@@ -451,36 +454,67 @@ extension MapViewController {
                 
                 print(jsonData)
                 
-                let routes = jsonData["routes"].arrayValue
+                
                 
                 let status = jsonData["status"].stringValue
                 print(status)
                 
                 if status == "OK" {
-                
-                for route in routes {
-                    let overview_polyline = route["overview_polyline"].dictionary
-                    let points = overview_polyline?["points"]?.string
-                    if (points != nil) {
-                        let path = GMSPath.init(fromEncodedPath: points ?? "")
-                        let polyline = GMSPolyline.init(path: path)
-                        polyline.strokeColor = .systemPurple
-                        polyline.strokeWidth = 5
-                        polyline.map = self.mapView
-                        
-                        self.routeDrawn = true
-                        
-                        let legs = route["legs"]
-                        let duration = legs[0]["duration"]
-                        let text = duration["text"]
-                        
-                       
-                        self.destinationLabel.text = "Showing Route for \(formattedDate)"
-                        UIView.animate(withDuration: 0.25) {
-                            self.routeDetailsButton.alpha = 1
+                    
+                    let routes = jsonData["routes"].arrayValue
+                    
+                    var directions = ""
+                    
+                    for route in routes {
+                        let overview_polyline = route["overview_polyline"].dictionary
+                        let points = overview_polyline?["points"]?.string
+                        if (points != nil) {
+                            let path = GMSPath.init(fromEncodedPath: points ?? "")
+                            let polyline = GMSPolyline.init(path: path)
+                            polyline.strokeColor = .systemPurple
+                            polyline.strokeWidth = 5
+                            polyline.map = self.mapView
+                            
+                            self.routeDrawn = true
+                            
+                            let legs = route["legs"].arrayValue
+                            
+                            for leg in legs {
+                                let steps = leg["steps"].arrayValue
+                                
+                                for step in steps {
+                                    let html_instructions = step["html_instructions"].string
+                                    
+                                    directions.append(html_instructions ?? "Missing Instructions")
+                                    directions.append("\n")
+                                    
+                                    let steps2 = step["steps"].arrayValue
+                                    
+                                    for step2 in steps2 {
+                                        let html_instructions2 = step2["html_instructions"].string
+                                        
+                                        directions.append(html_instructions2 ?? "Missing Instructions")
+                                        directions.append("\n")
+                                    }
+                                    directions.append("\n")
+                                }
+                                
+                                
+                            }
+                            
+                            print("\n\n\(directions)\n\n")
+                            
+                            let directionsSansHTML = directions.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+                            print(directionsSansHTML)
+                            
+                            
+                            
+                            self.destinationLabel.text = "Showing Route for \(formattedDate)\nDetails available"
+                            UIView.animate(withDuration: 0.25) {
+                                self.routeDetailsButton.alpha = 1
+                            }
+                            
                         }
-                        
-                    }
                     }
                 } else {
                     self.destinationLabel.text = "Sorry.\nNo routes are available."

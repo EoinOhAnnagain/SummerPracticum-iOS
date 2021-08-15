@@ -130,3 +130,12 @@ func intToTime(_ seconds: Int) -> String {
     
     return result
 }
+
+
+//MARK: - String Manipulation
+
+func stringSplitter(_ title: String, _ sep: String) -> [String] {
+    return title.components(separatedBy: sep)
+}
+
+
