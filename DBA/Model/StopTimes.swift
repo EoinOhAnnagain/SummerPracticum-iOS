@@ -21,7 +21,7 @@ struct StopTimes {
 
 struct stopTimesJSON: Codable {
     
-    let countDownInSeconds: Int
+    let countdown: Int
     let route_number: String
     //let arrivalTime: String
     //let timeChange: Int

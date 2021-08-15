@@ -20,7 +20,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var chosenRoute: String?
     var nearMeChosen = false
     
-    @IBOutlet weak var destinationPicker: UIPickerView!
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var nearMeControlsView: UIView!
@@ -34,6 +33,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var routePicker: UIPickerView!
     
     @IBOutlet var buttons: [UIButton]!
+    @IBOutlet var views: [UIView]!
+    
+    @IBOutlet weak var originLabel: UILabel!
+    @IBOutlet weak var destinationLabel: UILabel!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBOutlet weak var routingView: UIView!
+    
+    @IBOutlet weak var routingButton: UIButton!
+    @IBOutlet weak var routeDetailsButton: UIButton!
     
     var userLocation: CLLocationCoordinate2D?
     var radius: Double = 1000
@@ -44,23 +53,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var markerAtcoCodeForSegue: String?
     
     var routeDrawn = false
+    var originMarker: GMSMarker?
+    var destinationMarker: GMSMarker?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         roundCorners(buttons)
+        roundCorners(views)
         
         
         mapView.delegate = self
         routePicker.delegate = self
-        destinationPicker.delegate = self
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
         
-        
-        
+        datePicker.minimumDate = Date()
+        routingView.alpha = 0
         
         
         
@@ -69,6 +80,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         
     }
+    
+    
     
     
     
@@ -90,10 +103,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             mapView.camera = Dublin
         }
-        mapView.settings.compassButton = true
         
         
-        mapView.isMyLocationEnabled = true
+        
+        //mapView.isMyLocationEnabled = true
         
         
 //        mapView.settings.myLocationButton = true
@@ -252,31 +265,16 @@ extension MapViewController {
 extension MapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if pickerView.tag == 0 {
-            return 1
-        }
-        return 2
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView.tag == 0 {
-            return K.routeNames.count
-        }
-        if component == 0 {
-            return K.routeNames.count
-        }
-        return 1
+        return K.routeNames.count
     }
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView.tag == 0 {
-            return K.routeNames[row]
-        }
-        if component == 0 {
-            return K.routeNames[row]
-        }
-        return "test"
+        return K.routeNames[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -319,29 +317,86 @@ extension MapViewController: GMSMapViewDelegate {
     
     
     func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
+        mapView.clear()
         print("\nLONG PRESS INFO\n")
         print(marker.position.latitude)
         print(marker.position.longitude)
-        getDirections(marker.position.latitude, marker.position.longitude)
+        originMarker = marker
+        originMarker!.icon = GMSMarker.markerImage(with: .green)
+        originMarker!.map = mapView
+        
+        routingButton.alpha = 0
+        routeDetailsButton.alpha = 0
+        destinationLabel.text = "Destination: Tap the map to place a destination pin"
+        
+        let title = marker.title
+        
+        routingView.alpha = 1
+        
+        originLabel.text = "Origin: \(locationName(title!))"
         
     }
+    
+    func locationName(_ title: String) -> String {
+        let result = title.components(separatedBy: "\n")
+        return  "\(result[0]) - \(result[1])"
+        
+        
+    }
+    
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        if routeDrawn {
-            routeDrawn = false
-            if nearMeChosen {
-                generateStopsNearMePins()
-            } else {
-                generateRouteStopPins()
-            }
+//        if routeDrawn {
+//            routeDrawn = false
+//            if nearMeChosen {
+//                generateStopsNearMePins()
+//            } else {
+//                generateRouteStopPins()
+//            }
+//        }
+        
+//        if destinationMarker != nil {
+//            destinationMarker!.map = nil
+//        }
+        
+        if originMarker == nil {
+            return
         }
+        
+        mapView.clear()
+        
+        originMarker!.icon = GMSMarker.markerImage(with: .green)
+        originMarker!.map = mapView
+        
+        let marker = GMSMarker()
+        
+        marker.position = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        marker.icon = GMSMarker.markerImage(with: .green)
+        marker.isTappable = false
+        marker.map = mapView
+        
+        destinationMarker = marker
+        
+  
+        destinationLabel.text = "Destination chosen.\nOptional: Choose a departure date/time"
+        UIView.animate(withDuration: 0.25) {
+            self.routingButton.alpha = 1
+        }
+        
+    }
+ 
+    @IBAction func routingButtonPressed(_ sender: UIButton) {
+        getDirections(originMarker!, destinationMarker!)
     }
     
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        print("\nOPENED MARKER\n")
+    @IBAction func routeDetailsButtonPressed(_ sender: UIButton) {
         
-        return false
     }
+//    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+//        print("\nOPENED MARKER\n")
+//
+//        return false
+//    }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         
@@ -367,15 +422,24 @@ extension MapViewController: GMSMapViewDelegate {
 extension MapViewController {
     
     
-    func getDirections(_ sourceLat: CLLocationDegrees, _ sourceLon: CLLocationDegrees) {
+    func getDirections(_ source: GMSMarker, _ destination: GMSMarker) {
         
         
         
-        var url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(sourceLat),\(sourceLon)"
+        var url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.position.latitude),\(source.position.longitude)"
         
-        url.append("&destination=53.29323339287316,-6.202983856201172")
+        url.append("&destination=\(destination.position.latitude),\(destination.position.longitude)")
         
         url.append("&key=\(S.googleMapsAPIKey)&mode=transit&%20transit_mode=bus&transit_routing_preference=fewer_transfers")
+       
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy 'at' HH:mm"
+        let formattedDate = dateFormatter.string(from: datePicker.date)
+        
+        //dateFormatter.timeZone = NSTimeZone(name: "IST") as TimeZone?
+        print()
+       
+        url.append("&departure_time=\(Int(datePicker.date.timeIntervalSince1970))")
         
         AF.request(url).responseJSON { (response) in
             guard let data = response.data else {
@@ -388,6 +452,11 @@ extension MapViewController {
                 print(jsonData)
                 
                 let routes = jsonData["routes"].arrayValue
+                
+                let status = jsonData["status"].stringValue
+                print(status)
+                
+                if status == "OK" {
                 
                 for route in routes {
                     let overview_polyline = route["overview_polyline"].dictionary
@@ -405,17 +474,56 @@ extension MapViewController {
                         let duration = legs[0]["duration"]
                         let text = duration["text"]
                         
+                       
+                        self.destinationLabel.text = "Showing Route for \(formattedDate)"
+                        UIView.animate(withDuration: 0.25) {
+                            self.routeDetailsButton.alpha = 1
+                        }
+                        
                     }
+                    }
+                } else {
+                    self.destinationLabel.text = "Sorry.\nNo routes are available."
                 }
                 
             } catch let error {
                 print(error.localizedDescription)
+                self.destinationLabel.text = "Sorry.\nSomething went  wrong."
             }
             
             
         }
         
         
+        
+    }
+    
+    @IBAction func hideRoutingView(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.25) {
+            self.routingView.alpha = 0
+        }
+        
+        if nearMeChosen {
+            generateStopsNearMePins()
+        } else {
+            generateRouteStopPins()
+        }
+        
+        originMarker = nil
+        
+        
+    }
+    
+    
+    
+}
+
+
+//MARK: - Date Picker
+
+extension MapViewController  {
+    
+    @objc func datePickerValueChanged(sender: UIDatePicker) {
         
     }
     
