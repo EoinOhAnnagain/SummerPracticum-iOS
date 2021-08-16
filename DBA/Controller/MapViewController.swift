@@ -176,7 +176,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         stopMarker.userData = stop.AtcoCode
         
-        stopMarker.snippet = "Route(s): \(stop.routes.trimmingCharacters(in: .whitespaces))\n\nTap for arrival times.\nLong press for routing."
+        stopMarker.snippet = "Route(s): \(stop.routes.trimmingCharacters(in: .whitespaces))\n\nTap for routing.\nLong press for arrival times."
         
         stopMarker.map = mapView
     }
@@ -603,16 +603,7 @@ extension MapViewController {
         
         let json: [String: Any] = ["param_1": String(stopsNumber), "param_2": routeNumber]
             
-//            [
-//
-//            "headers": ["Content-Type": "application/json"],
-//            "body": "{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}",
-//        ]
-    
-//        let json = "{ method: \"POST\", headers: {\"Content_Type\" : \"application/json\"}, body: \"{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}\"}"
-        
-//        print(json)
-//        print("here1")
+
         if JSONSerialization.isValidJSONObject(json) {
             
 //            print("here2")
