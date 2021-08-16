@@ -29,6 +29,14 @@ func roundCorners(_ toRound: UIButton) {
     }
 }
 
+func roundCorners(_ toRound: UILabel) {
+    if (0.4 * toRound.bounds.size.height) > 25 {
+        toRound.layer.cornerRadius = 25
+    } else {
+        toRound.layer.cornerRadius = 0.4 * toRound.bounds.size.height
+    }
+}
+
 func roundCorners(_ toRound: [UILabel]) {
     for x in toRound {
         if (0.4 * x.bounds.size.height) > 25 {
@@ -54,6 +62,16 @@ func roundCorners(_ toRound: UITextView) {
         toRound.layer.cornerRadius = 25
     } else {
         toRound.layer.cornerRadius = 0.4 * toRound.bounds.size.height
+    }
+}
+
+func roundCorners(_ toRound: [UITextView]) {
+    for x in toRound {
+        if (0.4 * x.bounds.size.height) > 25 {
+            x.layer.cornerRadius = 25
+        } else {
+            x.layer.cornerRadius = 0.4 * x.bounds.size.height
+        }
     }
 }
 
@@ -130,3 +148,12 @@ func intToTime(_ seconds: Int) -> String {
     
     return result
 }
+
+
+//MARK: - String Manipulation
+
+func stringSplitter(_ title: String, _ sep: String) -> [String] {
+    return title.components(separatedBy: sep)
+}
+
+

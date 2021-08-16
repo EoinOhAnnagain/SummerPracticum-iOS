@@ -56,6 +56,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var originMarker: GMSMarker?
     var destinationMarker: GMSMarker?
     
+    var directionsSansHTML: String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +73,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         
         datePicker.minimumDate = Date()
-        routingView.alpha = 0
         
         
         
@@ -109,9 +110,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         //mapView.isMyLocationEnabled = true
         
         
-//        mapView.settings.myLocationButton = true
-//        mapView.settings.compassButton = true
-//        view.addSubview(mapView)
+        //        mapView.settings.myLocationButton = true
+        //        mapView.settings.compassButton = true
+        //        view.addSubview(mapView)
         
         
         // Creates a marker in the center of the map.
@@ -123,7 +124,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         marker.map = mapView
         //marker.icon = UIImage(systemName: "figure.wave.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))
         
-              
+        
         locationManager.stopUpdatingLocation()
         
         if nearMeChosen {
@@ -178,7 +179,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         stopMarker.map = mapView
     }
-  
+    
     
 }
 
@@ -208,7 +209,7 @@ extension MapViewController {
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
-       
+        
         locationButtonUsed = true
         locationManager.startUpdatingLocation()
         
@@ -312,6 +313,10 @@ extension MapViewController: GMSMapViewDelegate {
             let destinationVC = segue.destination as! StopTimesViewController
             destinationVC.stopName = markerTitleForSegue
             destinationVC.stopAtcoCode = markerAtcoCodeForSegue
+        } else if segue.identifier == K.map.details {
+            print(directionsSansHTML!)
+            let destinationVC = segue.destination as! DirectionDetailsViewController
+            destinationVC.directions = directionsSansHTML!
         }
     }
     
@@ -333,31 +338,31 @@ extension MapViewController: GMSMapViewDelegate {
         
         routingView.alpha = 1
         
-        originLabel.text = "Origin: \(locationName(title!))"
+        let titleArray = stringSplitter(title!, "\n")
+        
+        originLabel.text = "Origin: \(titleArray[0]) - \(titleArray[1])"
         
     }
     
-    func locationName(_ title: String) -> String {
-        let result = title.components(separatedBy: "\n")
-        return  "\(result[0]) - \(result[1])"
-        
-        
-    }
+//    func locationName(_ title: String) -> String {
+//        let result = title.components(separatedBy: "\n")
+//        return  "\(result[0]) - \(result[1])"
+//    }
     
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-//        if routeDrawn {
-//            routeDrawn = false
-//            if nearMeChosen {
-//                generateStopsNearMePins()
-//            } else {
-//                generateRouteStopPins()
-//            }
-//        }
+        //        if routeDrawn {
+        //            routeDrawn = false
+        //            if nearMeChosen {
+        //                generateStopsNearMePins()
+        //            } else {
+        //                generateRouteStopPins()
+        //            }
+        //        }
         
-//        if destinationMarker != nil {
-//            destinationMarker!.map = nil
-//        }
+        //        if destinationMarker != nil {
+        //            destinationMarker!.map = nil
+        //        }
         
         if originMarker == nil {
             return
@@ -377,26 +382,29 @@ extension MapViewController: GMSMapViewDelegate {
         
         destinationMarker = marker
         
-  
+        
         destinationLabel.text = "Destination chosen.\nOptional: Choose a departure date/time"
         UIView.animate(withDuration: 0.25) {
             self.routingButton.alpha = 1
+            self.routeDetailsButton.alpha = 0
         }
         
     }
- 
+    
     @IBAction func routingButtonPressed(_ sender: UIButton) {
         getDirections(originMarker!, destinationMarker!)
     }
     
     @IBAction func routeDetailsButtonPressed(_ sender: UIButton) {
         
+        performSegue(withIdentifier: K.map.details, sender: self)
+        
     }
-//    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-//        print("\nOPENED MARKER\n")
-//
-//        return false
-//    }
+    //    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+    //        print("\nOPENED MARKER\n")
+    //
+    //        return false
+    //    }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         
@@ -431,15 +439,17 @@ extension MapViewController {
         url.append("&destination=\(destination.position.latitude),\(destination.position.longitude)")
         
         url.append("&key=\(S.googleMapsAPIKey)&mode=transit&%20transit_mode=bus&transit_routing_preference=fewer_transfers")
-       
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy 'at' HH:mm"
         let formattedDate = dateFormatter.string(from: datePicker.date)
         
         //dateFormatter.timeZone = NSTimeZone(name: "IST") as TimeZone?
         print()
-       
+        
         url.append("&departure_time=\(Int(datePicker.date.timeIntervalSince1970))")
+        
+        print("\n\n\(url)\n\n")
         
         AF.request(url).responseJSON { (response) in
             guard let data = response.data else {
@@ -448,40 +458,101 @@ extension MapViewController {
             
             do {
                 let jsonData = try JSON(data: data)
+
                 
-                print(jsonData)
-                
-                let routes = jsonData["routes"].arrayValue
                 
                 let status = jsonData["status"].stringValue
                 print(status)
                 
                 if status == "OK" {
-                
-                for route in routes {
-                    let overview_polyline = route["overview_polyline"].dictionary
-                    let points = overview_polyline?["points"]?.string
-                    if (points != nil) {
-                        let path = GMSPath.init(fromEncodedPath: points ?? "")
-                        let polyline = GMSPolyline.init(path: path)
-                        polyline.strokeColor = .systemPurple
-                        polyline.strokeWidth = 5
-                        polyline.map = self.mapView
-                        
-                        self.routeDrawn = true
-                        
-                        let legs = route["legs"]
-                        let duration = legs[0]["duration"]
-                        let text = duration["text"]
-                        
-                       
-                        self.destinationLabel.text = "Showing Route for \(formattedDate)"
-                        UIView.animate(withDuration: 0.25) {
-                            self.routeDetailsButton.alpha = 1
+                    
+                    let routes = jsonData["routes"].arrayValue
+                    
+                    var directions = ""
+                    
+                    for route in routes {
+                        let overview_polyline = route["overview_polyline"].dictionary
+                        let points = overview_polyline?["points"]?.string
+                        if (points != nil) {
+                            let path = GMSPath.init(fromEncodedPath: points ?? "")
+                            let polyline = GMSPolyline.init(path: path)
+                            polyline.strokeColor = .systemPurple
+                            polyline.strokeWidth = 5
+                            polyline.map = self.mapView
+                            
+                            self.routeDrawn = true
+                            
+                            let legs = route["legs"].arrayValue
+                            
+                            for leg in legs {
+                                let steps = leg["steps"].arrayValue
+                                
+                                //
+                                
+                                
+                                
+                                
+                                
+                                for step in steps {
+                                    let html_instructions = step["html_instructions"].string
+                                    
+                                    directions.append(html_instructions ?? "Missing Instructions")
+                                    directions.append("\n")
+                                    
+                                    let steps2 = step["steps"].arrayValue
+                                    
+                                    if step["travel_mode"].string == "TRANSIT" {
+                                        
+                                        let transitDetails = step["transit_details"].dictionary
+                                        
+                                        let stopsNumber = transitDetails!["num_stops"]!.int
+                                        let routeNumber = transitDetails!["line"]!["short_name"].string
+                                        let startStop = transitDetails!["departure_stop"]!["name"].string
+                                        
+                                        
+                                        directions.append("Your bus is the \(routeNumber!) from stop \(stopsNumber!) - \(startStop!)\n")
+                                        
+                                        self.postDataFare(stopsNumber!, routeNumber!)
+                                        
+                                    }
+                                    
+                                    for step2 in steps2 {
+                                        let html_instructions2 = step2["html_instructions"].string
+                                        
+                                        directions.append("  \(html_instructions2 ?? "Missing Instructions")")
+                                        directions.append("\n")
+                                    }
+                                    directions.append("\n")
+                                }
+                                
+                                
+                            }
+                            
+                            let alteredDirections = stringSplitter(directions, "<div")
+                            var directionsPreped = "\n"
+                            
+                            for i in alteredDirections {
+                                directionsPreped.append(i)
+                                directionsPreped.append("\n  <")
+                            }
+                            
+                            self.directionsSansHTML = directionsPreped.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+                            
+                            
+                            
+                            self.destinationLabel.text = "Showing Route for \(formattedDate)\nDetails available"
+                            UIView.animate(withDuration: 0.25) {
+                                self.routeDetailsButton.alpha = 1
+                            }
+                            
                         }
                         
+                        
+                        
                     }
-                    }
+                    
+                    
+                    
                 } else {
                     self.destinationLabel.text = "Sorry.\nNo routes are available."
                 }
@@ -518,13 +589,66 @@ extension MapViewController {
     
 }
 
+//MARK: - Backend
 
-//MARK: - Date Picker
-
-extension MapViewController  {
+extension MapViewController {
     
-    @objc func datePickerValueChanged(sender: UIDatePicker) {
+    func postDataFare(_ stopsNumber: Int, _ routeNumber: String) {
+        
+        print("\n\nFARE SECTION\n\n")
+        
+        let json: [String: Any] = [
+            "method": "POST",
+            "headers": ["Content-Type": "application/json"],
+            "body": "{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}",
+        ]
+    
+//        let json = "{ method: \"POST\", headers: {\"Content_Tupe\" : \"application/json\"}, body: \"{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}\"}"
+        
+        if JSONSerialization.isValidJSONObject(json) {
+            
+            
+            
+            let jsonData = try? JSONSerialization.data(withJSONObject: json)
+            
+            
+            
+            let url = URL(string: "http://173.82.208.22:8000/core/Fare")!
+            
+            
+            var request = URLRequest(url: url)
+            
+            request.httpMethod = "POST"
+            
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                
+                guard let data = data, error == nil else {
+                    print(error?.localizedDescription ?? "No data")
+                    return
+                }
+                
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                
+                print(responseJSON)
+                if let responseJSON = responseJSON as? [String: Any] {
+                    print("here10")
+                    print(responseJSON)
+                } else {
+                    print("here11")
+                }
+                
+            }
+            
+            task.resume()
+            
+        } else {
+            print("Bad JSON")
+        }
+                
+        
+        
         
     }
-    
 }

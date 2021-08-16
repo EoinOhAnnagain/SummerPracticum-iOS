@@ -73,6 +73,7 @@ struct K {
         
         static let legal = "mapLegalSegue"
         static let times = "mapToTimes"
+        static let details = "directionDetailsSegue"
         
     }
     
