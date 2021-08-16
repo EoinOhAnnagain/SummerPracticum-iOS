@@ -1938,7 +1938,7 @@
             </objects>
             <point key="canvasLocation" x="-2713" y="319"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="8aa-Np-bXN">
             <objects>
                 <viewController id="q9d-hX-vZA" customClass="MapViewController" customModule="DBA" customModuleProvider="target" sceneMemberID="viewController">
@@ -2013,8 +2013,7 @@
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="eye.slash" catalog="system"/>
                                                         <connections>
-                                                            <action selector="hideNearMeControls:" destination="q9d-hX-vZA" eventType="touchUpInside" id="SP3-Sc-kPu"/>
-                                                            <action selector="viewControllerPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="7Xq-Ty-wWf"/>
+                                                            <action selector="hideRouteViewPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="gOt-A3-GRe"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -2037,7 +2036,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="X6d-tA-TMk">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="60.333333333333336"/>
                                                         <subviews>
-                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="12" translatesAutoresizingMaskIntoConstraints="NO" id="7VU-jn-C4A">
+                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="12" translatesAutoresizingMaskIntoConstraints="NO" id="7VU-jn-C4A">
                                                                 <rect key="frame" x="-2" y="0.0" width="338" height="31"/>
                                                                 <color key="tintColor" name="Interface"/>
                                                                 <color key="minimumTrackTintColor" name="Interface"/>
@@ -2071,9 +2070,7 @@
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="eye.slash" catalog="system"/>
                                                         <connections>
-                                                            <action selector="hideNearMeControls:" destination="q9d-hX-vZA" eventType="touchUpInside" id="6jI-1n-Ynv"/>
-                                                            <action selector="hideRouteViewPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="hdc-H1-T9i"/>
-                                                            <action selector="viewControllerPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="baF-0c-5D5"/>
+                                                            <action selector="hideNearMeControls:" destination="q9d-hX-vZA" eventType="touchUpInside" id="Ks4-KF-ezi"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -2088,30 +2085,30 @@
                                         </constraints>
                                     </view>
                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="We7-6G-u1d">
-                                        <rect key="frame" x="0.0" y="413.33333333333337" width="414" height="342.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="409.33333333333337" width="414" height="346.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3VX-k7-EDs">
-                                                <rect key="frame" x="20" y="20" width="374" height="282.66666666666669"/>
+                                                <rect key="frame" x="20" y="20" width="374" height="286.66666666666669"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="ioi-ag-Mul">
-                                                        <rect key="frame" x="0.0" y="0.0" width="334" height="282.66666666666669"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ioi-ag-Mul">
+                                                        <rect key="frame" x="0.0" y="0.0" width="334" height="286.66666666666669"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmI-GI-HDV">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmI-GI-HDV">
                                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="20.333333333333332"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" name="Interface"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Up1-b3-hQB">
-                                                                <rect key="frame" x="0.0" y="33.333333333333258" width="334" height="20.333333333333329"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Up1-b3-hQB">
+                                                                <rect key="frame" x="0.0" y="35.333333333333258" width="334" height="20.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" name="Interface"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="i50-nz-k0X">
-                                                                <rect key="frame" x="0.0" y="66.666666666666629" width="320" height="216"/>
-                                                                <color key="backgroundColor" name="Interface"/>
-                                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <rect key="frame" x="7" y="70.666666666666629" width="320" height="216"/>
+                                                                <color key="backgroundColor" systemColor="separatorColor"/>
+                                                                <color key="tintColor" systemColor="systemYellowColor"/>
                                                             </datePicker>
                                                         </subviews>
                                                         <constraints>
@@ -2122,7 +2119,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vZF-fm-AiL">
-                                                        <rect key="frame" x="344" y="152.66666666666663" width="30" height="130"/>
+                                                        <rect key="frame" x="344" y="156.66666666666663" width="30" height="130"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xT-Ad-Hdg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -2134,10 +2131,7 @@
                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" image="magnifyingglass" catalog="system"/>
                                                                 <connections>
-                                                                    <action selector="hideNearMeControls:" destination="q9d-hX-vZA" eventType="touchUpInside" id="12z-EN-qbR"/>
-                                                                    <action selector="hideRouteViewPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="kdq-xO-vXs"/>
-                                                                    <action selector="routeDetailsButtonPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="7V1-zy-PeN"/>
-                                                                    <action selector="viewControllerPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="MVN-mN-f7n"/>
+                                                                    <action selector="routeDetailsButtonPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="A9b-ql-ZR7"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Svi-QS-RKQ">
@@ -2150,10 +2144,7 @@
                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" image="circle.dashed.inset.fill" catalog="system"/>
                                                                 <connections>
-                                                                    <action selector="hideNearMeControls:" destination="q9d-hX-vZA" eventType="touchUpInside" id="99e-p1-ugS"/>
-                                                                    <action selector="hideRouteViewPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="nP2-eJ-uZO"/>
-                                                                    <action selector="routingButtonPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="Iy7-uf-IdS"/>
-                                                                    <action selector="viewControllerPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="Jbp-hg-CAA"/>
+                                                                    <action selector="routingButtonPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="KoI-ch-JNK"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alE-ld-duU">
@@ -2166,10 +2157,7 @@
                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" image="eye.slash" catalog="system"/>
                                                                 <connections>
-                                                                    <action selector="hideNearMeControls:" destination="q9d-hX-vZA" eventType="touchUpInside" id="Tke-HQ-TlI"/>
-                                                                    <action selector="hideRouteViewPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="qh4-fu-Gk9"/>
-                                                                    <action selector="hideRoutingView:" destination="q9d-hX-vZA" eventType="touchUpInside" id="YBe-gu-xrQ"/>
-                                                                    <action selector="viewControllerPressed:" destination="q9d-hX-vZA" eventType="touchUpInside" id="MAF-ie-fKD"/>
+                                                                    <action selector="hideRoutingView:" destination="q9d-hX-vZA" eventType="touchUpInside" id="wPt-SS-dXG"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -2219,8 +2207,8 @@
                             <constraint firstItem="Ri9-kN-FEY" firstAttribute="trailing" secondItem="U7k-D8-Pig" secondAttribute="trailing" id="xsn-9C-8c9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Zru-Fq-GqO">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="book.fill" catalog="system" id="OBu-4q-Va2">
+                    <navigationItem key="navigationItem" title="Map" id="Zru-Fq-GqO">
+                        <barButtonItem key="rightBarButtonItem" image="book.fill" catalog="system" width="80" id="OBu-4q-Va2">
                             <connections>
                                 <action selector="bookStopButtonPressed:" destination="q9d-hX-vZA" id="r9u-oZ-mjd"/>
                             </connections>
@@ -2237,22 +2225,22 @@
                         <outlet property="nearMeControlsView" destination="spc-As-QLd" id="5FA-U7-SxF"/>
                         <outlet property="originLabel" destination="VmI-GI-HDV" id="1DT-lV-Ju0"/>
                         <outlet property="routeControlsView" destination="Qgo-CF-Xc0" id="VYg-8B-JC0"/>
-                        <outlet property="routeDetailsButton" destination="1xT-Ad-Hdg" id="ddT-NY-xcp"/>
+                        <outlet property="routeDetailsButton" destination="1xT-Ad-Hdg" id="ro9-eZ-1Ir"/>
                         <outlet property="routePicker" destination="2jW-zA-MCK" id="434-lh-HA4"/>
-                        <outlet property="routingButton" destination="Svi-QS-RKQ" id="WHk-Sx-NRz"/>
+                        <outlet property="routingButton" destination="Svi-QS-RKQ" id="Hhu-bB-OJi"/>
                         <outlet property="routingView" destination="We7-6G-u1d" id="BNf-Oz-ZJJ"/>
                         <outlet property="sliderLabel" destination="6gG-G6-GA7" id="pMc-Ei-D14"/>
                         <outletCollection property="buttons" destination="N5R-lu-FJf" collectionClass="NSMutableArray" id="SR0-Qw-Ygy"/>
                         <outletCollection property="buttons" destination="oc3-sL-xv4" collectionClass="NSMutableArray" id="n6q-fr-Hn4"/>
                         <outletCollection property="buttons" destination="SlS-jD-s4X" collectionClass="NSMutableArray" id="5ny-5A-Lv6"/>
-                        <outletCollection property="buttons" destination="r0k-77-sTR" collectionClass="NSMutableArray" id="IyZ-zZ-6Ti"/>
                         <outletCollection property="views" destination="spc-As-QLd" collectionClass="NSMutableArray" id="QpD-Mn-ewd"/>
-                        <outletCollection property="buttons" destination="r0k-77-sTR" collectionClass="NSMutableArray" id="c3p-SX-wil"/>
                         <outletCollection property="views" destination="Qgo-CF-Xc0" collectionClass="NSMutableArray" id="KIH-fo-3ut"/>
-                        <outletCollection property="buttons" destination="alE-ld-duU" collectionClass="NSMutableArray" id="p7N-n7-PZL"/>
-                        <outletCollection property="buttons" destination="Svi-QS-RKQ" collectionClass="NSMutableArray" id="mzO-UT-u2d"/>
-                        <outletCollection property="buttons" destination="1xT-Ad-Hdg" collectionClass="NSMutableArray" id="Her-e6-jal"/>
                         <outletCollection property="views" destination="We7-6G-u1d" collectionClass="NSMutableArray" id="bLc-bz-Unv"/>
+                        <outletCollection property="buttons" destination="WQj-vD-9uT" collectionClass="NSMutableArray" id="q7z-T2-A30"/>
+                        <outletCollection property="buttons" destination="r0k-77-sTR" collectionClass="NSMutableArray" id="NPA-HJ-QdU"/>
+                        <outletCollection property="buttons" destination="1xT-Ad-Hdg" collectionClass="NSMutableArray" id="cTF-YD-cSI"/>
+                        <outletCollection property="buttons" destination="Svi-QS-RKQ" collectionClass="NSMutableArray" id="4Xe-EU-ddD"/>
+                        <outletCollection property="buttons" destination="alE-ld-duU" collectionClass="NSMutableArray" id="hkV-9r-kD8"/>
                         <segue destination="etP-KT-HfC" kind="presentation" identifier="mapLegalSegue" id="pps-Mo-6wf"/>
                         <segue destination="4AG-7N-JuR" kind="presentation" identifier="mapToTimes" id="Mij-Nw-0W0"/>
                         <segue destination="raP-ua-aHB" kind="presentation" identifier="directionDetailsSegue" id="IIP-4D-W03"/>
@@ -3391,6 +3379,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
