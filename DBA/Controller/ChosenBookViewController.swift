@@ -16,7 +16,7 @@ class ChosenBookViewController: UIViewController {
     
     var bookTitle: String?
     
-    @IBOutlet weak var bookSelect: UIButton!
+    @IBOutlet var buttons: [UIButton]!
     
     var currentRow = 0
     
@@ -27,7 +27,7 @@ class ChosenBookViewController: UIViewController {
         chaptersPicker.delegate = self
         chaptersPicker.dataSource = self
         
-        roundCorners(bookSelect)
+        roundCorners(buttons)
         
         
         bookCover.image = UIImage(named: bookTitle!)
@@ -35,6 +35,10 @@ class ChosenBookViewController: UIViewController {
     }
     
     @IBAction func tapper(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func dismissPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     

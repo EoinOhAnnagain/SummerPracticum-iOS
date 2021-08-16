@@ -385,13 +385,35 @@
                                     <action selector="bookSelectPressed:" destination="de5-6K-IQB" eventType="touchUpInside" id="zPU-Aq-NgM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SX-Zp-bNb">
+                                <rect key="frame" x="254" y="732" width="60" height="60"/>
+                                <color key="backgroundColor" name="Interface"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="60" id="7fP-0I-Ft4"/>
+                                    <constraint firstAttribute="height" priority="750" constant="60" id="Mg3-QV-YDb"/>
+                                    <constraint firstAttribute="width" secondItem="6SX-Zp-bNb" secondAttribute="height" multiplier="1:1" id="oHN-xW-oVc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="150"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="image" image="arrowshape.turn.up.backward" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default" weight="regular"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissPressed:" destination="de5-6K-IQB" eventType="touchUpInside" id="c8i-ez-ywh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="n7n-ia-hfQ"/>
                         <color key="backgroundColor" name="BookChapterBackground"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="6SX-Zp-bNb" firstAttribute="top" secondItem="zuY-kh-qWa" secondAttribute="bottom" constant="8" id="1re-RK-rhi"/>
                             <constraint firstItem="n7n-ia-hfQ" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RV4-wb-f2Q" secondAttribute="bottom" id="2R4-0X-Q0e"/>
+                            <constraint firstItem="6SX-Zp-bNb" firstAttribute="width" secondItem="6SX-Zp-bNb" secondAttribute="height" multiplier="1:1" id="2Wk-Lo-clW"/>
                             <constraint firstItem="n7n-ia-hfQ" firstAttribute="trailing" secondItem="RV4-wb-f2Q" secondAttribute="trailing" constant="20" id="AWD-fh-sjG"/>
+                            <constraint firstItem="RV4-wb-f2Q" firstAttribute="leading" secondItem="6SX-Zp-bNb" secondAttribute="trailing" constant="20" id="AeP-wz-lZq"/>
                             <constraint firstItem="n7n-ia-hfQ" firstAttribute="bottom" secondItem="zuY-kh-qWa" secondAttribute="bottom" constant="138" id="Boq-Pb-vmt"/>
                             <constraint firstItem="RV4-wb-f2Q" firstAttribute="top" secondItem="zuY-kh-qWa" secondAttribute="bottom" constant="8" id="HNF-q9-WB2"/>
                             <constraint firstItem="xqz-IR-K0d" firstAttribute="top" secondItem="n7n-ia-hfQ" secondAttribute="top" constant="20" id="Y0d-bl-KSN"/>
@@ -409,9 +431,10 @@
                     </view>
                     <connections>
                         <outlet property="bookCover" destination="xqz-IR-K0d" id="Xdj-Re-Mwd"/>
-                        <outlet property="bookSelect" destination="RV4-wb-f2Q" id="l1r-ie-t19"/>
                         <outlet property="chaptersPicker" destination="zuY-kh-qWa" id="PZh-Fm-SeJ"/>
                         <outlet property="tap" destination="jif-7h-8OJ" id="ETV-ag-ocq"/>
+                        <outletCollection property="buttons" destination="RV4-wb-f2Q" collectionClass="NSMutableArray" id="stq-gG-srq"/>
+                        <outletCollection property="buttons" destination="6SX-Zp-bNb" collectionClass="NSMutableArray" id="Ejn-Rp-tKP"/>
                         <segue destination="EJB-2K-zfZ" kind="presentation" identifier="ReadyToRead" modalPresentationStyle="fullScreen" id="Hwg-5i-fNZ"/>
                     </connections>
                 </viewController>
