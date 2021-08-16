@@ -458,9 +458,7 @@ extension MapViewController {
             
             do {
                 let jsonData = try JSON(data: data)
-                
-                print(jsonData)
-                
+
                 
                 
                 let status = jsonData["status"].stringValue
@@ -514,6 +512,8 @@ extension MapViewController {
                                         
                                         directions.append("Your bus is the \(routeNumber!) from stop \(stopsNumber!) - \(startStop!)\n")
                                         
+                                        self.postDataFare(stopsNumber!, routeNumber!)
+                                        
                                     }
                                     
                                     for step2 in steps2 {
@@ -547,7 +547,7 @@ extension MapViewController {
                             
                         }
                         
-                        self.getFares(route)
+                        
                         
                     }
                     
@@ -593,19 +593,62 @@ extension MapViewController {
 
 extension MapViewController {
     
-    func getFares(_ route: JSON) {
-    
-        let fareInfo = route["legs"][0]["steps"].arrayValue
+    func postDataFare(_ stopsNumber: Int, _ routeNumber: String) {
         
-        for i in fareInfo {
+        print("\n\nFARE SECTION\n\n")
+        
+        let json: [String: Any] = [
+            "method": "POST",
+            "headers": ["Content-Type": "application/json"],
+            "body": "{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}",
+        ]
+    
+//        let json = "{ method: \"POST\", headers: {\"Content_Tupe\" : \"application/json\"}, body: \"{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}\"}"
+        
+        if JSONSerialization.isValidJSONObject(json) {
             
             
             
+            let jsonData = try? JSONSerialization.data(withJSONObject: json)
+            
+            
+            
+            let url = URL(string: "http://173.82.208.22:8000/core/Fare")!
+            
+            
+            var request = URLRequest(url: url)
+            
+            request.httpMethod = "POST"
+            
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                
+                guard let data = data, error == nil else {
+                    print(error?.localizedDescription ?? "No data")
+                    return
+                }
+                
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                
+                print(responseJSON)
+                if let responseJSON = responseJSON as? [String: Any] {
+                    print("here10")
+                    print(responseJSON)
+                } else {
+                    print("here11")
+                }
+                
+            }
+            
+            task.resume()
+            
+        } else {
+            print("Bad JSON")
         }
+                
         
         
         
     }
-    
-    
 }
