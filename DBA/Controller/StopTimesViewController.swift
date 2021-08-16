@@ -58,7 +58,7 @@ class StopTimesViewController: UIViewController, StopTimesManagerDelegate {
     
     @objc func timerStuff() {
         seconds += 1
-        timerLabel.text = intToTime(seconds)
+        timerLabel.text = intToTime(seconds, true)
         dateTimeLabel.text = "\(currentDate())\n\(currentTime())"
     }
     

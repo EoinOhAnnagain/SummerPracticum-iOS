@@ -69,12 +69,12 @@ class CodebreakerViewController: UIViewController {
         
         
         for circle in UserCircles {
-            circleise(circle)
+            roundCorners(circle)
             circle.backgroundColor = colors[circle.tag]
         }
         
         for circle in AnswerCircles {
-            circleise(circle)
+            roundCorners(circle)
             circle.backgroundColor = UIColor(named: K.color)
             circle.setTitle("..?..", for: .normal)
             circle.layer.borderWidth = 3
@@ -100,7 +100,7 @@ class CodebreakerViewController: UIViewController {
     
     func prepRoundCircles(_ circles: [UIButton]) {
         for circle in circles {
-            circleise(circle)
+            roundCorners(circle)
             circle.backgroundColor = .clear
             circle.layer.borderWidth = 0
         }

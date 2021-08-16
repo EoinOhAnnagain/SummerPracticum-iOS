@@ -58,12 +58,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var directionsSansHTML: String?
     
+    var faresJSON: [JSON] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         roundCorners(buttons)
-        roundCorners(views)
+        
         
         
         mapView.delegate = self
@@ -302,26 +303,6 @@ extension MapViewController: GMSMapViewDelegate {
     
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        print("\nTAPPED MARKER\n")
-        markerTitleForSegue = marker.title!
-        markerAtcoCodeForSegue = (marker.userData! as! String)
-        performSegue(withIdentifier: K.map.times, sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == K.map.times {
-            let destinationVC = segue.destination as! StopTimesViewController
-            destinationVC.stopName = markerTitleForSegue
-            destinationVC.stopAtcoCode = markerAtcoCodeForSegue
-        } else if segue.identifier == K.map.details {
-            print(directionsSansHTML!)
-            let destinationVC = segue.destination as! DirectionDetailsViewController
-            destinationVC.directions = directionsSansHTML!
-        }
-    }
-    
-    
-    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
         mapView.clear()
         print("\nLONG PRESS INFO\n")
         print(marker.position.latitude)
@@ -341,6 +322,28 @@ extension MapViewController: GMSMapViewDelegate {
         let titleArray = stringSplitter(title!, "\n")
         
         originLabel.text = "Origin: \(titleArray[0]) - \(titleArray[1])"
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.map.times {
+            let destinationVC = segue.destination as! StopTimesViewController
+            destinationVC.stopName = markerTitleForSegue
+            destinationVC.stopAtcoCode = markerAtcoCodeForSegue
+        } else if segue.identifier == K.map.details {
+            print(directionsSansHTML!)
+            let destinationVC = segue.destination as! DirectionDetailsViewController
+            destinationVC.directions = directionsSansHTML!
+            destinationVC.faresJSON = faresJSON
+        }
+    }
+    
+    
+    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
+        print("\nTAPPED MARKER\n")
+        markerTitleForSegue = marker.title!
+        markerAtcoCodeForSegue = (marker.userData! as! String)
+        performSegue(withIdentifier: K.map.times, sender: self)
         
     }
     
@@ -432,7 +435,7 @@ extension MapViewController {
     
     func getDirections(_ source: GMSMarker, _ destination: GMSMarker) {
         
-        
+        faresJSON = []
         
         var url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.position.latitude),\(source.position.longitude)"
         
@@ -541,6 +544,7 @@ extension MapViewController {
                             
                             
                             self.destinationLabel.text = "Showing Route for \(formattedDate)\nDetails available"
+                            
                             UIView.animate(withDuration: 0.25) {
                                 self.routeDetailsButton.alpha = 1
                             }
@@ -595,49 +599,86 @@ extension MapViewController {
     
     func postDataFare(_ stopsNumber: Int, _ routeNumber: String) {
         
-        print("\n\nFARE SECTION\n\n")
+//        print("\n\nFARE SECTION\n\n")
         
-        let json: [String: Any] = [
-            "method": "POST",
-            "headers": ["Content-Type": "application/json"],
-            "body": "{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}",
-        ]
+        let json: [String: Any] = ["param_1": String(stopsNumber), "param_2": routeNumber]
+            
+//            [
+//
+//            "headers": ["Content-Type": "application/json"],
+//            "body": "{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}",
+//        ]
     
-//        let json = "{ method: \"POST\", headers: {\"Content_Tupe\" : \"application/json\"}, body: \"{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}\"}"
+//        let json = "{ method: \"POST\", headers: {\"Content_Type\" : \"application/json\"}, body: \"{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}\"}"
         
+//        print(json)
+//        print("here1")
         if JSONSerialization.isValidJSONObject(json) {
             
+//            print("here2")
             
             
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
             
             
-            
+//            print("here3")
             let url = URL(string: "http://173.82.208.22:8000/core/Fare")!
             
-            
+//            print("here4")
             var request = URLRequest(url: url)
-            
+//            print("here5")
             request.httpMethod = "POST"
-            
+//            print("here6")
             request.httpBody = jsonData
             
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            print(request)
+            
+//            print("\n\nJSONDATA")
+//            print("\n")
+//            print(try? JSONSerialization.jsonObject(with: jsonData!, options: []))
+//            print("\n\n")
+            
+            let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
                 
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription ?? "No data")
                     return
                 }
                 
+//                print("data: \(data)")
+//                print("response: \(response)")
+//                print("error: \(error) - \(error?.localizedDescription)")
+                
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
                 
-                print(responseJSON)
-                if let responseJSON = responseJSON as? [String: Any] {
-                    print("here10")
-                    print(responseJSON)
-                } else {
-                    print("here11")
+//                print("\n\n")
+                
+//                print(responseJSON!)
+                
+                do {
+                    let parsedJSON = try JSON(data: data)
+                    print("SCORE")
+                    
+                    self.faresJSON.append(parsedJSON)
+                    
+//                    for dataBoy in parsedJSON {
+//                        
+//                        print(dataBoy.0.jsonKey)
+//                        print(dataBoy.1["fare"])
+//                        print(dataBoy.1["category"])
+//                        
+//                    }
+                    
+                } catch {
+                    print("NOPE")
                 }
+                
+                
+                
+            
+                
+                
+                print("\n\n")
                 
             }
             

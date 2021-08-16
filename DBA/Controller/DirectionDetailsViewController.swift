@@ -6,40 +6,76 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class DirectionDetailsViewController: UIViewController {
 
     var directions: String?
-    @IBOutlet weak var directionsTextView: UITextView!
+    var faresJSON: [JSON]?
     
-    @IBOutlet var labels: [UILabel]!
+    var faresString = "\n"
+    
+    @IBOutlet weak var directionsTextView: UITextView!
     
     @IBOutlet weak var timeDetailsLabel: UILabel!
     @IBOutlet weak var fareDetailsLabel: UILabel!
     
+    @IBOutlet var labels: [UILabel]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        fareDetailsLabel.text = "\ngrgrwe\n\nfwuighuirwh\n\n\nfesuifhbewiuhg\n"
-        timeDetailsLabel.text = "\ngrgrwe\n\nfwuighuirwh\n\n\nfesuifhbewiuhg\n"
         
-        roundCorners(timeDetailsLabel)
+        stringifyFares()
         
+        fareDetailsLabel.text = faresString
+        timeDetailsLabel.text = "hello world"
+        
+        print(String(directions!.dropLast()))
         
         roundCorners(directionsTextView)
+        
+        // Do to how the text is prepared there is a "<" at the end that needs to be dropped.
         directionsTextView.text = String(directions!.dropLast())
-        // Do any additional setup after loading the view.
+        
+        
+        
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func stringifyFares() {
+        
+        faresString = "\n"
+        
+        for fare in faresJSON! {
+            
+            print("\n\nFARE\n")
+            
+            print(fare)
+            
+            for item in fare {
+                
+                faresString.append("\(item.1["category"]):\t\t")
+                
+                if item.1["category"] == "AdultCash" || item.1["category"] == "AdultLeap" {
+                    faresString.append("\t\t")
+                }
+                
+                faresString.append("\(item.1["fare"])\n")
+                
+            }
+            
+            faresString.append("\n")
+            
+        }
+        
+        if faresString == "\n" {
+            faresString = "Fare data is still being loaded.\nPlease exit and reenter page to try again."
+        }
+        
+//        print(faresString)
+        
     }
-    */
-
+    
+    
+    
 }
