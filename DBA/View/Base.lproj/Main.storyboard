@@ -2037,7 +2037,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="X6d-tA-TMk">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="60.333333333333336"/>
                                                         <subviews>
-                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7VU-jn-C4A">
+                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="12" translatesAutoresizingMaskIntoConstraints="NO" id="7VU-jn-C4A">
                                                                 <rect key="frame" x="-2" y="0.0" width="338" height="31"/>
                                                                 <color key="tintColor" name="Interface"/>
                                                                 <color key="minimumTrackTintColor" name="Interface"/>
@@ -2047,7 +2047,7 @@
                                                                     <action selector="sliderDidSlide:" destination="q9d-hX-vZA" eventType="valueChanged" id="VVv-cA-W9p"/>
                                                                 </connections>
                                                             </slider>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gG-G6-GA7">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Showing stops within 1.00km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gG-G6-GA7">
                                                                 <rect key="frame" x="0.0" y="40" width="334" height="20.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" name="Interface"/>
