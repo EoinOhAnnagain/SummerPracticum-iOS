@@ -674,10 +674,11 @@ extension MapViewController {
                     return
                 }
                 print("here8")
-                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                let responseJSON = try? JSONSerialization.jsonObject(with: data)
                 print("here9")
                 print("\ndata:\n\(data)\n")
                 print("\nResponse:\n\(response)\n")
+                print("\nResponseJSON:\n\(responseJSON)\n")
                 do {
                     let parsedJSON = try JSON(data: data)
                     print("SCORE")

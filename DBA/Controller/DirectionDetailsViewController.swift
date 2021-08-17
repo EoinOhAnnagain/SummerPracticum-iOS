@@ -13,30 +13,33 @@ class DirectionDetailsViewController: UIViewController {
     var directions: String?
     var faresJSON: [JSON]?
     
+    @IBOutlet weak var faresTextView: UITextView!
+    
     var faresString = "\n"
     
-//    @IBOutlet weak var directionsTextView: UITextView!
+    @IBOutlet var views: [UIView]!
+    @IBOutlet var textViews: [UITextView]!
     
-    @IBOutlet weak var timeDetailsLabel: UILabel!
-    @IBOutlet weak var fareDetailsLabel: UILabel!
+    @IBOutlet weak var timesTV: UITextView!
+    @IBOutlet weak var faresTV: UITextView!
+    @IBOutlet weak var driectionsTV: UITextView!
     
-    @IBOutlet weak var directionsTextView: UITextView!
-    @IBOutlet var labels: [UILabel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         stringifyFares()
         
-        fareDetailsLabel.text = faresString
-        timeDetailsLabel.text = "hello world"
         
-//        roundCorners(directionsTextView)
-        roundCorners(labels)
+        
+        
+
+        roundCorners(views)
+        roundCorners(textViews)
         
         // Due to how the text is prepared there is a "<" at the end that needs to be dropped.
-        directionsTextView.text = String(directions!.dropLast())
-        
+        driectionsTV.text = String(directions!.dropLast())
+        faresTV.text = faresString
         
         
     }
@@ -46,17 +49,14 @@ class DirectionDetailsViewController: UIViewController {
         
         faresString = "\n"
         
+        var i = 1
+        
         for fare in faresJSON! {
             
+            faresString.append("Fares for bus \(i)\n\n")
+            i += 1
+            
             for item in fare {
-                
-                print(item.1["category"].count)
-                
-                if item.1["category"].count == 0 {
-                    print("Found buggy fare data")
-                    faresString = "No fare data available.\nSorry"
-                    return
-                }
                 
                 faresString.append("\(item.1["category"]):\t\t")
                 
