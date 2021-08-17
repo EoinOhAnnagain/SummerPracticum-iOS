@@ -24,18 +24,11 @@ class DirectionDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("\n\nfaresJSON\n")
-        print(faresJSON!)
-        
-        fareDetailsLabel.text = "Fare data is still being loaded. Please exit page and try again."
         
         stringifyFares()
         
         fareDetailsLabel.text = faresString
         timeDetailsLabel.text = "hello world"
-        
-        print(String(directions!.dropLast()))
         
         roundCorners(directionsTextView)
         
@@ -53,14 +46,10 @@ class DirectionDetailsViewController: UIViewController {
         
         for fare in faresJSON! {
             
-            print("\n\nFARE\n")
-            
-            print(fare)
-            
             for item in fare {
                 
                 if item.1["category"].count == 1 {
-                    print("CATCH")
+                    print("Found buggy fare data")
                     faresString = "No fare data available.\nSorry"
                     return
                 }
@@ -80,11 +69,8 @@ class DirectionDetailsViewController: UIViewController {
         }
         
         if faresString == "\n" {
-            faresString = "Fare data is still being loaded.\nPlease exit and reenter page to try again."
+            faresString = "Fare data is still being loaded or doesn't exist.\nPlease exit and re-enter page to try again."
         }
-        
-//        print(faresString)
-        
     }
     
     

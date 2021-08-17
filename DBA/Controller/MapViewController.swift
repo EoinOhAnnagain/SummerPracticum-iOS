@@ -448,9 +448,13 @@ extension MapViewController {
         let formattedDate = dateFormatter.string(from: datePicker.date)
         
         //dateFormatter.timeZone = NSTimeZone(name: "IST") as TimeZone?
-        print()
         
         url.append("&departure_time=\(Int(datePicker.date.timeIntervalSince1970))")
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let reFormattedDate = dateFormatter.string(from: datePicker.date)
+        
+        
         
         print("\n\n\(url)\n\n")
         
@@ -505,6 +509,7 @@ extension MapViewController {
                                     let steps2 = step["steps"].arrayValue
                                     
                                     if step["travel_mode"].string == "TRANSIT" {
+                                        print("TRANSIT")
                                         
                                         let transitDetails = step["transit_details"].dictionary
                                         
@@ -515,8 +520,12 @@ extension MapViewController {
                                         
                                         directions.append("Your bus is the \(routeNumber!) from stop \(stopsNumber!) - \(startStop!)\n")
                                         
+                                        print("AT THE FUNCTIONS")
                                         self.postDataFare(stopsNumber!, routeNumber!)
+                                        self.postDataTravelTimes(stopsNumber!, routeNumber!, startStop!, reFormattedDate)
                                         
+                                    } else {
+                                        print("NOT-TRANSIT")
                                     }
                                     
                                     for step2 in steps2 {
@@ -599,35 +608,19 @@ extension MapViewController {
     
     func postDataFare(_ stopsNumber: Int, _ routeNumber: String) {
         
-//        print("\n\nFARE SECTION\n\n")
-        
         let json: [String: Any] = ["param_1": String(stopsNumber), "param_2": routeNumber]
-            
 
         if JSONSerialization.isValidJSONObject(json) {
             
-//            print("here2")
-            
-            
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
             
-            
-//            print("here3")
             let url = URL(string: "http://173.82.208.22:8000/core/Fare")!
             
-//            print("here4")
             var request = URLRequest(url: url)
-//            print("here5")
+
             request.httpMethod = "POST"
-//            print("here6")
+
             request.httpBody = jsonData
-            
-//            print(request)
-            
-//            print("\n\nJSONDATA")
-//            print("\n")
-//            print(try? JSONSerialization.jsonObject(with: jsonData!, options: []))
-//            print("\n\n")
             
             let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
                 
@@ -636,40 +629,17 @@ extension MapViewController {
                     return
                 }
                 
-//                print("data: \(data)")
-//                print("response: \(response)")
-//                print("error: \(error) - \(error?.localizedDescription)")
-                
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                
-//                print("\n\n")
-                
-//                print(responseJSON!)
                 
                 do {
                     let parsedJSON = try JSON(data: data)
-                    print("SCORE")
+                    
                     
                     self.faresJSON.append(parsedJSON)
-                    
-//                    for dataBoy in parsedJSON {
-//                        
-//                        print(dataBoy.0.jsonKey)
-//                        print(dataBoy.1["fare"])
-//                        print(dataBoy.1["category"])
-//                        
-//                    }
                     
                 } catch {
                     print("NOPE")
                 }
-                
-                
-                
-            
-                
-                
-                print("\n\n")
                 
             }
             
@@ -678,9 +648,57 @@ extension MapViewController {
         } else {
             print("Bad JSON")
         }
-                
-        
-        
-        
     }
+    
+    
+    func postDataTravelTimes(_ stopsNumber: Int, _ routeNumber: String, _ startStop: String, _ journeyDate: String) {
+        
+        let json: [String: Any] = ["param_1": String(stopsNumber), "param_2": routeNumber, "param_3": startStop, "param_4": journeyDate]
+
+        print("\n\n")
+        print("here0")
+        print("\nJSON:\n\(json)")
+        if JSONSerialization.isValidJSONObject(json) {
+            print("here1")
+            let jsonData = try? JSONSerialization.data(withJSONObject: json)
+            print("here2")
+            let url = URL(string: "http://173.82.208.22:8000/core/Travel")!
+            print("here3")
+            var request = URLRequest(url: url)
+            print("here4")
+            request.httpMethod = "POST"
+            print("here5")
+            request.httpBody = jsonData
+            print("here6")
+            print("\nJSON DATA:\n\(jsonData)\n")
+            let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
+                print("here7")
+                guard let data = data, error == nil else {
+                    print(error?.localizedDescription ?? "No data")
+                    return
+                }
+                print("here8")
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                print("here9")
+                print("\ndata:\n\(data)\n")
+                print("\nResponse:\n\(response)\n")
+                do {
+                    let parsedJSON = try JSON(data: data)
+                    print("SCORE")
+                    
+                    print(parsedJSON)
+                    
+                } catch {
+                    print("NOPE")
+                }
+                
+            }
+            
+            task.resume()
+            
+        } else {
+            print("Bad JSON")
+        }
+    }
+    
 }
