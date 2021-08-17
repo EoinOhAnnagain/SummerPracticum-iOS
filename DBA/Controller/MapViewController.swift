@@ -58,28 +58,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var directionsSansHTML: String?
     
+    var faresJSON: [JSON] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Round corners
         roundCorners(buttons)
-        roundCorners(views)
         
-        
+        // Set delegates
         mapView.delegate = self
         routePicker.delegate = self
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
-        
+        // Set min and max days for date picker
         datePicker.minimumDate = Date()
-        
-        
-        
-        // Do any additional setup after loading the view.
-        
-        
-        
+        var days = DateComponents()
+        days.day = 14
+        datePicker.maximumDate = Calendar.current.date(byAdding: days, to: Date())
     }
     
     
@@ -175,7 +172,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         stopMarker.userData = stop.AtcoCode
         
-        stopMarker.snippet = "Route(s): \(stop.routes.trimmingCharacters(in: .whitespaces))\n\nTap for arrival times.\nLong press for routing."
+        stopMarker.snippet = "Route(s): \(stop.routes.trimmingCharacters(in: .whitespaces))\n\nTap for routing.\nLong press for arrival times."
         
         stopMarker.map = mapView
     }
@@ -302,26 +299,6 @@ extension MapViewController: GMSMapViewDelegate {
     
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        print("\nTAPPED MARKER\n")
-        markerTitleForSegue = marker.title!
-        markerAtcoCodeForSegue = (marker.userData! as! String)
-        performSegue(withIdentifier: K.map.times, sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == K.map.times {
-            let destinationVC = segue.destination as! StopTimesViewController
-            destinationVC.stopName = markerTitleForSegue
-            destinationVC.stopAtcoCode = markerAtcoCodeForSegue
-        } else if segue.identifier == K.map.details {
-            print(directionsSansHTML!)
-            let destinationVC = segue.destination as! DirectionDetailsViewController
-            destinationVC.directions = directionsSansHTML!
-        }
-    }
-    
-    
-    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
         mapView.clear()
         print("\nLONG PRESS INFO\n")
         print(marker.position.latitude)
@@ -341,6 +318,28 @@ extension MapViewController: GMSMapViewDelegate {
         let titleArray = stringSplitter(title!, "\n")
         
         originLabel.text = "Origin: \(titleArray[0]) - \(titleArray[1])"
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.map.times {
+            let destinationVC = segue.destination as! StopTimesViewController
+            destinationVC.stopName = markerTitleForSegue
+            destinationVC.stopAtcoCode = markerAtcoCodeForSegue
+        } else if segue.identifier == K.map.details {
+            print(directionsSansHTML!)
+            let destinationVC = segue.destination as! DirectionDetailsViewController
+            destinationVC.directions = directionsSansHTML!
+            destinationVC.faresJSON = faresJSON
+        }
+    }
+    
+    
+    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
+        print("\nTAPPED MARKER\n")
+        markerTitleForSegue = marker.title!
+        markerAtcoCodeForSegue = (marker.userData! as! String)
+        performSegue(withIdentifier: K.map.times, sender: self)
         
     }
     
@@ -432,7 +431,7 @@ extension MapViewController {
     
     func getDirections(_ source: GMSMarker, _ destination: GMSMarker) {
         
-        
+        faresJSON = []
         
         var url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.position.latitude),\(source.position.longitude)"
         
@@ -445,9 +444,13 @@ extension MapViewController {
         let formattedDate = dateFormatter.string(from: datePicker.date)
         
         //dateFormatter.timeZone = NSTimeZone(name: "IST") as TimeZone?
-        print()
         
         url.append("&departure_time=\(Int(datePicker.date.timeIntervalSince1970))")
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let reFormattedDate = dateFormatter.string(from: datePicker.date)
+        
+        
         
         print("\n\n\(url)\n\n")
         
@@ -502,6 +505,7 @@ extension MapViewController {
                                     let steps2 = step["steps"].arrayValue
                                     
                                     if step["travel_mode"].string == "TRANSIT" {
+                                        print("TRANSIT")
                                         
                                         let transitDetails = step["transit_details"].dictionary
                                         
@@ -512,8 +516,12 @@ extension MapViewController {
                                         
                                         directions.append("Your bus is the \(routeNumber!) from stop \(stopsNumber!) - \(startStop!)\n")
                                         
+                                        print("AT THE FUNCTIONS")
                                         self.postDataFare(stopsNumber!, routeNumber!)
+                                        self.postDataTravelTimes(stopsNumber!, routeNumber!, startStop!, reFormattedDate)
                                         
+                                    } else {
+                                        print("NOT-TRANSIT")
                                     }
                                     
                                     for step2 in steps2 {
@@ -541,6 +549,7 @@ extension MapViewController {
                             
                             
                             self.destinationLabel.text = "Showing Route for \(formattedDate)\nDetails available"
+                            
                             UIView.animate(withDuration: 0.25) {
                                 self.routeDetailsButton.alpha = 1
                             }
@@ -595,34 +604,21 @@ extension MapViewController {
     
     func postDataFare(_ stopsNumber: Int, _ routeNumber: String) {
         
-        print("\n\nFARE SECTION\n\n")
-        
-        let json: [String: Any] = [
-            "method": "POST",
-            "headers": ["Content-Type": "application/json"],
-            "body": "{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}",
-        ]
-    
-//        let json = "{ method: \"POST\", headers: {\"Content_Tupe\" : \"application/json\"}, body: \"{\"param_1\":\(String(stopsNumber)),\"param_2\":\"\(routeNumber)\"}\"}"
-        
+        let json: [String: Any] = ["param_1": String(stopsNumber), "param_2": routeNumber]
+
         if JSONSerialization.isValidJSONObject(json) {
-            
-            
             
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
             
-            
-            
             let url = URL(string: "http://173.82.208.22:8000/core/Fare")!
             
-            
             var request = URLRequest(url: url)
-            
+
             request.httpMethod = "POST"
-            
+
             request.httpBody = jsonData
             
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
                 
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription ?? "No data")
@@ -631,12 +627,14 @@ extension MapViewController {
                 
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
                 
-                print(responseJSON)
-                if let responseJSON = responseJSON as? [String: Any] {
-                    print("here10")
-                    print(responseJSON)
-                } else {
-                    print("here11")
+                do {
+                    let parsedJSON = try JSON(data: data)
+                    
+                    
+                    self.faresJSON.append(parsedJSON)
+                    
+                } catch {
+                    print("NOPE")
                 }
                 
             }
@@ -646,9 +644,57 @@ extension MapViewController {
         } else {
             print("Bad JSON")
         }
-                
-        
-        
-        
     }
+    
+    
+    func postDataTravelTimes(_ stopsNumber: Int, _ routeNumber: String, _ startStop: String, _ journeyDate: String) {
+        
+        let json: [String: Any] = ["param_1": String(stopsNumber), "param_2": routeNumber, "param_3": startStop, "param_4": journeyDate]
+
+        print("\n\n")
+        print("here0")
+        print("\nJSON:\n\(json)")
+        if JSONSerialization.isValidJSONObject(json) {
+            print("here1")
+            let jsonData = try? JSONSerialization.data(withJSONObject: json)
+            print("here2")
+            let url = URL(string: "http://173.82.208.22:8000/core/Travel")!
+            print("here3")
+            var request = URLRequest(url: url)
+            print("here4")
+            request.httpMethod = "POST"
+            print("here5")
+            request.httpBody = jsonData
+            print("here6")
+            print("\nJSON DATA:\n\(jsonData)\n")
+            let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
+                print("here7")
+                guard let data = data, error == nil else {
+                    print(error?.localizedDescription ?? "No data")
+                    return
+                }
+                print("here8")
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                print("here9")
+                print("\ndata:\n\(data)\n")
+                print("\nResponse:\n\(response)\n")
+                do {
+                    let parsedJSON = try JSON(data: data)
+                    print("SCORE")
+                    
+                    print(parsedJSON)
+                    
+                } catch {
+                    print("NOPE")
+                }
+                
+            }
+            
+            task.resume()
+            
+        } else {
+            print("Bad JSON")
+        }
+    }
+    
 }

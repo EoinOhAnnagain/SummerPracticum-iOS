@@ -87,7 +87,7 @@ struct StopTimesManager {
                 //let arrivalTime = data.arrivalTime
                 //let timeDifference = data.timeChange
                 
-                let countDownString = intToTime(countDown)
+                let countDownString = intToTime(countDown, false)
                 let arrivalTime = currentTimePlus(countDown)
                 
                 let result = StopTimes(remainingTime: countDownString, route: routeNumber, arrivalTime: arrivalTime)

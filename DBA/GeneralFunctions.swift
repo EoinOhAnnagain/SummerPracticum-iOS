@@ -136,7 +136,7 @@ func currentTimePlus(_ currentOffset: Int) -> String {
     return dateFormatter.string(from: currentDateTimeIncreased)
 }
 
-func intToTime(_ seconds: Int) -> String {
+func intToTime(_ seconds: Int, _ s: Bool) -> String {
     
     var result = ""
     
@@ -145,6 +145,10 @@ func intToTime(_ seconds: Int) -> String {
     }
     
     result += "\((seconds % 3600) / 60)m"
+    
+    if s {
+        result += " \((seconds % 3600) % 60)s"
+    }
     
     return result
 }
