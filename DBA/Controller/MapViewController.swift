@@ -651,43 +651,37 @@ extension MapViewController {
         
         let json: [String: Any] = ["param_1": String(stopsNumber), "param_2": routeNumber, "param_3": startStop, "param_4": journeyDate]
 
-        print("\n\n")
-        print("here0")
-        print("\nJSON:\n\(json)")
+//        print("\n\n")
+//        print("here0")
+//        print("\nJSON:\n\(json)")
         if JSONSerialization.isValidJSONObject(json) {
-            print("here1")
+//            print("here1")
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
-            print("here2")
+//            print("here2")
             let url = URL(string: "http://173.82.208.22:8000/core/Travel")!
-            print("here3")
+//            print("here3")
             var request = URLRequest(url: url)
-            print("here4")
+//            print("here4")
             request.httpMethod = "POST"
-            print("here5")
+//            print("here5")
             request.httpBody = jsonData
-            print("here6")
-            print("\nJSON DATA:\n\(jsonData)\n")
+//            print("here6")
+//            print("\nJSON DATA:\n\(jsonData)\n")
             let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
-                print("here7")
+//                print("here7")
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription ?? "No data")
                     return
                 }
-                print("here8")
+//                print("here8")
                 let stringInt = String.init(data: data, encoding: String.Encoding.utf8)
-                print("here9")
+                let int = Int.init(stringInt!)
+//                print("here9")
+                
+//                print("\nResponse:\n\(response)\n")
                 print("\ndata:\n\(data)\n")
-                print("\nResponse:\n\(response)\n")
                 print("\nstringInt:\n\(stringInt)\n")
-                do {
-                    let parsedJSON = try JSON(data: data)
-                    print("SCORE")
-                    
-                    print(parsedJSON)
-                    
-                } catch {
-                    print("NOPE")
-                }
+                print("\nint:\n\(int)\n")
                 
             }
             
