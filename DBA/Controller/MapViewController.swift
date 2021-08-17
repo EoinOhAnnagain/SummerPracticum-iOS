@@ -60,6 +60,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var faresJSON: [JSON] = []
     
+    var departureTime: Int?
+    var finalWalkTime: Int?
+    var startTime: Int?
+    var predictionTime: Int?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,22 +110,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         
         
-        //mapView.isMyLocationEnabled = true
-        
-        
-        //        mapView.settings.myLocationButton = true
-        //        mapView.settings.compassButton = true
-        //        view.addSubview(mapView)
-        
-        
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        userLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        marker.position = userLocation!
-        marker.title = "You Are Here"
-        marker.snippet = ":)"
-        marker.map = mapView
-        //marker.icon = UIImage(systemName: "figure.wave.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))
+        mapView.isMyLocationEnabled = true
+    
         
         
         locationManager.stopUpdatingLocation()

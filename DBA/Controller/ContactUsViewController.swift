@@ -105,7 +105,7 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
                 } else {
                     
                     mc.mailComposeDelegate = self
-                    mc.setToRecipients(S.ContactUsAddresses)
+                    mc.setToRecipients(S.contactUsAddresses)
                     mc.setSubject("\(reason!) - \(email!)")
                     
                     
