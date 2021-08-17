@@ -40,7 +40,7 @@ struct K {
         static let admins = ["admin@ucd.ie", "me@ucd.com"]
         
         
-        static let bannedWords = ["fuck", "bitch", "bastard", "wanker"]
+        static let bannedWords = ["fuck", "bitch", "bastard", "wank"]
         
         struct FStore {
             static let collectionName = "messages"

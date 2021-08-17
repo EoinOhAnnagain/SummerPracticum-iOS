@@ -86,9 +86,8 @@ class WeatherViewController: UIViewController {
             visibilityLabel.text = "\(weather!.visibility) m"
             pressureLabel.text = "\(weather!.pressure) hPa"
             
-            speedLabel.text = "\(weather!.stringWindSpeed) kph"
+            speedLabel.text = "\(weather!.stringWindSpeed) kph\n\(weather!.degreeName)"
             windArrow.transform = CGAffineTransform(rotationAngle: CGFloat((weather!.windDeg))*(.pi/180))
-            directionLabel.text = weather!.degreeName
             
             sunriseLabel.text = "\(weather!.sunriseTime)"
             sunsetLabel.text = "\(weather!.sunsetTime)"
@@ -138,7 +137,6 @@ class WeatherViewController: UIViewController {
                 self.windTitle.alpha = 1
                 self.windArrow.alpha = 1
                 self.speedLabel.alpha = 1
-                self.directionLabel.alpha = 1
             }
         }
 
