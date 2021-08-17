@@ -15,11 +15,12 @@ class DirectionDetailsViewController: UIViewController {
     
     var faresString = "\n"
     
-    @IBOutlet weak var directionsTextView: UITextView!
+//    @IBOutlet weak var directionsTextView: UITextView!
     
     @IBOutlet weak var timeDetailsLabel: UILabel!
     @IBOutlet weak var fareDetailsLabel: UILabel!
     
+    @IBOutlet weak var directionsTextView: UITextView!
     @IBOutlet var labels: [UILabel]!
     
     override func viewDidLoad() {
@@ -30,9 +31,10 @@ class DirectionDetailsViewController: UIViewController {
         fareDetailsLabel.text = faresString
         timeDetailsLabel.text = "hello world"
         
-        roundCorners(directionsTextView)
+//        roundCorners(directionsTextView)
+        roundCorners(labels)
         
-        // Do to how the text is prepared there is a "<" at the end that needs to be dropped.
+        // Due to how the text is prepared there is a "<" at the end that needs to be dropped.
         directionsTextView.text = String(directions!.dropLast())
         
         
@@ -48,7 +50,9 @@ class DirectionDetailsViewController: UIViewController {
             
             for item in fare {
                 
-                if item.1["category"].count == 1 {
+                print(item.1["category"].count)
+                
+                if item.1["category"].count == 0 {
                     print("Found buggy fare data")
                     faresString = "No fare data available.\nSorry"
                     return

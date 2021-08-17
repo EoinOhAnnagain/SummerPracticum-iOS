@@ -63,24 +63,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Round corners
         roundCorners(buttons)
         
-        
-        
+        // Set delegates
         mapView.delegate = self
         routePicker.delegate = self
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
-        
+        // Set min and max days for date picker
         datePicker.minimumDate = Date()
-        
-        
-        
-        // Do any additional setup after loading the view.
-        
-        
-        
+        var days = DateComponents()
+        days.day = 14
+        datePicker.maximumDate = Calendar.current.date(byAdding: days, to: Date())
     }
     
     
