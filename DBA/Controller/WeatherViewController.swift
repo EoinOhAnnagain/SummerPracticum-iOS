@@ -86,9 +86,8 @@ class WeatherViewController: UIViewController {
             visibilityLabel.text = "\(weather!.visibility) m"
             pressureLabel.text = "\(weather!.pressure) hPa"
             
-            speedLabel.text = "\(weather!.stringWindSpeed) kph"
+            speedLabel.text = "\(weather!.stringWindSpeed) kph\n\(weather!.degreeName)"
             windArrow.transform = CGAffineTransform(rotationAngle: CGFloat((weather!.windDeg))*(.pi/180))
-            directionLabel.text = weather!.degreeName
             
             sunriseLabel.text = "\(weather!.sunriseTime)"
             sunsetLabel.text = "\(weather!.sunsetTime)"
@@ -111,20 +110,8 @@ class WeatherViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    func currentTime() -> String {
-        let currentDateTime = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter.string(from: currentDateTime)
-    }
     
-    func currentDate() -> String {
-        let currentDateTime = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yy"
-        return dateFormatter.string(from: currentDateTime)
-    }
+    
     
     func makeVisable() {
         DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0.5...1.5) ) {
@@ -150,7 +137,6 @@ class WeatherViewController: UIViewController {
                 self.windTitle.alpha = 1
                 self.windArrow.alpha = 1
                 self.speedLabel.alpha = 1
-                self.directionLabel.alpha = 1
             }
         }
 

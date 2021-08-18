@@ -37,7 +37,7 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .darkContent
     }
-  
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +58,8 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         // Do any additional setup after loading the view.
         
     }
-  
-  
+    
+    
     
     func title() {
         titleLabel.text = ""
@@ -102,7 +102,7 @@ class LoginViewController: UIViewController, UISearchTextFieldDelegate {
         }
     }
     
-   
+    
     
     
     func logOut() {
@@ -138,12 +138,17 @@ extension LoginViewController {
         if let email = loginEmailTextField.text, let password = loginPasswordTextField.text {
             if email != "" && password != "" {
                 
-                Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                Auth.auth().signIn(withEmail: email, password: password) { [self] authResult, error in
                     if let e = error {
                         self.infoLabel.text = e.localizedDescription
                     } else {
-                        self.infoLabel.text = "👍🏻"
-                        self.performSegue(withIdentifier: K.loggedIn, sender: self)
+                        if Auth.auth().currentUser!.isEmailVerified == false {
+                            self.infoLabel.text = "Please verify email"
+                            logOut()
+                        } else {
+                            self.infoLabel.text = "👍🏻"
+                            self.performSegue(withIdentifier: K.loggedIn, sender: self)
+                        }
                     }
                 }
             } else {
@@ -165,21 +170,43 @@ extension LoginViewController {
     func signUp() {
         if let email = signUpEmailTextField.text, let password = signUpPasswordTextField.text, let password2 = signUpSecondPasswordTextField.text {
             if email != "" && password != "" && password2 != "" {
-                if password == password2 {
-                    
-                    self.infoLabel.text = "Signing up new user"
-                    Auth.auth().createUser(withEmail: email, password: password) { AuthResult, error in
-                        if let e = error{
-                            print(e.localizedDescription)
-                            self.infoLabel.text = e.localizedDescription
-                            
-                        } else {
-                            self.infoLabel.text = "👍🏻"
-                            self.performSegue(withIdentifier: K.signedUp, sender: self)
+                print(password.count)
+                if password.count >= 8 {
+                    if password == password2 {
+                        
+                        self.infoLabel.text = "Signing up new user"
+                        Auth.auth().createUser(withEmail: email, password: password) { AuthResult, error in
+                            if let e = error{
+                                print(e.localizedDescription)
+                                self.infoLabel.text = e.localizedDescription
+                                
+                            } else {
+                                
+                                Auth.auth().currentUser?.sendEmailVerification { error in
+                                    if let e = error{
+                                        print(e.localizedDescription)
+                                        self.infoLabel.text = e.localizedDescription
+                                        
+                                    } else {
+                                        
+                                        self.infoLabel.text = "👍🏻 Please check your email for a verification link"
+                                        self.loginEmailTextField.text = self.signUpEmailTextField.text
+                                        self.loginPasswordTextField.text = self.signUpPasswordTextField.text
+                                        self.signUpPasswordTextField.text = ""
+                                        self.signUpEmailTextField.text = ""
+                                        self.signUpSecondPasswordTextField.text = ""
+                                    }
+                                    
+                                }
+                            }
                         }
+                    } else {
+                        self.infoLabel.text = "Passwords do not match"
+                        self.signUpPasswordTextField.text = ""
+                        self.signUpSecondPasswordTextField.text = ""
                     }
                 } else {
-                    self.infoLabel.text = "Passwords do not match"
+                    self.infoLabel.text = "Password must be at least 8 characters long"
                     self.signUpPasswordTextField.text = ""
                     self.signUpSecondPasswordTextField.text = ""
                 }
@@ -224,7 +251,7 @@ extension LoginViewController {
             bookStopButton.image = nil
         }
     }
-
+    
     @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
         SpeechService.shared.stopSpeeching()
         bookStopButton.image = nil
