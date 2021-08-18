@@ -31,6 +31,8 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        showAlert()
         setUp()
         
         roundCorners(sendButton)
@@ -223,4 +225,26 @@ extension ContactUsViewController {
         bookStopButton.image = nil
     }
     
+}
+
+
+//MARK: - GDPR Alert
+
+
+extension ContactUsViewController {
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.message)\(K.GDPR.contactUs)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.dismiss, style: .cancel, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
+            print("Agreed to GDPR")
+        }))
+        
+        present(alert, animated: true)
+    }
 }

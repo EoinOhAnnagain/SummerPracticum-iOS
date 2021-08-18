@@ -36,6 +36,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showAlert()
         
         roundCorners(chatPicker)
         roundCorners(views)
@@ -391,4 +392,27 @@ extension ChatViewController {
         bookStopButton.image = nil
     }
     
+}
+
+
+
+//MARK: - GDPR Alert
+
+
+extension ChatViewController {
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.message)\(K.GDPR.chat)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.dismiss, style: .cancel, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
+            print("Agreed to GDPR")
+        }))
+        
+        present(alert, animated: true)
+    }
 }
