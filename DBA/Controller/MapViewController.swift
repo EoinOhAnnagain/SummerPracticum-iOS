@@ -65,6 +65,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var startTime: Int?
     var predictionTime: Int?
     
+    var googlesGuess: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +78,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         routePicker.delegate = self
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
+        
+        
         
         // Set min and max days for date picker
         datePicker.minimumDate = Date()
@@ -111,7 +114,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         
         mapView.isMyLocationEnabled = true
-    
+        
+        
+        //        mapView.settings.myLocationButton = true
+        //        mapView.settings.compassButton = true
+        //        view.addSubview(mapView)
+        
+        
+        // Creates a marker in the center of the map.
+        userLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        //marker.icon = UIImage(systemName: "figure.wave.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))
         
         
         locationManager.stopUpdatingLocation()
@@ -319,10 +331,14 @@ extension MapViewController: GMSMapViewDelegate {
             destinationVC.stopName = markerTitleForSegue
             destinationVC.stopAtcoCode = markerAtcoCodeForSegue
         } else if segue.identifier == K.map.details {
-            print(directionsSansHTML!)
             let destinationVC = segue.destination as! DirectionDetailsViewController
             destinationVC.directions = directionsSansHTML!
             destinationVC.faresJSON = faresJSON
+            destinationVC.departureTime = departureTime
+            destinationVC.finalWalkTime = finalWalkTime
+            destinationVC.startTime = startTime
+            destinationVC.predictionTime = predictionTime
+            destinationVC.googlesGuess = googlesGuess
         }
     }
     
@@ -383,6 +399,12 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     @IBAction func routingButtonPressed(_ sender: UIButton) {
+        
+        mapView.clear()
+        destinationMarker!.map = mapView
+        originMarker!.map = mapView
+        
+        
         getDirections(originMarker!, destinationMarker!)
     }
     
@@ -422,6 +444,9 @@ extension MapViewController {
     
     
     func getDirections(_ source: GMSMarker, _ destination: GMSMarker) {
+        
+        self.startTime = nil
+        self.googlesGuess = nil
         
         faresJSON = []
         
@@ -480,6 +505,16 @@ extension MapViewController {
                             let legs = route["legs"].arrayValue
                             
                             for leg in legs {
+                                
+                                
+                                if self.startTime == nil {
+                                    self.startTime = leg["departure_time"]["value"].int
+                                }
+                                
+                                if self.googlesGuess == nil {
+                                    self.googlesGuess = leg["duration"]["text"].string
+                                }
+                                
                                 let steps = leg["steps"].arrayValue
                                 
                                 //
@@ -497,7 +532,7 @@ extension MapViewController {
                                     let steps2 = step["steps"].arrayValue
                                     
                                     if step["travel_mode"].string == "TRANSIT" {
-                                        print("TRANSIT")
+                                        
                                         
                                         let transitDetails = step["transit_details"].dictionary
                                         
@@ -505,15 +540,18 @@ extension MapViewController {
                                         let routeNumber = transitDetails!["line"]!["short_name"].string
                                         let startStop = transitDetails!["departure_stop"]!["name"].string
                                         
+                                        self.departureTime = transitDetails!["departure_time"]!["value"].int
                                         
-                                        directions.append("Your bus is the \(routeNumber!) from stop \(stopsNumber!) - \(startStop!)\n")
+                                        
+                                        
+                                        directions.append("Your bus is the \(routeNumber!) from \(startStop!)\n")
                                         
                                         print("AT THE FUNCTIONS")
                                         self.postDataFare(stopsNumber!, routeNumber!)
                                         self.postDataTravelTimes(stopsNumber!, routeNumber!, startStop!, reFormattedDate)
                                         
-                                    } else {
-                                        print("NOT-TRANSIT")
+                                    } else if step["travel_mode"].string == "WALKING" {
+                                        self.finalWalkTime = step["duration"]["value"].int
                                     }
                                     
                                     for step2 in steps2 {
@@ -617,8 +655,6 @@ extension MapViewController {
                     return
                 }
                 
-                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                
                 do {
                     let parsedJSON = try JSON(data: data)
                     
@@ -667,13 +703,15 @@ extension MapViewController {
                 }
 //                print("here8")
                 let stringInt = String.init(data: data, encoding: String.Encoding.utf8)
-                let int = Int.init(stringInt!)
+                let predictionInt = Int.init(stringInt ?? "0")
 //                print("here9")
                 
 //                print("\nResponse:\n\(response)\n")
                 print("\ndata:\n\(data)\n")
                 print("\nstringInt:\n\(stringInt)\n")
-                print("\nint:\n\(int)\n")
+                print("\nint:\n\(predictionInt)\n")
+                
+                predictionTime = predictionInt
                 
             }
             
