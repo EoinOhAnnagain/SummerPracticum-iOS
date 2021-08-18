@@ -24,6 +24,7 @@ class ChatViewController: UIViewController {
     var messages: [Message] = []
     
     var chosenChat: String = "messages"
+    var listener: ListenerRegistration?
     
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
@@ -35,6 +36,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showAlert()
         
         roundCorners(chatPicker)
         roundCorners(views)
@@ -62,13 +64,21 @@ class ChatViewController: UIViewController {
     
     
     func loadMessages() {
-        db.collection(chosenChat).order(by: K.chat.FStore.dateField).addSnapshotListener { (querySnapshot, error) in
+        
+        if listener != nil {
+            listener!.remove()
+        }
+        
+        listener = db.collection(chosenChat).order(by: K.chat.FStore.dateField).addSnapshotListener { (querySnapshot, error) in
+            
             self.messages = []
             if let e = error {
                 print(e.localizedDescription)
             } else {
                 
                 if let snapshotDocuments = querySnapshot?.documents {
+                    
+                    print(snapshotDocuments)
                     
                     if snapshotDocuments.count == 0 {
                         let newMessage =  Message(sender: "Debug", body: "This chat is currently empty...\nWhy not be the first to post", date: 0)
@@ -88,6 +98,7 @@ class ChatViewController: UIViewController {
                             if let messageSender = data[K.chat.FStore.senderField] as? String, let messageText = data[K.chat.FStore.textField] as? String, let messageDate = data[K.chat.FStore.dateField] {
                                 let newMessage = Message(sender: messageSender, body: messageText, date: messageDate as! NSNumber)
                                 self.messages.append(newMessage)
+                                
                                 
                                 DispatchQueue.main.async {
                                     self.tableView.reloadData()
@@ -133,23 +144,33 @@ extension ChatViewController: UITableViewDataSource {
         cell.label.text = message.body
         
         if message.sender == Auth.auth().currentUser?.email {
-            cell.leftSpeechBubble.isHidden = true
-            cell.rightSpeechBubble.isHidden = false
-            
-            cell.chatBubble.backgroundColor = UIColor.clear
-            cell.label.textColor = UIColor(named: K.color)
-            cell.chatBubble.layer.borderWidth = 3
-            cell.chatBubble.layer.borderColor = UIColor(named: K.color)?.cgColor
-        } else {
-            cell.rightSpeechBubble.isHidden = true
             cell.leftSpeechBubble.isHidden = false
+            cell.rightSpeechBubble.isHidden = true
+            cell.leftSpeechBubble.alpha = 0
             
             cell.chatBubble.backgroundColor = UIColor(named: K.color)
             cell.label.textColor = UIColor.black
             cell.chatBubble.layer.borderWidth = 0
             cell.chatBubble.layer.borderColor = UIColor.clear.cgColor
+        } else {
+            cell.rightSpeechBubble.isHidden = false
+            cell.leftSpeechBubble.isHidden = true
+            cell.rightSpeechBubble.alpha = 0
+            
+            cell.chatBubble.backgroundColor = UIColor.clear
+            cell.label.textColor = UIColor(named: K.color)
+            cell.chatBubble.layer.borderWidth = 3
+            cell.chatBubble.layer.borderColor = UIColor(named: K.color)?.cgColor
         }
         
+        if S.admins.contains(message.sender) {
+            cell.chatBubble.backgroundColor = .lightGray
+            cell.label.textColor = UIColor.purple
+            cell.chatBubble.layer.borderWidth = 3
+            cell.chatBubble.layer.borderColor = UIColor.purple.cgColor
+            
+        }
+
         
         return cell
     }
@@ -167,7 +188,8 @@ extension ChatViewController: UITableViewDelegate {
         let formattedDate = dateFormatter(messageDate)
         let formattedTime = timeFormatter(messageDate)
         infoLabel.text = "Message sent at \(formattedTime) on \(formattedDate)"
-        infoLabel.alpha = 0.7
+        infoLabel.alpha = 1
+        infoLabel.textColor = .lightGray
     }
     
     func dateFormatter(_ unformatted: NSNumber) -> String {
@@ -306,17 +328,23 @@ extension ChatViewController: UITextFieldDelegate {
         
         if let messageText = messageTextField.text, let messageSender = Auth.auth().currentUser?.email {
             if messageText != "" {
-                db.collection(chosenChat).addDocument(data: [
-                    K.chat.FStore.senderField: messageSender,
-                    K.chat.FStore.textField: messageText,
-                    K.chat.FStore.dateField: Int(Date().timeIntervalSince1970)
-                ]) { (error) in
-                    if let e = error {
-                        print(e.localizedDescription)
-                    } else {
-                        print("saved data")
-                        DispatchQueue.main.async {
-                            self.messageTextField.text = ""
+                if profanityFilter(messageText.lowercased()) {
+                    infoLabel.text = "Your message may not contain profanity"
+                    infoLabel.textColor = .red
+                    infoLabel.alpha = 1
+                } else {
+                    db.collection(chosenChat).addDocument(data: [
+                        K.chat.FStore.senderField: messageSender,
+                        K.chat.FStore.textField: messageText,
+                        K.chat.FStore.dateField: Int(Date().timeIntervalSince1970)
+                    ]) { (error) in
+                        if let e = error {
+                            print(e.localizedDescription)
+                        } else {
+                            print("saved data")
+                            DispatchQueue.main.async {
+                                self.messageTextField.text = ""
+                            }
                         }
                     }
                 }
@@ -332,6 +360,17 @@ extension ChatViewController: UITextFieldDelegate {
         send()
         view.endEditing(true)
     }
+    
+    func profanityFilter(_ text: String) -> Bool {
+        for i in K.chat.bannedWords {
+            let regex = "(?=.*\(i)*)"
+            if (text.range(of:regex, options: .regularExpression) != nil) {
+                return true
+            }
+        }
+        return false
+    }
+    
 }
 
 
@@ -353,4 +392,27 @@ extension ChatViewController {
         bookStopButton.image = nil
     }
     
+}
+
+
+
+//MARK: - GDPR Alert
+
+
+extension ChatViewController {
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.message)\(K.GDPR.chat)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.dismiss, style: .cancel, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
+            print("Agreed to GDPR")
+        }))
+        
+        present(alert, animated: true)
+    }
 }

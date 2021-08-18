@@ -31,6 +31,8 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        showAlert()
         setUp()
         
         roundCorners(sendButton)
@@ -81,7 +83,6 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
                 reason = K.contact.pickerOptions[picked]
             }
             
-            let toRecipients = ["eoin.ohannagain@ucdconnect.ie", "eugene.egan1@ucdconnect.ie", "ming-han.ta@ucdconnect.ie", "junzheng.liu@ucdconnect.ie", "eoin1711@gmail.com"]
             
             let mc: MFMailComposeViewController = MFMailComposeViewController()
             
@@ -106,7 +107,7 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
                 } else {
                     
                     mc.mailComposeDelegate = self
-                    mc.setToRecipients(toRecipients)
+                    mc.setToRecipients(S.contactUsAddresses)
                     mc.setSubject("\(reason!) - \(email!)")
                     
                     
@@ -224,4 +225,26 @@ extension ContactUsViewController {
         bookStopButton.image = nil
     }
     
+}
+
+
+//MARK: - GDPR Alert
+
+
+extension ContactUsViewController {
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.message)\(K.GDPR.contactUs)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.dismiss, style: .cancel, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
+            print("Agreed to GDPR")
+        }))
+        
+        present(alert, animated: true)
+    }
 }

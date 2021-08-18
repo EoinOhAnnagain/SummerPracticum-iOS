@@ -8,7 +8,7 @@
 import UIKit
 
 class BookViewController: UIViewController {
-
+    
     @IBOutlet weak var bookText: UITextView!
     @IBOutlet weak var mediaButton: UIButton!
     
@@ -18,6 +18,10 @@ class BookViewController: UIViewController {
     var fileName: String?
     
     var playing = false
+    
+    var currentFontSize: CGFloat = 14
+    
+    @IBOutlet weak var fontView: UIView!
     
     @IBOutlet var buttons: [UIButton]!
     
@@ -32,7 +36,7 @@ class BookViewController: UIViewController {
         
         //bookPicker.dataSource = self
         //bookPicker.delegate = self
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -56,7 +60,7 @@ class BookViewController: UIViewController {
         
     }
     
-
+    
     @IBAction func dismissPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -87,14 +91,14 @@ class BookViewController: UIViewController {
         bookText.scrollRangeToVisible(NSRange(location: 0, length: 0))
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     @IBAction func mediaButtonPressed(_ sender: UIButton) {
         
         if SpeechService.isPlaying {
@@ -108,6 +112,42 @@ class BookViewController: UIViewController {
         }
         
     }
+    
+    //MARK: - Font Controls
+    
+    @IBAction func fontButtonPressed(_ sender: UIButton) {
+        if fontView.alpha == 0 {
+            UIView.animate(withDuration: 0.25) {
+                self.fontView.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.25) {
+                self.fontView.alpha = 0
+            }
+        }
+        
+    }
+    
+    @IBAction func increaseFontSize(_ sender: UIButton) {
+        if currentFontSize < 24 {
+            currentFontSize += 1
+            bookText.font = .systemFont(ofSize: currentFontSize)
+        }
+    }
+    
+    @IBAction func decreaseFontSize(_ sender: UIButton) {
+        if currentFontSize > 1 {
+            currentFontSize -= 1
+            bookText.font = .systemFont(ofSize: currentFontSize)
+        }
+        
+    }
+    
+    @IBAction func defaultFontSize(_ sender: UIButton) {
+        currentFontSize = 14
+        bookText.font = .systemFont(ofSize: currentFontSize)
+    }
+    
     
 }
 
