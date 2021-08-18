@@ -73,15 +73,15 @@ class DirectionDetailsViewController: UIViewController {
             let startDate = Date(timeIntervalSince1970: Double(startTime!))
             let readyStartDate = startDateFormatter.string(from: startDate)
             
-            timesString.append("\n\nYour start time is \(readyStartDate)")
+            timesString.append("\n\nYour start time is \(readyStartDate).")
             
             
             let endDateFormatter = DateFormatter()
-            endDateFormatter.dateFormat = "HH:mm 'on' MMM-dd"
-            let endDate = Date(timeIntervalSince1970: Double(startTime!))
-            let readyEndDate = startDateFormatter.string(from: endDate)
+            endDateFormatter.dateFormat = "HH:mm"
+            let endDate = Date(timeIntervalSince1970: Double(departureTime!+predictionTime!+finalWalkTime!))
+            let readyEndDate = endDateFormatter.string(from: endDate)
             
-            timesString.append("\nYour arrival time is \(readyEndDate)")
+            timesString.append("\nYour arrival time is \(readyEndDate).")
             
             timesString.append("\n\nGoogle's estimate is \(googlesGuess ?? "Unknown")")
             
