@@ -32,15 +32,25 @@ struct K {
     static let toUs = "MainToUs"
     static let toGame = "MainToGame"
     
+    
+    struct GDPR {
+        
+        static let title = "GDPR Notice"
+        static let message = "In order for the page you are entering to function certain data is tracked. Without this data the page would not be able to opperate correctly.\nBy tapping 'Agree and Continue' you are agreeing to allow us to store the data this page requires.\nOtherwise please tap 'Disagree and Back' to return to the main menu.None of the data used is shared with 3rd parties.\n\nThank you for your understanding.\n\nThe following data is used for this page:\n"
+        static let chat = "\n-Your loggin email address is stored with your message for security. This cannot be seen my other users.\n-Any messages you send will be stored so they can be sent to others."
+        static let contactUs = "\n-Your email address\n-Any information you provide in messages you send to us through this page."
+        static let dismiss = "Disagree and Back"
+        static let agree = "Agree and Continue"
+    }
+    
+    
     struct chat {
         static let chatCellID = "chatCell"
         static let chatNib = "ChatCell"
         static let segueToConduct = "conductRulesSegue"
         
-        static let admins = ["admin@ucd.ie", "me@ucd.com"]
         
-        
-        static let bannedWords = ["fuck", "bitch", "bastard", "wanker"]
+        static let bannedWords = ["fuck", "bitch", "bastard", "wank"]
         
         struct FStore {
             static let collectionName = "messages"

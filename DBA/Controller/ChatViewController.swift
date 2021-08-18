@@ -24,6 +24,7 @@ class ChatViewController: UIViewController {
     var messages: [Message] = []
     
     var chosenChat: String = "messages"
+    var listener: ListenerRegistration?
     
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
@@ -35,6 +36,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showAlert()
         
         roundCorners(chatPicker)
         roundCorners(views)
@@ -62,13 +64,21 @@ class ChatViewController: UIViewController {
     
     
     func loadMessages() {
-        db.collection(chosenChat).order(by: K.chat.FStore.dateField).addSnapshotListener { (querySnapshot, error) in
+        
+        if listener != nil {
+            listener!.remove()
+        }
+        
+        listener = db.collection(chosenChat).order(by: K.chat.FStore.dateField).addSnapshotListener { (querySnapshot, error) in
+            
             self.messages = []
             if let e = error {
                 print(e.localizedDescription)
             } else {
                 
                 if let snapshotDocuments = querySnapshot?.documents {
+                    
+                    print(snapshotDocuments)
                     
                     if snapshotDocuments.count == 0 {
                         let newMessage =  Message(sender: "Debug", body: "This chat is currently empty...\nWhy not be the first to post", date: 0)
@@ -134,24 +144,26 @@ extension ChatViewController: UITableViewDataSource {
         cell.label.text = message.body
         
         if message.sender == Auth.auth().currentUser?.email {
-            cell.leftSpeechBubble.isHidden = true
-            cell.rightSpeechBubble.isHidden = false
-            
-            cell.chatBubble.backgroundColor = UIColor.clear
-            cell.label.textColor = UIColor(named: K.color)
-            cell.chatBubble.layer.borderWidth = 3
-            cell.chatBubble.layer.borderColor = UIColor(named: K.color)?.cgColor
-        } else {
-            cell.rightSpeechBubble.isHidden = true
             cell.leftSpeechBubble.isHidden = false
+            cell.rightSpeechBubble.isHidden = true
+            cell.leftSpeechBubble.alpha = 0
             
             cell.chatBubble.backgroundColor = UIColor(named: K.color)
             cell.label.textColor = UIColor.black
             cell.chatBubble.layer.borderWidth = 0
             cell.chatBubble.layer.borderColor = UIColor.clear.cgColor
+        } else {
+            cell.rightSpeechBubble.isHidden = false
+            cell.leftSpeechBubble.isHidden = true
+            cell.rightSpeechBubble.alpha = 0
+            
+            cell.chatBubble.backgroundColor = UIColor.clear
+            cell.label.textColor = UIColor(named: K.color)
+            cell.chatBubble.layer.borderWidth = 3
+            cell.chatBubble.layer.borderColor = UIColor(named: K.color)?.cgColor
         }
         
-        if K.chat.admins.contains(message.sender) {
+        if S.admins.contains(message.sender) {
             cell.chatBubble.backgroundColor = .lightGray
             cell.label.textColor = UIColor.purple
             cell.chatBubble.layer.borderWidth = 3
@@ -380,4 +392,27 @@ extension ChatViewController {
         bookStopButton.image = nil
     }
     
+}
+
+
+
+//MARK: - GDPR Alert
+
+
+extension ChatViewController {
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.message)\(K.GDPR.chat)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.dismiss, style: .cancel, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
+            print("Agreed to GDPR")
+        }))
+        
+        present(alert, animated: true)
+    }
 }

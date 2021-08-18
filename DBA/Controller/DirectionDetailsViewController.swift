@@ -13,50 +13,102 @@ class DirectionDetailsViewController: UIViewController {
     var directions: String?
     var faresJSON: [JSON]?
     
+    @IBOutlet weak var faresTextView: UITextView!
+    
     var faresString = "\n"
+    var timesString = "\n"
     
-//    @IBOutlet weak var directionsTextView: UITextView!
+    var departureTime: Int?
+    var finalWalkTime: Int?
+    var startTime: Int?
+    var predictionTime: Int?
     
-    @IBOutlet weak var timeDetailsLabel: UILabel!
-    @IBOutlet weak var fareDetailsLabel: UILabel!
+    var googlesGuess: String?
     
-    @IBOutlet weak var directionsTextView: UITextView!
-    @IBOutlet var labels: [UILabel]!
+    @IBOutlet var views: [UIView]!
+    @IBOutlet var textViews: [UITextView]!
+    
+    @IBOutlet weak var timesTV: UITextView!
+    @IBOutlet weak var faresTV: UITextView!
+    @IBOutlet weak var driectionsTV: UITextView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         stringifyFares()
         
-        fareDetailsLabel.text = faresString
-        timeDetailsLabel.text = "hello world"
         
-//        roundCorners(directionsTextView)
-        roundCorners(labels)
+        
+        
+
+        roundCorners(views)
+        roundCorners(textViews)
         
         // Due to how the text is prepared there is a "<" at the end that needs to be dropped.
-        directionsTextView.text = String(directions!.dropLast())
+        driectionsTV.text = String(directions!.dropLast())
+        faresTV.text = faresString
+    
         
-        
-        
+        stringifyTimes()
     }
     
 
+    func stringifyTimes() {
+        
+        timesString = "\n"
+        
+        if predictionTime != nil && startTime != nil && finalWalkTime != nil && departureTime != nil {
+            print("start till bus = \(departureTime!-startTime!)")
+            print("time after departure = \(predictionTime!+finalWalkTime!)")
+            print("Journey will take \((departureTime!-startTime!)+predictionTime!+finalWalkTime!)")
+            print("This is \(intToTime(((departureTime!-startTime!)+predictionTime!+finalWalkTime!), true))")
+            
+            
+            timesString.append("We predict your journey will take:  \(intToTime(((departureTime!-startTime!)+predictionTime!+finalWalkTime!), true))")
+            
+            
+            let startDateFormatter = DateFormatter()
+            startDateFormatter.dateFormat = "HH:mm 'on' MMM-dd"
+            let startDate = Date(timeIntervalSince1970: Double(startTime!))
+            let readyStartDate = startDateFormatter.string(from: startDate)
+            
+            timesString.append("\n\nYour start time is \(readyStartDate).")
+            
+            
+            let endDateFormatter = DateFormatter()
+            endDateFormatter.dateFormat = "HH:mm"
+            let endDate = Date(timeIntervalSince1970: Double(departureTime!+predictionTime!+finalWalkTime!))
+            let readyEndDate = endDateFormatter.string(from: endDate)
+            
+            timesString.append("\nYour arrival time is \(readyEndDate).")
+            
+            timesString.append("\n\nGoogle's estimate is \(googlesGuess ?? "Unknown")")
+            
+            
+            
+        } else {
+            timesString.append("\nTimes data is still being loaded or your journey may not include any buses.\nEither that or something went wrong.\nPlease exit and re-enter this page to try again.")
+        }
+        
+        
+        timesTV.text = timesString
+        
+    }
+    
+    
     func stringifyFares() {
         
         faresString = "\n"
         
+        var i = 1
+        
         for fare in faresJSON! {
             
+            faresString.append("Fares for bus \(i)\n\n")
+            i += 1
+            
             for item in fare {
-                
-                print(item.1["category"].count)
-                
-                if item.1["category"].count == 0 {
-                    print("Found buggy fare data")
-                    faresString = "No fare data available.\nSorry"
-                    return
-                }
                 
                 faresString.append("\(item.1["category"]):\t\t")
                 
@@ -73,10 +125,11 @@ class DirectionDetailsViewController: UIViewController {
         }
         
         if faresString == "\n" {
-            faresString = "Fare data is still being loaded or doesn't exist.\nPlease exit and re-enter page to try again."
+            faresString = "Fare data is still being loaded or your journey may not include any buses.\nEither that or something went wrong.\nPlease exit and re-enter this page to try again."
         }
     }
     
     
     
 }
+
