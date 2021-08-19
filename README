@@ -1,19 +1,9 @@
-Main Readme 
+<H1>READ ME iOS-SummerPracticum</H1>
 
-Installation 
+Hi,
 
-1. Install Docker desktop: https://www.docker.com/products/docker-desktop.
+Thank you for taking the time to explore this repository read this README.
+In this read me you will find a brief description of the repository, instructions on how to run the app, and a description of dependencies not present in the repo for security.
+Please note that this repo is designed to be used in conjunction with the web apps repo found here: https://github.com/Eoinoha/SummerPracticum
+As such some files, such as the best practice document have not been replicated. 
 
-2. git clone this repository. 
-
-3. change directory to /dublin_bus_app in terminal.
-
-4. execute docker-compose up, then check http://localhost:8000/ 
-
-
-Local developing enviroment setting
-
-1. pip install requirement.txt to conda virtual environment: 
-  - pip install -r ./requirement.txt
-2. After develop on local machine if there are some new dependency, update the requirement.txt
-  - pip freeze > requirement.txt
