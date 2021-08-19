@@ -13,6 +13,8 @@ import Firebase
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var GDPRView: UIView!
+    
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
     @IBOutlet weak var weatherIcon: UIImageView!
@@ -48,12 +50,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let fadeTextAnimation = CATransition()
-        fadeTextAnimation.duration = 0.5
-        fadeTextAnimation.type = .fade
-            
-        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
-        navigationItem.title = "D B A"
+        
         
         roundCorners(buttons)
         roundCorners(views)
@@ -226,10 +223,12 @@ extension ViewController {
             chatButton.backgroundColor = UIColor(named: K.color)
             bookButton.backgroundColor = UIColor(named: K.color)
             gameButton.backgroundColor = UIColor(named: K.color)
+            GDPRView.alpha = 0
         } else {
             chatButton.backgroundColor = .systemGray3
             bookButton.backgroundColor = .systemGray3
             gameButton.backgroundColor = .systemGray3
+            showAlert()
         }
     }
 }
@@ -293,5 +292,30 @@ extension ViewController {
     @IBAction func bookStopButtonPressed(_ sender: UIBarButtonItem) {
         SpeechService.shared.stopSpeeching()
         bookStopButton.image = nil
+    }
+}
+
+
+//MARK: - GDPR Alert
+
+
+extension ViewController {
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.messageSignUp)\(K.GDPR.chat)\(K.GDPR.contactUs)\(K.GDPR.map)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "\(K.GDPR.dismissGuest)", style: .cancel, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "\(K.GDPR.agreeGuest)", style: .default, handler: { action in
+            print("Agreed to GDPR")
+            UIView.animate(withDuration: 0.25) {
+                self.GDPRView.alpha = 0
+            }
+        }))
+        
+        present(alert, animated: true)
     }
 }

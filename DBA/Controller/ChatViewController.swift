@@ -12,8 +12,6 @@ import IQKeyboardManagerSwift
 class ChatViewController: UIViewController {
     
     
-    @IBOutlet weak var GDPRView: UIView!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
@@ -37,7 +35,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showAlert()
+
         
         roundCorners(chatPicker)
         roundCorners(views)
@@ -252,7 +250,7 @@ extension ChatViewController: UIPickerViewDelegate {
         } else {
             
             if row == 0 {
-                return "Diresction:"
+                return "Directions:"
             } else if row == 1 {
                 return "Inbound"
             } else {
@@ -396,27 +394,3 @@ extension ChatViewController {
 }
 
 
-
-//MARK: - GDPR Alert
-
-
-extension ChatViewController {
-    
-    func showAlert() {
-        
-        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.message)\(K.GDPR.chat)", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: K.GDPR.dismiss, style: .cancel, handler: { action in
-            self.navigationController?.popViewController(animated: true)
-        }))
-        
-        alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
-            print("Agreed to GDPR")
-            UIView.animate(withDuration: 0.25) {
-                self.GDPRView.alpha = 0
-            }
-        }))
-        
-        present(alert, animated: true)
-    }
-}

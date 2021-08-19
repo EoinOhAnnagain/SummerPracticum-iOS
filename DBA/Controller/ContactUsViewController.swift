@@ -12,8 +12,6 @@ import MessageUI
 class ContactUsViewController: UIViewController, MFMailComposeViewControllerDelegate, UITextViewDelegate {
 
     
-    @IBOutlet weak var GDRPView: UIView!
-    
     var userEmail: String?
     
     @IBOutlet weak var firstLabel: UILabel!
@@ -35,7 +33,6 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
         super.viewDidLoad()
 
         
-        showAlert()
         setUp()
         
         roundCorners(sendButton)
@@ -230,27 +227,3 @@ extension ContactUsViewController {
     
 }
 
-
-//MARK: - GDPR Alert
-
-
-extension ContactUsViewController {
-    
-    func showAlert() {
-        
-        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.message)\(K.GDPR.contactUs)", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: K.GDPR.dismiss, style: .cancel, handler: { action in
-            self.navigationController?.popViewController(animated: true)
-        }))
-        
-        alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
-            print("Agreed to GDPR")
-            UIView.animate(withDuration: 0.25) {
-                self.GDRPView.alpha = 0
-            }
-        }))
-        
-        present(alert, animated: true)
-    }
-}
