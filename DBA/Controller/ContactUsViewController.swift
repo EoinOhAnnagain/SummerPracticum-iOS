@@ -11,6 +11,9 @@ import MessageUI
 
 class ContactUsViewController: UIViewController, MFMailComposeViewControllerDelegate, UITextViewDelegate {
 
+    
+    @IBOutlet weak var GDRPView: UIView!
+    
     var userEmail: String?
     
     @IBOutlet weak var firstLabel: UILabel!
@@ -243,6 +246,9 @@ extension ContactUsViewController {
         
         alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
             print("Agreed to GDPR")
+            UIView.animate(withDuration: 0.25) {
+                self.GDRPView.alpha = 0
+            }
         }))
         
         present(alert, animated: true)

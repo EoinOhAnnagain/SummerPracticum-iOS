@@ -12,6 +12,7 @@ import IQKeyboardManagerSwift
 class ChatViewController: UIViewController {
     
     
+    @IBOutlet weak var GDPRView: UIView!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
@@ -411,6 +412,9 @@ extension ChatViewController {
         
         alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
             print("Agreed to GDPR")
+            UIView.animate(withDuration: 0.25) {
+                self.GDPRView.alpha = 0
+            }
         }))
         
         present(alert, animated: true)

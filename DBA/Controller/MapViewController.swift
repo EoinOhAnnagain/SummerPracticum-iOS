@@ -20,6 +20,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var chosenRoute: String?
     var nearMeChosen = false
     
+    @IBOutlet weak var mainView: UIView!
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var nearMeControlsView: UIView!
@@ -69,6 +70,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        showAlert()
         
         // Round corners
         roundCorners(buttons)
@@ -723,3 +726,30 @@ extension MapViewController {
     }
     
 }
+
+
+
+//MARK: - GDPR Alert
+
+
+extension MapViewController {
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.message)\(K.GDPR.map)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.dismiss, style: .cancel, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
+            print("Agreed to GDPR")
+            UIView.animate(withDuration: 0.25) {
+                self.mainView.alpha = 1
+            }
+        }))
+        
+        present(alert, animated: true)
+    }
+}
+

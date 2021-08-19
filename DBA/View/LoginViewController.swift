@@ -164,7 +164,7 @@ extension LoginViewController {
 extension LoginViewController {
     
     @IBAction func signUpPressed(_ sender: UIButton) {
-        signUp()
+        showAlert()
     }
     
     func signUp() {
@@ -261,6 +261,24 @@ extension LoginViewController {
 
 
 
+//MARK: - GDPR Alert
 
 
-
+extension LoginViewController {
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.signUp)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Disagree", style: .cancel, handler: { action in
+            self.infoLabel.text = "Did not create new user due to GDPR."
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Agree and Sign Up", style: .default, handler: { action in
+            print("Agreed to GDPR")
+            self.signUp()
+        }))
+        
+        present(alert, animated: true)
+    }
+}
