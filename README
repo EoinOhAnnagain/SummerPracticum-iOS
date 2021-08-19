@@ -1,7 +1,9 @@
-<H1>READ ME iOS-SummerPracticum</H1>
+#READ ME iOS-SummerPracticum
+
+
+##Introduction
 
 Hi,
-
 Thank you for taking the time to explore this repository read this README.
 In this read me you will find a brief description of the repository, instructions on how to run the app, and a description of dependencies not present in the repo for security.
 Please note that this repo is designed to be used in conjunction with the web apps repo found here: https://github.com/Eoinoha/SummerPracticum
