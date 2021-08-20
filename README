@@ -50,7 +50,7 @@ You will need a device running MacOS 11 and an iPhone runnning iOS 14. Later OSs
 5a. In the finder from step 2, navidate into the folder DBA. From there, drag the file GoogleServices-info.plist into xcode where the old, red, reference was. 
     Check that the settings match those in this image and click finish.
 5b. If you have a copy of Sensitive.swift do the same as you did for GoogleService-info.plist.
-    Otherwise, in Xcode, from the file selector on the left, right click the DBA folder and select 'New file'. Select a swift file from the iOS option and click next. Name the file Sensitive and create the file.
+    Otherwise, in Xcode, from the file selector on the left, right click the DBA folder and select 'New file'. Select a swift file from the iOS option and click next. Name the file Sensitive and create the file. If there is an issue with creating the file please email me at eoin.ohannagain@ucdconnect.ie and I will send on a copy of the file.
     This file contains a single struct called 'S' with the following variables.
     'openWeatherAPIKey' contains the API key for Open Weather (String)
     'googleMapsAPIKey' contains the api key for our google maps API. If you are using your own make sure the iOS maps and directions are enabled. (String)
