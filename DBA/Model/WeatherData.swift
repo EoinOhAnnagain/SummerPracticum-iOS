@@ -7,6 +7,8 @@
 
 import Foundation
 
+// This file contains structures used to decode the JSON from Open Weather
+
 struct WeatherData: Decodable {
     let name: String
     let main: Main

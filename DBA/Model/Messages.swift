@@ -8,6 +8,7 @@
 import Foundation
 
 struct Message {
+    // Message object for the chat VC
     
     let sender: String
     let body: String

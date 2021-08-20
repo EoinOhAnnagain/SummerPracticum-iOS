@@ -11,6 +11,9 @@ import UIKit
 
 //MARK: - Functions for Rounder Corners of Objects
 
+
+// The following functions all round the corners for various UI elements. These can be passed as a single element or an array of those elements
+
 func roundCorners(_ toRound: [UIButton]) {
     for x in toRound {
         if (0.4 * x.bounds.size.height) > 25 {
@@ -111,6 +114,8 @@ func roundCorners(_ toRound: UIImageView) {
 //MARK: - Time/Date
 
 func currentTime() -> String {
+    // This method returns the current time in hours and minutes
+    
     let currentDateTime = Date()
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
@@ -118,6 +123,8 @@ func currentTime() -> String {
 }
 
 func currentDate() -> String {
+    // This methos returns the current date in day-month-year
+    
     let currentDateTime = Date()
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd-MM-yy"
@@ -125,6 +132,8 @@ func currentDate() -> String {
 }
 
 func currentTimePlus(_ currentOffset: Int) -> String {
+    // This method returns the current time plus a passed about of time (in the form of seconds as an int) and returns a string showing the hours and minutes
+    
     print("\n")
     let currentDateTime = Date()
     let dateFormatter = DateFormatter()
@@ -137,6 +146,7 @@ func currentTimePlus(_ currentOffset: Int) -> String {
 }
 
 func intToTime(_ seconds: Int, _ s: Bool) -> String {
+    // Convert a passed int into a string displaying hours, minutes and optionally seconds
     
     var result = ""
     
@@ -157,6 +167,8 @@ func intToTime(_ seconds: Int, _ s: Bool) -> String {
 //MARK: - String Manipulation
 
 func stringSplitter(_ title: String, _ sep: String) -> [String] {
+    // Split the passed string into an array of strings using a second string passed as a marker
+    
     return title.components(separatedBy: sep)
 }
 
