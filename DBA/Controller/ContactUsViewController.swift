@@ -14,13 +14,11 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
     
     var userEmail: String?
     
-    @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
     
     @IBOutlet weak var firstPicker: UIPickerView!
     
-    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var issueTextView: UITextView!
     
     @IBOutlet weak var sendButton: UIButton!
@@ -33,33 +31,24 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
         super.viewDidLoad()
 
         
-        setUp()
-        
         roundCorners(sendButton)
         roundCorners(issueTextView)
         
         roundCorners(sendButton)
         roundCorners(issueTextView)
-        roundCorners(emailTextField)
+        
         
         resultLabel.alpha = 0
         
         firstPicker.dataSource = self
         firstPicker.delegate = self
         
-        emailTextField.delegate = self
+        
         issueTextView.delegate = self
         
         // Do any additional setup after loading the view.
     }
     
-
-    func setUp() {
-        if userEmail != nil {
-            emailTextField.alpha = 0
-            firstLabel.alpha = 0
-        }
-    }
     
     
     @IBAction func sendButtonPressed(_ sender: UIButton) {
@@ -74,7 +63,6 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
             
             
             var reason: String?
-            var email: String?
             
             
             if picked == (K.contact.pickerOptions.count + 1) {
@@ -86,37 +74,27 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
             
             let mc: MFMailComposeViewController = MFMailComposeViewController()
             
-            if userEmail != nil {
-                email = userEmail
-            } else {
-                email = emailTextField.text
-            }
             
-            if email == nil || email == "" {
-                resultLabel.text = "Please include an email address."
+            
+            
+            let message =  issueTextView.text
+            
+            if message == nil || message == "" {
+                resultLabel.text = "Please include a message so we can help you."
                 resultLabel.alpha = 1
                 resultLabel.textColor = UIColor(named: "Interface")
             } else {
                 
-                let message =  issueTextView.text
+                mc.mailComposeDelegate = self
+                mc.setToRecipients(S.contactUsAddresses)
+                mc.setSubject("iOS report - \(reason!)")
                 
-                if message == nil || message == "" {
-                    resultLabel.text = "Please include a message so we can help you."
-                    resultLabel.alpha = 1
-                    resultLabel.textColor = UIColor(named: "Interface")
-                } else {
+                
+                
+                mc.setMessageBody("Subject: \(reason!)\n\nIssue: \(message!)", isHTML: false)
+                
+                self.present(mc, animated: true) {
                     
-                    mc.mailComposeDelegate = self
-                    mc.setToRecipients(S.contactUsAddresses)
-                    mc.setSubject("\(reason!) - \(email!)")
-                    
-                    
-                    
-                    mc.setMessageBody("Email: \(email!) \n\nSubject: \(reason!) \n\nIssue: \(message!)", isHTML: false)
-                    
-                    self.present(mc, animated: true) {
-                        
-                    }
                 }
             }
         }
@@ -138,7 +116,6 @@ class ContactUsViewController: UIViewController, MFMailComposeViewControllerDele
             resultLabel.alpha = 1
             resultLabel.textColor = .green
             issueTextView.text = ""
-            emailTextField.text = ""
         default:
             resultLabel.alpha = 0
             break

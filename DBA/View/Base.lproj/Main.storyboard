@@ -1395,13 +1395,13 @@
                         <outletCollection property="UserCircles" destination="sPm-Be-zNV" collectionClass="NSMutableArray" id="GVb-Xw-G2d"/>
                         <outletCollection property="UserCircles" destination="J8S-CS-k74" collectionClass="NSMutableArray" id="Qha-kO-GQf"/>
                         <outletCollection property="AnswerCircles" destination="70D-bo-f1T" collectionClass="NSMutableArray" id="ktc-iW-f7z"/>
-                        <outletCollection property="HitandBlowLabels" destination="KKh-ma-sjX" collectionClass="NSMutableArray" id="61Z-sD-Oy1"/>
-                        <outletCollection property="HitandBlowLabels" destination="d0M-jF-XS4" collectionClass="NSMutableArray" id="A1q-bz-ZCv"/>
-                        <outletCollection property="HitandBlowLabels" destination="6yM-eV-bx2" collectionClass="NSMutableArray" id="vC7-Up-dXF"/>
-                        <outletCollection property="HitandBlowLabels" destination="Ugp-1o-jNb" collectionClass="NSMutableArray" id="qEu-2t-5H5"/>
-                        <outletCollection property="HitandBlowLabels" destination="PpB-od-Nbh" collectionClass="NSMutableArray" id="NaQ-Jd-Bu9"/>
-                        <outletCollection property="HitandBlowLabels" destination="nIo-HP-HNV" collectionClass="NSMutableArray" id="z6A-Is-Smn"/>
-                        <outletCollection property="HitandBlowLabels" destination="pZR-es-PBD" collectionClass="NSMutableArray" id="maZ-15-Yvz"/>
+                        <outletCollection property="hitAndBlowLabels" destination="KKh-ma-sjX" collectionClass="NSMutableArray" id="61Z-sD-Oy1"/>
+                        <outletCollection property="hitAndBlowLabels" destination="d0M-jF-XS4" collectionClass="NSMutableArray" id="A1q-bz-ZCv"/>
+                        <outletCollection property="hitAndBlowLabels" destination="6yM-eV-bx2" collectionClass="NSMutableArray" id="vC7-Up-dXF"/>
+                        <outletCollection property="hitAndBlowLabels" destination="Ugp-1o-jNb" collectionClass="NSMutableArray" id="qEu-2t-5H5"/>
+                        <outletCollection property="hitAndBlowLabels" destination="PpB-od-Nbh" collectionClass="NSMutableArray" id="NaQ-Jd-Bu9"/>
+                        <outletCollection property="hitAndBlowLabels" destination="nIo-HP-HNV" collectionClass="NSMutableArray" id="z6A-Is-Smn"/>
+                        <outletCollection property="hitAndBlowLabels" destination="pZR-es-PBD" collectionClass="NSMutableArray" id="maZ-15-Yvz"/>
                         <outletCollection property="roundCircles" destination="bIW-cG-iWM" collectionClass="NSMutableArray" id="duq-5P-y20"/>
                         <outletCollection property="roundCircles" destination="hgi-YA-Vcz" collectionClass="NSMutableArray" id="XzS-Lu-Dul"/>
                         <outletCollection property="roundCircles" destination="ua5-PZ-GOw" collectionClass="NSMutableArray" id="o0n-r3-API"/>
@@ -1594,7 +1594,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-xB-6Ky">
-                                <rect key="frame" x="8" y="148" width="398" height="216"/>
+                                <rect key="frame" x="8" y="147.99999999999997" width="398" height="319.33333333333326"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQN-6y-PFs">
                                 <rect key="frame" x="20" y="812" width="374" height="50"/>
@@ -1611,39 +1611,19 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="62" translatesAutoresizingMaskIntoConstraints="NO" id="S63-Sy-XgR">
-                                <rect key="frame" x="20" y="374" width="374" height="428"/>
+                                <rect key="frame" x="20" y="477.33333333333326" width="374" height="324.66666666666674"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-Eo-6XI">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="42"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEh-9V-dYQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" name="Interface"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="iyd-0R-XbX">
-                                                <rect key="frame" x="0.0" y="8" width="374" height="34"/>
-                                                <color key="backgroundColor" systemColor="separatorColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="34" id="Cpc-j9-NdD"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" textContentType="email"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EOT-UY-NXc">
-                                        <rect key="frame" x="0.0" y="103.99999999999999" width="374" height="241.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="242.33333333333334"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sse-0f-Qbm">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="19.666666666666668"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="Interface"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RYX-XJ-xw5">
-                                                <rect key="frame" x="0.0" y="27.666666666666686" width="374" height="214"/>
+                                                <rect key="frame" x="0.0" y="28.333333333333371" width="374" height="214"/>
                                                 <color key="backgroundColor" systemColor="separatorColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1658,7 +1638,7 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVZ-lD-ylw">
-                                        <rect key="frame" x="0.0" y="407.66666666666663" width="41.333333333333336" height="20.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="304.33333333333331" width="41.333333333333336" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="Interface"/>
                                         <nil key="highlightedColor"/>
@@ -1667,8 +1647,6 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="EOT-UY-NXc" secondAttribute="trailing" id="1d9-lt-Q8j"/>
                                     <constraint firstItem="EOT-UY-NXc" firstAttribute="leading" secondItem="S63-Sy-XgR" secondAttribute="leading" id="Bok-mp-8cm"/>
-                                    <constraint firstAttribute="trailing" secondItem="OHV-Eo-6XI" secondAttribute="trailing" id="IXG-Zc-4Iv"/>
-                                    <constraint firstItem="OHV-Eo-6XI" firstAttribute="leading" secondItem="S63-Sy-XgR" secondAttribute="leading" id="gw4-9z-Bhy"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -1696,8 +1674,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bookStopButton" destination="etY-2T-1jC" id="is1-pz-KD1"/>
-                        <outlet property="emailTextField" destination="iyd-0R-XbX" id="6X9-hr-E9N"/>
-                        <outlet property="firstLabel" destination="zEh-9V-dYQ" id="H3g-ag-9EL"/>
                         <outlet property="firstPicker" destination="X4c-xB-6Ky" id="UeN-7O-gWw"/>
                         <outlet property="issueTextView" destination="RYX-XJ-xw5" id="Dza-1V-6Fv"/>
                         <outlet property="placeholderLabel" destination="sse-0f-Qbm" id="vtC-Rk-ggP"/>

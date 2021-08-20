@@ -12,51 +12,59 @@ import CoreLocation
 
 class LoginViewController: UIViewController, UISearchTextFieldDelegate {
     
-    
+    // IBOutlets
+    // Nav Bar Button
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
+    // Login Outlets
     @IBOutlet weak var loginEmailTextField: UITextField!
     @IBOutlet weak var loginPasswordTextField: UITextField!
     
+    // Sign Up Outlets
     @IBOutlet weak var signUpEmailTextField: UITextField!
     @IBOutlet weak var signUpPasswordTextField: UITextField!
     @IBOutlet weak var signUpSecondPasswordTextField: UITextField!
     
+    // Info Label Outlet
     @IBOutlet weak var infoLabel: UILabel!
     
+    // Title Outlet
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleLabel2: UILabel!
     
-    
+    // Outlet Collections
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet var labels: [UILabel]!
     
+    // Variable for route names
     var routeNames: [String] = []
     
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        // Set status bar style
         .darkContent
     }
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // If a user is logged in log them out
         logOut()
+        
+        // Roud corners of various objects
         roundCorners(buttons)
         roundCorners(labels)
+        
+        // Animate the title
         title()
         
-        
-        
+        // Set delegates
         loginEmailTextField.delegate = self
         loginPasswordTextField.delegate = self
         signUpEmailTextField.delegate = self
         signUpPasswordTextField.delegate = self
         signUpSecondPasswordTextField.delegate = self
-        // Do any additional setup after loading the view.
-        
     }
     
     

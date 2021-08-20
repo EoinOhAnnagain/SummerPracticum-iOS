@@ -25,7 +25,7 @@ class CodebreakerViewController: UIViewController {
     
     @IBOutlet var roundLabels: [UILabel]!
     
-    @IBOutlet var HitandBlowLabels: [UILabel]!
+    @IBOutlet var hitAndBlowLabels: [UILabel]!
     
     let colors: [UIColor] = [.systemPurple, .systemGreen, .systemOrange, .systemGray, .systemRed, .systemTeal]
     
@@ -66,6 +66,8 @@ class CodebreakerViewController: UIViewController {
             codeColors.append(colors[Int.random(in: 0...5)])
         }
         
+        labelFont(roundLabels)
+        labelFont(hitAndBlowLabels)
         
         
         for circle in UserCircles {
@@ -96,6 +98,11 @@ class CodebreakerViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func labelFont(_ labels: [UILabel]) {
+        for label in labels {
+            label.adjustsFontSizeToFitWidth = true
+        }
+    }
     
     
     func prepRoundCircles(_ circles: [UIButton]) {
@@ -110,7 +117,7 @@ class CodebreakerViewController: UIViewController {
         for label in roundLabels {
             label.alpha = 0
         }
-        for label in HitandBlowLabels {
+        for label in hitAndBlowLabels {
             label.alpha = 0
         }
     }
@@ -240,7 +247,7 @@ class CodebreakerViewController: UIViewController {
             return true
         } else if last == false {
             
-            HitandBlowLabels[currentRound-1].alpha = 1
+            hitAndBlowLabels[currentRound-1].alpha = 1
             var hitAndBlowString = "\(hitCounter) hit"
             if hitCounter > 1 {
                 hitAndBlowString.append("s")
@@ -249,7 +256,7 @@ class CodebreakerViewController: UIViewController {
             if blowCounter > 1 {
                 hitAndBlowString.append("s")
             }
-            HitandBlowLabels[currentRound-1].text = hitAndBlowString
+            hitAndBlowLabels[currentRound-1].text = hitAndBlowString
             currectRoundPrep(roundCircles, roundLabels[currentRound])
         }
         return false
