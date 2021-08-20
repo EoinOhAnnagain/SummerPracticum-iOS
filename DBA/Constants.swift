@@ -7,6 +7,8 @@
 
 struct K {
     
+    // This struct contains constants that are used throughout the app.
+    
     static var routeNames: [String] = []
     static var stopsLocations: [Pin] = []
     
@@ -34,6 +36,7 @@ struct K {
     
     
     struct GDPR {
+        // GDPR specific
         
         static let title = "GDPR Notice"
         static let messageGuest = "In order certain features of this app to function certain data is tracked. Without this data the app would not be able to opperate correctly.\nBy tapping 'Agree and Continue' you are agreeing to allow us to use and store this data for the apps operations.\nOtherwise please tap 'Disagree and Back' to return to the main menu.None of the data used is shared with 3rd parties unless otherwise stated below.\n\nIf you are below the age of 16 you must select 'Disagree and Back' in complience with the General Data Protection Act and Irish Law.\n\nThank you for your understanding.\n\nThe following pages use the following data:\n"
@@ -50,14 +53,16 @@ struct K {
     
     
     struct chat {
+        // Chat specific
         static let chatCellID = "chatCell"
         static let chatNib = "ChatCell"
         static let segueToConduct = "conductRulesSegue"
         
-        
+        // Banned words
         static let bannedWords = ["fuck", "bitch", "bastard", "wank"]
         
         struct FStore {
+            // Message variables
             static let collectionName = "messages"
             static let senderField = "sender"
             static let textField = "body"
@@ -68,6 +73,8 @@ struct K {
     }
     
     struct contact {
+        // Contact us picker view options
+        
         static let pickerOptions = [
             "Request Feature",
             "Request Book",
@@ -85,6 +92,7 @@ struct K {
     }
     
     struct map {
+        // Map segues
         
         static let legal = "mapLegalSegue"
         static let times = "mapToTimes"
@@ -93,17 +101,22 @@ struct K {
     }
     
     struct aboutUs {
+        // About us specific
+        
         static let cellID = "aboutUsCell"
         static let cellNibName = "AboutUsCellTableViewCell"
         static let textCellId = "textCell"
         
-        static let tableViewData = [
-            cellData(opened: false, name: "Eoin Ó'hAnnagáin B.Rel.Ed.M, A.R.I.A.M.", picture: #imageLiteral(resourceName: "Eoin"), blurb: "Throughout the practicum Eoin was responsible for the iOS development learning swift and Xcode from scratch to do so. As part of this he also took lead of the project UI styles as well initiating the cross platform chat function. Additionally, as the teams maintenance lead, Eoin was responsible for maintaining the teams GitHub repository, establishing the teams best practices, and resolving conflicts.\n\nPrior to undertaking the Computer Science conversion masters at UCD, Eoin was a Music and Religious Education teacher, having studied at Mater Dei/DCU. He is also an associate of the Royal Irish Academy of Music and has been teaching piano since 2008 and has performed organ at the National Concert Hall."),
+        static var tableViewData = [
+            cellData(opened: false, name: "Eoin Ó'hAnnagáin B.Rel.Ed.M, A.R.I.A.M.", picture: #imageLiteral(resourceName: "Eoin"), blurb: "Throughout the practicum Eoin was responsible for the iOS development, learning swift and Xcode from scratch to do so. As part of this he also took lead of the project UI styles as well initiating the cross platform chat function. Additionally, as the teams maintenance lead, Eoin was responsible for maintaining the teams GitHub repository, establishing the teams best practices, and resolving conflicts.\n\nPrior to undertaking the Computer Science conversion masters at UCD, Eoin was a Music and Religious Education teacher, having studied at Mater Dei/DCU. He is also an associate of the Royal Irish Academy of Music and has been teaching piano since 2008. He has also performed organ at the National Concert Hall and hosted, and performed at several concerts, in the R.I.A.M.'s Katherine Brennan Hall."),
             cellData(opened: false, name: "Eugene Egan, LLB, MSc", picture: #imageLiteral(resourceName: "Eugene") , blurb: "Eugene brought the Dublin Bus data to life, in the form of bespoke APIs used across both iOS and Web apps, as well as designing and constructing the Web App's map and journey interfaces. He also unified the cross-platform chat function on the Web end. Eugene was Scrum Master of this Agile team, ensuring team coordination so that milestones were met.\n\nEugene is a former musician, turned former paralegal, now Computer Science student in UCD. Music being a young man's game, and Law being a waste of a good life, who knew that ultimate happiness would come in the form of agonizing over JSON parsing for hours on end."),
             cellData(opened: false, name: "Junzheng Liu", picture: #imageLiteral(resourceName: "Even"), blurb: "Junzheng Liu is a back-end engineer specializing in data analysis. In this project, he is mainly responsible for machine learning to predict travel time, database construction, implementation of travel price calculation functions and the establishment of docker images.\n\nHe used to work in China Airlines for market data processing and analysis. He used to develop a complete automatic lesson scheduling system at the Yantai branch of New Oriental Education Technology Group.He often says that he has processed more data than the salt he has eaten himself."),
             cellData(opened: false, name: "Hank Ta", picture: #imageLiteral(resourceName: "Hank"), blurb: "Hank was an experienced firmware engineer in Taiwan, during those years of work he has became an expert to print Hello world in any kinds of programming language. In this project, Hank was responsible for setting up the backend development environment, such as creating Docker file and initiating the Django setting. Also, he built up a user authentication system by Django and React, to deal with the sign-in and sign-up process from backend to frontend.")
         ]
     }
+    
+    
+    // Book variables
     
     static let readBook = "ReadyToRead"
     static let bookChosen = "bookChosen"

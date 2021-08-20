@@ -2584,7 +2584,6 @@
                     <connections>
                         <outlet property="driectionsTV" destination="OOy-Pf-jrZ" id="9FH-rx-6xN"/>
                         <outlet property="faresTV" destination="IpB-7q-bh9" id="xSa-qb-x4t"/>
-                        <outlet property="faresTextView" destination="IpB-7q-bh9" id="jKC-9a-2IX"/>
                         <outlet property="timesTV" destination="8cm-df-3OM" id="gBO-13-cUj"/>
                         <outletCollection property="views" destination="X4W-fx-gAd" collectionClass="NSMutableArray" id="URt-q9-dUB"/>
                         <outletCollection property="views" destination="gSL-y7-EFc" collectionClass="NSMutableArray" id="TGO-Qn-Ujf"/>
