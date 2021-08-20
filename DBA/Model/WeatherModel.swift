@@ -8,7 +8,10 @@
 import Foundation
 
 struct WeatherModel {
+    // Weather model for the weather widget
     
+    
+    // Variables direct from the API
     let conditionId: Int
     let cityName: String
     let description: String
@@ -31,10 +34,7 @@ struct WeatherModel {
     let sunset: Double
     
     
-    
-    
-    
-    
+    // Variables created using the data from the API
     var stringTemperature: String {
         return String(format: "%.1f", temperature)
     }
@@ -56,16 +56,13 @@ struct WeatherModel {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: Date(timeIntervalSince1970: sunrise))
-//        return dateFormatter.string(from: Date(timeIntervalSince1970: sunrise+Double(TimeZone.current.secondsFromGMT())))
     }
+    
     var sunsetTime: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: Date(timeIntervalSince1970: sunset))
-//        return dateFormatter.string(from: Date(timeIntervalSince1970: sunset+Double(TimeZone.current.secondsFromGMT())))
     }
-    
-    
     
     var conditionName: String {
         switch conditionId {

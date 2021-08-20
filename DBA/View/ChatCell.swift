@@ -9,6 +9,7 @@ import UIKit
 
 class ChatCell: UITableViewCell {
 
+    // IBOutlets
     @IBOutlet weak var chatBubble: UIView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var rightSpeechBubble: UIImageView!
@@ -17,29 +18,25 @@ class ChatCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        // Code for when ChatCell created
         
         chatBubble.layer.cornerRadius = chatBubble.frame.size.height / 3
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        // What to do when a ChatCell is selected
         
         if selected {
+            // If the ChatCell is selected change its background colour to blue
             UIView.animate(withDuration: 0.5) {
                 self.contentView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.5)
-                self.rightSpeechBubble.image = UIImage(systemName: "arrow.left")
-                self.leftSpeechBubble.image = UIImage(systemName: "arrow.right")
             }
         } else {
+            // Otherwise set the background colour to the default colour
             UIView.animate(withDuration: 0.5) {
                 self.contentView.backgroundColor = UIColor.clear
-                self.rightSpeechBubble.image = UIImage(systemName: "bubble.right")
-                self.leftSpeechBubble.image = UIImage(systemName: "bubble.left.fill")
             }
         }
-
-        // Configure the view for the selected state
     }
-    
 }

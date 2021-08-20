@@ -8,6 +8,8 @@
 import UIKit
 
 struct cellData {
+    // Structure for cellData object
+    
     var opened = Bool()
     var name = String()
     var picture = UIImage(systemName: "person.fill.questionmark")
@@ -16,55 +18,41 @@ struct cellData {
 
 class AboutUsViewController: UIViewController {
 
+    // IBOutlet for navigation bar audio book button
     @IBOutlet weak var bookStopButton: UIBarButtonItem!
     
+    // IBOutlet for table view
     @IBOutlet weak var tableView: UITableView!
-    
-    var tableViewData = [cellData]()
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set table view delegates
         tableView.dataSource = self
         tableView.delegate = self
+        
+        // Set xib for table view
         tableView.register(UINib(nibName: K.aboutUs.cellNibName, bundle: nil), forCellReuseIdentifier: K.aboutUs.cellID)
         
-        tableViewData = [
-            cellData(opened: false, name: "Eoin Ó'hAnnagáin B.Rel.Ed.M, A.R.I.A.M.", picture: #imageLiteral(resourceName: "Eoin"), blurb: "Throughout the practicum Eoin was responsible for the iOS development learning swift and Xcode from scratch to do so. As part of this he also took lead of the project UI styles as well initiating the cross platform chat function. Additionally, as the teams maintenance lead, Eoin was responsible for maintaining the teams GitHub repository, establishing the teams best practices, and resolving conflicts.\n\nPrior to undertaking the Computer Science conversion masters at UCD, Eoin was a Music and Religious Education teacher, having studied at Mater Dei/DCU. He is also an associate of the Royal Irish Academy of Music and has been teaching piano since 2008 and has performed organ at the National Concert Hall."),
-            cellData(opened: false, name: "Eugene Egan, LLB, MSc", picture: #imageLiteral(resourceName: "Eugene") , blurb: "Eugene brought the Dublin Bus data to life, in the form of bespoke APIs used across both iOS and Web apps, as well as designing and constructing the Web App's map and journey interfaces. He also unified the cross-platform chat function on the Web end. Eugene was Scrum Master of this Agile team, ensuring team coordination so that milestones were met.\n\nEugene is a former musician, turned former paralegal, now Computer Science student in UCD. Music being a young man's game, and Law being a waste of a good life, who knew that ultimate happiness would come in the form of agonizing over JSON parsing for hours on end."),
-            cellData(opened: false, name: "Junzheng Liu", picture: #imageLiteral(resourceName: "Even"), blurb: "Junzheng Liu is a back-end engineer specializing in data analysis. In this project, he is mainly responsible for machine learning to predict travel time, database construction, implementation of travel price calculation functions and the establishment of docker images.\n\nHe used to work in China Airlines for market data processing and analysis. He used to develop a complete automatic lesson scheduling system at the Yantai branch of New Oriental Education Technology Group.He often says that he has processed more data than the salt he has eaten himself.\n\nEven is a back-end engineer specializing in data analysis. In this project, he is mainly responsible for machine learning to predict travel time, database construction, implementation of travel price calculation functions and the establishment of docker images.\n\nHe used to work in China Airlines for market data processing and analysis.He used to develop a complete automatic lesson scheduling system at the Yantai branch of New Oriental Education Technology Group.He often says that he has processed more data than the salt he has eaten himself."),
-            cellData(opened: false, name: "Hank Ta", picture: #imageLiteral(resourceName: "Hank"), blurb: "Hank was an experienced firmware engineer in Taiwan, during those years of work he has became an expert to print Hello world in any kinds of programming language. In this project, Hank was responsible for setting up the backend development environment, such as creating Docker file and initiating the Django setting. Also, he built up a user authentication system by Django and React, to deal with the sign-in and sign-up process from backend to frontend.")
-        ]
-        
-        
-
-        // Do any additional setup after loading the view.
     }
-    
-   
-
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
+//MARK: - Table View Data Source
 
 extension AboutUsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableViewData.count
+        // Number of sections
+        
+        return K.aboutUs.tableViewData.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableViewData[section].opened == true {
+        // Rows per sections
+        
+        if K.aboutUs.tableViewData[section].opened == true {
             return 2
         } else {
             return 1
@@ -72,40 +60,47 @@ extension AboutUsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Method to populate rows and segments
+        
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: K.aboutUs.cellID, for: indexPath) as! AboutUsCellTableViewCell
-            cell.nameLabel.text = tableViewData[indexPath.section].name
-            cell.profileImage.image = tableViewData[indexPath.section].picture
+            cell.nameLabel.text = K.aboutUs.tableViewData[indexPath.section].name
+            cell.profileImage.image = K.aboutUs.tableViewData[indexPath.section].picture
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: K.aboutUs.textCellId)
-            cell?.textLabel?.text = tableViewData[indexPath.section].blurb
+            cell?.textLabel?.text = K.aboutUs.tableViewData[indexPath.section].blurb
             return cell!
         }
     }
     
 }
 
+
+//MARK: - Table View Delegate
+
 extension AboutUsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableViewData[indexPath.section].opened {
-            tableViewData[indexPath.section].opened = false
+        // Method for displaying or hiding blurb when row is selected
+        
+        if K.aboutUs.tableViewData[indexPath.section].opened {
+            K.aboutUs.tableViewData[indexPath.section].opened = false
             let sections = IndexSet.init(integer: indexPath.section)
             tableView.reloadSections(sections, with: .none)
         } else {
-            tableViewData[indexPath.section].opened = true
+            K.aboutUs.tableViewData[indexPath.section].opened = true
             let sections = IndexSet.init(integer: indexPath.section)
             tableView.reloadSections(sections, with: .none)
         }
     }
-    
 }
 
 
 //MARK: - Audio Book Control
 
 extension AboutUsViewController {
+    // Audio book navigation bar controls
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
