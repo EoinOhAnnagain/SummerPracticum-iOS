@@ -46,7 +46,7 @@ You will need a device running MacOS 11 and an iPhone runnning iOS 14. Later OSs
 4.  Wait for indexing to complete. Please note, this may take a few minutes.
 
 5.  In the file list on the left you will likely find two files highlighted in red: GoogleServices-info.plist and Sensitive.swift.
-    
+    ![](/ReadMe%20Pictures/DeadFiles.png)
     Delete both of these.
 5a. In the finder from step 2, navidate into the folder DBA. From there, drag the file GoogleServices-info.plist into xcode where the old, red, reference was. 
     Check that the settings match those in this image and click finish.
