@@ -62,6 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     
     func parseStopsJSON() {
+        // This function parses the stops JSON
+        
         print("Started stops parsing")
         guard let jsonURL = Bundle.main.path(forResource: "routes", ofType: "json") else {
             print("There was an issue")
@@ -71,40 +73,17 @@ extension AppDelegate {
             return
         }
         
-        //jsonString
-        
-        
-        
         do {
-            
             let decodedData = try JSONDecoder().decode(routesJSONArray.self, from: Data(jsonString.utf8))
-            
-            
             for data in decodedData.routes {
                 K.routeNames.append(data.route_short_name)
             }
-            
             K.routeNames.sort()
-            
             print("Parsing Complete")
-            
-            
-//            let route_short_name = decodedData.test[0].route_short_name
-//
-//
-//            let person = test(route_short_name: route_short_name)
-//
-//
-//            print(person.route_short_name)
-            
-            
             
         } catch {
             print("Error occured when decoding: \(error.localizedDescription)\n\(error)")
         }
-        
-        
-        
     }
 }
 
@@ -114,6 +93,8 @@ extension AppDelegate {
 extension AppDelegate {
     
     func parseRoutesJSON() {
+        // This function parses the routes JSON
+        
         print("Started routes parsing")
         guard let jsonRoutesURL = Bundle.main.path(forResource: "stops", ofType: "json") else {
             print("There was an issue")
@@ -124,22 +105,12 @@ extension AppDelegate {
             return
         }
         
-        //jsonString
-        
-        
-        
         do {
-            
             let decodedRoutesData = try JSONDecoder().decode(stopsJSONArray.self, from: Data(jsonRoutesString.utf8))
-            
-            
             for data in decodedRoutesData.Stops {
-                
                 let lat = data.Latitude
                 let long = data.Longitude
                 let routeData = data.RouteData
-                
-                
                 var nameEnglish: String?
                 if data.ShortCommonName_en != nil {
                     nameEnglish = data.ShortCommonName_en
@@ -148,49 +119,16 @@ extension AppDelegate {
                 }
                 
                 let atcoCode = data.AtcoCode
-                //let nameEnglish = data.ShortCommonName_en
-                
-//                var nameIrish: String?
-//                if data.ShortCommonName_en != nil {
-//                    nameIrish = data.ShortCommonName_en
-//                } else {
-//                    nameIrish = "UNKNOWN"
-//                }
-//                //let nameIrish = data.ShortCommonName_ga
-                
                 let stopNumber = data.PlateCode
-                
                 let routesArray = String(routeData.filter { !" ".contains($0) }).components(separatedBy: ",")
                 
-                
-                
                 K.stopsLocations.append(Pin(lat: CLLocationDegrees(lat), long: CLLocationDegrees(long), isStop: true, titleEn: nameEnglish!, routes: routeData, stopNumber: stopNumber, AtcoCode: atcoCode, busesAtStop: routesArray))
-                
-                
             }
             
-            //K.routeNames.sort()
-            
-            
             print("Routes Parsing Complete")
-            
-            
-//            let route_short_name = decodedData.test[0].route_short_name
-//
-//
-//            let person = test(route_short_name: route_short_name)
-//
-//
-//            print(person.route_short_name)
-            
-            
-            
         } catch {
             print("Error occured when decoding: \(error.localizedDescription)\n\(error)")
         }
-        
-        
-        
     }
 }
 

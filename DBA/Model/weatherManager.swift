@@ -9,16 +9,18 @@ import Foundation
 import CoreLocation
 
 protocol WeatherManagerDelegate {
+    // Protocol for VCs using the Weather Manager
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
     func didFailWithError(error: Error)
 }
 
 struct WeatherManager {
     
+    // Set the delegate
     var delegate: WeatherManagerDelegate?
     
+    // Create Open Weather URL
     let incompleteURL = "https://api.openweathermap.org/data/2.5/weather?appid=\(S.openWeatherAPIKey)&units=metric"
-    
     func getLocalWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) {
         let weatherURL = "\(incompleteURL)&lat=\(lat)&lon=\(lon)"
         getWeather(weatherURL: weatherURL)
@@ -26,6 +28,7 @@ struct WeatherManager {
     
     
     func getWeather(weatherURL: String) {
+        // Get the weather data from Open Weather
         
         //Create URL
         if let url = URL(string: weatherURL) {
@@ -51,15 +54,13 @@ struct WeatherManager {
             //start the task
             task.resume()
         }
-        
-        
-        
-        
     }
     
     
     
     func parseJSON(_ weatherData: Data) -> WeatherModel? {
+        // The function parses and decodes the Weather JSON
+        
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: weatherData)
@@ -87,14 +88,13 @@ struct WeatherManager {
             
             let name = decodedData.name
             
+            // Use decoded data to create a weather model
             let weather = WeatherModel(conditionId: id, cityName: name, description: description, temperature: temp, feelsLike: feelsLike, min: min, max: max, humidity: humidity, visibility: visibility, pressure: pressure, windSpeed: speed, windDeg: deg, sunrise: sunrise, sunset: sunset)
-    
             return weather
             
         } catch {
             delegate?.didFailWithError(error: error)
         }
-        
         return nil
     }
 }

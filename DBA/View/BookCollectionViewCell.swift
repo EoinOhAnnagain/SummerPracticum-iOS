@@ -8,15 +8,17 @@
 import UIKit
 
 class BookCollectionViewCell: UICollectionViewCell {
-
+    
+    // IBOutlets
     @IBOutlet var imageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     public func configure(with image: UIImage) {
+        // Set the imageView to the passed image
+        
         imageView.image = image
     }
     
