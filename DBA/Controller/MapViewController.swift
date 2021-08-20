@@ -640,7 +640,7 @@ extension MapViewController {
             
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
             
-            let url = URL(string: "http://173.82.208.22:8000/core/Fare")!
+            let url = URL(string: "\(S.fareURL)")!
             
             var request = URLRequest(url: url)
 
@@ -686,7 +686,7 @@ extension MapViewController {
 //            print("here1")
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
 //            print("here2")
-            let url = URL(string: "http://173.82.208.22:8000/core/Travel")!
+            let url = URL(string: "\(S.timesURL)")!
 //            print("here3")
             var request = URLRequest(url: url)
 //            print("here4")

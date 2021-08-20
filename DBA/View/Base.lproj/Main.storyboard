@@ -1721,13 +1721,13 @@
                                 <rect key="frame" x="20" y="150" width="374" height="702"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iAO-Q9-L9T">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="494.33333333333331"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U14-gY-NUc">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="281"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="439.33333333333331"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5SG-JC-5Cv">
-                                                        <rect key="frame" x="5" y="226" width="364" height="50"/>
+                                                        <rect key="frame" x="5" y="384.33333333333337" width="364" height="50"/>
                                                         <color key="backgroundColor" name="Interface"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="kC6-fj-Cev"/>
@@ -1740,7 +1740,7 @@
                                                         </connections>
                                                     </button>
                                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9O-1n-JZ2">
-                                                        <rect key="frame" x="5" y="5" width="364" height="216"/>
+                                                        <rect key="frame" x="5" y="5" width="364" height="374.33333333333331"/>
                                                         <color key="tintColor" name="Interface"/>
                                                     </pickerView>
                                                 </subviews>
@@ -1756,7 +1756,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78W-d3-V9G">
-                                                <rect key="frame" x="5" y="286" width="364" height="50"/>
+                                                <rect key="frame" x="5" y="444.33333333333337" width="364" height="50"/>
                                                 <color key="backgroundColor" name="Interface"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="9Bj-TS-nds"/>
@@ -1776,10 +1776,6 @@
                                             <constraint firstItem="78W-d3-V9G" firstAttribute="leading" secondItem="iAO-Q9-L9T" secondAttribute="leading" constant="5" id="oQp-gw-zh8"/>
                                         </constraints>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5A-Am-ZyN">
-                                        <rect key="frame" x="0.0" y="346" width="374" height="148.33333333333337"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Haj-Ue-Awl">
                                         <rect key="frame" x="0.0" y="504.33333333333343" width="374" height="127.66666666666669"/>
                                         <subviews>

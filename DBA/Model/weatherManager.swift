@@ -17,7 +17,7 @@ struct WeatherManager {
     
     var delegate: WeatherManagerDelegate?
     
-    let incompleteURL = S.weatherURL
+    let incompleteURL = "https://api.openweathermap.org/data/2.5/weather?appid=\(S.openWeatherAPIKey)&units=metric"
     
     func getLocalWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) {
         let weatherURL = "\(incompleteURL)&lat=\(lat)&lon=\(lon)"
