@@ -11,165 +11,124 @@ import MessageUI
 
 class ContactUsViewController: UIViewController, MFMailComposeViewControllerDelegate, UITextViewDelegate {
 
-    var userEmail: String?
     
-    @IBOutlet weak var firstLabel: UILabel!
+    // IBOutlet for navigation bar audio book button
+    @IBOutlet weak var bookStopButton: UIBarButtonItem!
+    
+    // IBOutlets for the labels
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
     
+    // IBOutlet for the picker view
     @IBOutlet weak var firstPicker: UIPickerView!
     
-    @IBOutlet weak var emailTextField: UITextField!
+    // IBOutlet for the text view
     @IBOutlet weak var issueTextView: UITextView!
     
+    // IBOutlet for the send button
     @IBOutlet weak var sendButton: UIButton!
-    
-    @IBOutlet weak var bookStopButton: UIBarButtonItem!
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        showAlert()
-        setUp()
-        
+        // Round corners
+        roundCorners(sendButton)
+        roundCorners(issueTextView)
         roundCorners(sendButton)
         roundCorners(issueTextView)
         
-        roundCorners(sendButton)
-        roundCorners(issueTextView)
-        roundCorners(emailTextField)
-        
+        // Hide the result label
         resultLabel.alpha = 0
         
+        // Set delegates
         firstPicker.dataSource = self
         firstPicker.delegate = self
-        
-        emailTextField.delegate = self
         issueTextView.delegate = self
-        
-        // Do any additional setup after loading the view.
     }
     
-
-    func setUp() {
-        if userEmail != nil {
-            emailTextField.alpha = 0
-            firstLabel.alpha = 0
-        }
-    }
     
+//MARK: - Send Email
     
     @IBAction func sendButtonPressed(_ sender: UIButton) {
+        // Method for when the send button is pressed
         
+        // Check that the user picked a subject
         let picked = firstPicker.selectedRow(inComponent: 0)
-        
         if picked == 0 {
             resultLabel.text = "Please select a subject"
             resultLabel.alpha = 1
             resultLabel.textColor = UIColor(named: "Interface")
         } else {
             
-            
+            // Create string to store reason for user contacting us
             var reason: String?
-            var email: String?
-            
-            
             if picked == (K.contact.pickerOptions.count + 1) {
                 reason = "Other"
             } else {
                 reason = K.contact.pickerOptions[picked]
             }
             
-            
+            // Create mailCompose VC
             let mc: MFMailComposeViewController = MFMailComposeViewController()
             
-            if userEmail != nil {
-                email = userEmail
-            } else {
-                email = emailTextField.text
-            }
-            
-            if email == nil || email == "" {
-                resultLabel.text = "Please include an email address."
+            // Get message from text view and check it exists
+            let message =  issueTextView.text
+            if message == nil || message == "" {
+                resultLabel.text = "Please include a message so we can help you."
                 resultLabel.alpha = 1
                 resultLabel.textColor = UIColor(named: "Interface")
             } else {
                 
-                let message =  issueTextView.text
-                
-                if message == nil || message == "" {
-                    resultLabel.text = "Please include a message so we can help you."
-                    resultLabel.alpha = 1
-                    resultLabel.textColor = UIColor(named: "Interface")
-                } else {
-                    
-                    mc.mailComposeDelegate = self
-                    mc.setToRecipients(S.contactUsAddresses)
-                    mc.setSubject("\(reason!) - \(email!)")
-                    
-                    
-                    
-                    mc.setMessageBody("Email: \(email!) \n\nSubject: \(reason!) \n\nIssue: \(message!)", isHTML: false)
-                    
-                    self.present(mc, animated: true) {
-                        
-                    }
+                // Create email using variables and present mailCompose VC
+                mc.mailComposeDelegate = self
+                mc.setToRecipients(S.contactUsAddresses)
+                mc.setSubject("iOS report - \(reason!)")
+                mc.setMessageBody("Subject: \(reason!)\n\nIssue: \(message!)", isHTML: false)
+                self.present(mc, animated: true) {
                 }
             }
         }
-        
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        // Method to handel various completions of the mailCompose VC using a switch statement
+        
         switch result.rawValue {
+        
         case MFMailComposeResult.cancelled.rawValue:
             resultLabel.alpha = 0
+        
         case MFMailComposeResult.failed.rawValue:
             resultLabel.text = "Message Sending Failed: \(error!.localizedDescription)"
             resultLabel.alpha = 1
             resultLabel.textColor = .red
+        
         case MFMailComposeResult.saved.rawValue:
             resultLabel.alpha = 0
+        
         case MFMailComposeResult.sent.rawValue:
             resultLabel.text = "Message Successfully Sent"
             resultLabel.alpha = 1
             resultLabel.textColor = .green
             issueTextView.text = ""
-            emailTextField.text = ""
+        
         default:
             resultLabel.alpha = 0
             break
         }
         
+        // Dismiss mailCompose VC
         self.dismiss(animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
-
-// MARK: - Manage Return Key
-
-extension ContactUsViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return view.endEditing(true)
-    }
-}
 
 //MARK: - Picker View
 
 extension ContactUsViewController: UIPickerViewDataSource {
+    
+    // Methods to set up the picker view data source
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -185,6 +144,7 @@ extension ContactUsViewController: UIPickerViewDataSource {
 extension ContactUsViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        // Method to populate the picker view's rows
         
         if row == 0 {
             return "Please Select an Option"
@@ -196,6 +156,7 @@ extension ContactUsViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // Method to alter the label above the text view depending on the users choice
         if row == 2 {
             placeholderLabel.text = "Requested book must be from Project Gutenberg"
         } else {
@@ -208,6 +169,7 @@ extension ContactUsViewController: UIPickerViewDelegate {
 //MARK: - Audio Book Control
 
 extension ContactUsViewController {
+    // Audio book navigation bar controls
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -227,24 +189,3 @@ extension ContactUsViewController {
     
 }
 
-
-//MARK: - GDPR Alert
-
-
-extension ContactUsViewController {
-    
-    func showAlert() {
-        
-        let alert = UIAlertController(title: K.GDPR.title, message: "\(K.GDPR.message)\(K.GDPR.contactUs)", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: K.GDPR.dismiss, style: .cancel, handler: { action in
-            self.navigationController?.popViewController(animated: true)
-        }))
-        
-        alert.addAction(UIAlertAction(title: K.GDPR.agree, style: .default, handler: { action in
-            print("Agreed to GDPR")
-        }))
-        
-        present(alert, animated: true)
-    }
-}

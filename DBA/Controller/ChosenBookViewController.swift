@@ -9,30 +9,42 @@ import UIKit
 
 class ChosenBookViewController: UIViewController {
 
+    // IBOutlets for the book image and chapter picker
     @IBOutlet weak var bookCover: UIImageView!
     @IBOutlet weak var chaptersPicker: UIPickerView!
     
+    // Tap recogniser
     @IBOutlet var tap: UITapGestureRecognizer!
     
-    var bookTitle: String?
     
+    // IBOutlet collection of buttons to round
     @IBOutlet var buttons: [UIButton]!
     
+    // Book title string
+    var bookTitle: String?
+    
+    // current row in picker
     var currentRow = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        // Set delegates
         chaptersPicker.delegate = self
         chaptersPicker.dataSource = self
         
+        // Round corners
         roundCorners(buttons)
         
-        
+        // Display book cover
         bookCover.image = UIImage(named: bookTitle!)
-        // Do any additional setup after loading the view.
     }
+    
+    
+//MARK: - Dismiss VC
+    
+    // Methods to dismiss the VC
     
     @IBAction func tapper(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -41,18 +53,10 @@ class ChosenBookViewController: UIViewController {
     @IBAction func dismissPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
+//MARK: - Picker View Data Source
 
 extension ChosenBookViewController: UIPickerViewDataSource {
     
@@ -63,26 +67,40 @@ extension ChosenBookViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return K.bookChapterNames[bookTitle!]!.count
     }
-    
-    
 }
+
+
+//MARK: - Picker View Delegate
 
 extension ChosenBookViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        // Chapter name to display
+        
         return K.bookChapterNames[bookTitle!]![row]
-            }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        currentRow = pickerView.selectedRow(inComponent: 0)
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // Pass selected row to variable
+        
+        currentRow = pickerView.selectedRow(inComponent: 0)
+    }
+}
+
+
+//MARK: - Segue
+
+extension ChosenBookViewController {
     
     @IBAction func bookSelectPressed(_ sender: UIButton) {
+        // Perform segue
+        
         performSegue(withIdentifier: K.readBook, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Pass book and chapter details to next VC
+        
         if segue.identifier == K.readBook {
             let destinationVC = segue.destination as! BookViewController
             destinationVC.bookTitle = bookTitle
