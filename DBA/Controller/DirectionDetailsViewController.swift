@@ -80,6 +80,9 @@ class DirectionDetailsViewController: UIViewController {
         } else {
             // Alt string if there is an issue
             timesString.append("\nTimes data is still being loaded or your journey may not include any buses.\nEither that or something went wrong.\nPlease exit and re-enter this page to try again.")
+            if googlesGuess != nil {
+                timesString.append("\n\nGoogle's estimate is \(googlesGuess ?? "Unknown")")
+            }
         }
         
         // Display the string
